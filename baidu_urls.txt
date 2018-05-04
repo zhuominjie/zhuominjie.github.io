@@ -1,4 +1,4 @@
-http://wwww.dadroid.cn/hexo-next优化之路.html
-http://wwww.dadroid.cn/SEO优化之路.html
-http://wwww.dadroid.cn/Quartz基本用法总结.html
-http://wwww.dadroid.cn/JAVA服务通过URL下载文件.html
+http://www.dadroid.cn/hexo-next优化之路.html
+http://www.dadroid.cn/SEO优化之路.html
+http://www.dadroid.cn/Quartz基本用法总结.html
+http://www.dadroid.cn/JAVA服务通过URL下载文件.html
