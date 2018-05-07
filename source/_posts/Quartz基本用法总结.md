@@ -213,12 +213,12 @@ public class QuartzJobConfig {
      * 方法调用任务明细工厂Bean
      */
     @Bean(name = "SpringJobBean")
-    public MethodInvokingJobDetailFactoryBean myFirstExerciseJobBean(MyFirstExerciseJob myFirstExerciseJob) {
+    public MethodInvokingJobDetailFactoryBean myFirstExerciseJobBean(SpringJob springJob) {
         MethodInvokingJobDetailFactoryBean jobDetail = new MethodInvokingJobDetailFactoryBean();
         jobDetail.setConcurrent(false); // 是否并发
-        jobDetail.setName("general-myFirstExerciseJob"); // 任务的名字
+        jobDetail.setName("general-springJob"); // 任务的名字
         jobDetail.setGroup("general"); // 任务的分组
-        jobDetail.setTargetObject(myFirstExerciseJob); // 被执行的对象
+        jobDetail.setTargetObject(springJob); // 被执行的对象
         jobDetail.setTargetMethod("myJobBusinessMethod"); // 被执行的方法
         return jobDetail;
     }
@@ -228,11 +228,11 @@ public class QuartzJobConfig {
      * 表达式触发器工厂Bean
      */
     @Bean(name = "SpringJobTrigger")
-    public CronTriggerFactoryBean myFirstExerciseJobTrigger(@Qualifier("myFirstExerciseJobBean") MethodInvokingJobDetailFactoryBean myFirstExerciseJobBean) {
+    public CronTriggerFactoryBean myFirstExerciseJobTrigger(@Qualifier("SpringJobBean") MethodInvokingJobDetailFactoryBean springJobBean) {
         CronTriggerFactoryBean tigger = new CronTriggerFactoryBean();
-        tigger.setJobDetail(myFirstExerciseJobBean.getObject());
+        tigger.setJobDetail(springJobBean.getObject());
         tigger.setCronExpression("0/10 * * * * ?"); // 什么是否触发，Spring Scheduler Cron表达式
-        tigger.setName("general-myFirstExerciseJobTrigger");
+        tigger.setName("general-springJobTrigger");
         return tigger;
     }
 }
