@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Java,URLConnection," />
+  <meta name="keywords" content="Java,Spring,Quartz,CronExpression,Cron" />
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="如何通过Java（模拟浏览器）发送HTTP请求，下载文件是WEB应用经常处理的场景。Java有原生的API可用于发送HTTP请求，即：java.net.URL、java.net.URLConnection。这些API本身已经足够好用，但不够简便。所以，也流行有许多Java HTTP请求的framework，如Apache的HttpClient等。 目前项目主要用到Java原生的方式，所以，这里主要">
-<meta name="keywords" content="Java,URLConnection">
+<meta name="description" content="CronExpression：用于配置cronTrigger的实例，由七个子表达式组成。这些表达式之间用空格分隔。  Seconds（秒） Minutes（分） Hours（小时） Day-of-Month（天） Month（月） Day-of-Week（周） Year（年）  例：”0 0 12 ? * WED” 意思是：每个星期三的中午12点执行。">
+<meta name="keywords" content="Java,Spring,Quartz,CronExpression,Cron">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JAVA服务通过URL下载文件">
-<meta property="og:url" content="http://www.dadroid.cn/JAVA服务通过URL下载文件.html">
+<meta property="og:title" content="Quartz系列二：Cron表达式详解">
+<meta property="og:url" content="http://www.dadroid.cn/Quartz系列二：Cron表达式详解.html">
 <meta property="og:site_name" content="大卓の哆啦A梦">
-<meta property="og:description" content="如何通过Java（模拟浏览器）发送HTTP请求，下载文件是WEB应用经常处理的场景。Java有原生的API可用于发送HTTP请求，即：java.net.URL、java.net.URLConnection。这些API本身已经足够好用，但不够简便。所以，也流行有许多Java HTTP请求的framework，如Apache的HttpClient等。 目前项目主要用到Java原生的方式，所以，这里主要">
+<meta property="og:description" content="CronExpression：用于配置cronTrigger的实例，由七个子表达式组成。这些表达式之间用空格分隔。  Seconds（秒） Minutes（分） Hours（小时） Day-of-Month（天） Month（月） Day-of-Week（周） Year（年）  例：”0 0 12 ? * WED” 意思是：每个星期三的中午12点执行。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-28T08:00:16.000Z">
+<meta property="og:updated_time" content="2018-05-08T08:23:22.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JAVA服务通过URL下载文件">
-<meta name="twitter:description" content="如何通过Java（模拟浏览器）发送HTTP请求，下载文件是WEB应用经常处理的场景。Java有原生的API可用于发送HTTP请求，即：java.net.URL、java.net.URLConnection。这些API本身已经足够好用，但不够简便。所以，也流行有许多Java HTTP请求的framework，如Apache的HttpClient等。 目前项目主要用到Java原生的方式，所以，这里主要">
+<meta name="twitter:title" content="Quartz系列二：Cron表达式详解">
+<meta name="twitter:description" content="CronExpression：用于配置cronTrigger的实例，由七个子表达式组成。这些表达式之间用空格分隔。  Seconds（秒） Minutes（分） Hours（小时） Day-of-Month（天） Month（月） Day-of-Week（周） Year（年）  例：”0 0 12 ? * WED” 意思是：每个星期三的中午12点执行。">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://www.dadroid.cn/JAVA服务通过URL下载文件.html"/>
+  <link rel="canonical" href="http://www.dadroid.cn/Quartz系列二：Cron表达式详解.html"/>
 
 
 
 
 
-  <title>JAVA服务通过URL下载文件 | 大卓の哆啦A梦</title>
+  <title>Quartz系列二：Cron表达式详解 | 大卓の哆啦A梦</title>
   
 
 
@@ -253,7 +253,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.dadroid.cn/JAVA服务通过URL下载文件.html">
+    <link itemprop="mainEntityOfPage" href="http://www.dadroid.cn/Quartz系列二：Cron表达式详解.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="韧卓">
@@ -270,7 +270,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">JAVA服务通过URL下载文件</h2>
+          <h2 class="post-title" itemprop="name headline">Quartz系列二：Cron表达式详解</h2>
         
 
         <div class="post-meta">
@@ -282,8 +282,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-18T14:36:47+08:00">
-                2018-04-18
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-08T14:00:03+08:00">
+                2018-05-08
               </time>
             
 
@@ -293,28 +293,6 @@
           </span>
 
           
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
 
           
             
@@ -323,8 +301,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/JAVA服务通过URL下载文件.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/JAVA服务通过URL下载文件.html" itemprop="commentCount"></span>
+                <a href="/Quartz系列二：Cron表达式详解.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/Quartz系列二：Cron表达式详解.html" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -332,7 +310,7 @@
 
           
           
-             <span id="/JAVA服务通过URL下载文件.html" class="leancloud_visitors" data-flag-title="JAVA服务通过URL下载文件">
+             <span id="/Quartz系列二：Cron表达式详解.html" class="leancloud_visitors" data-flag-title="Quartz系列二：Cron表达式详解">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -363,29 +341,192 @@
       
 
       
-        <p>如何通过Java（模拟浏览器）发送HTTP请求，下载文件是WEB应用经常处理的场景。Java有原生的API可用于发送HTTP请求，即：java.net.URL、java.net.URLConnection。这些API本身已经足够好用，但不够简便。所以，也流行有许多Java HTTP请求的framework，如Apache的HttpClient等。</p>
-<p>目前项目主要用到Java原生的方式，所以，这里主要介绍此方式。<br><a id="more"></a> </p>
-<h2 id="1-Get请求和Post请求"><a href="#1-Get请求和Post请求" class="headerlink" title="1.Get请求和Post请求"></a>1.Get请求和Post请求</h2><p>HTTP请求简单分为GET请求和POST请求（详见：<a href="https://tools.ietf.org/html/rfc2616#section-9" target="_blank" rel="noopener">Hypertext Transfer Protocol – HTTP/1.1 - Method Definitions</a>）。</p>
-<p>使用Java发送这两种请求的代码大同小异，只是一些参数设置的不同。步骤如下：</p>
+        <p>CronExpression：用于配置cronTrigger的实例，由七个子表达式组成。这些表达式之间用空格分隔。</p>
 <ol>
-<li>通过统一资源定位器（java.net.URL）获取连接器（java.net.URLConnection）</li>
-<li>设置请求的参数</li>
-<li>发送请求</li>
-<li>以输入流的形式获取返回内容</li>
-<li>关闭输入流</li>
+<li>Seconds（秒）</li>
+<li>Minutes（分）</li>
+<li>Hours（小时）</li>
+<li>Day-of-Month（天）</li>
+<li>Month（月）</li>
+<li>Day-of-Week（周）</li>
+<li>Year（年）</li>
 </ol>
-<p><strong>HttpURLConnection</strong>继承自<strong>URLConnection</strong>，常用它下面几个方法：</p>
-<ul>
-<li>-setRequestMethod：设置URL请求的方法， 如GET、POST、HEAD、OPTIONS、PUT、DELETE、TRACE。其中，GET方法是默认的，可以不写；</li>
-<li>-setRequestProperty：设置一般请求属性，如”Accept-Charset”、”Content-Type”、”User-Agent”等；</li>
-<li>-getResponseCode：从HTTP响应消息获取状态码；</li>
-<li>-getResponseMessage：获取与来自服务器的响应代码一起返回的HTTP响应消息（如果有）。</li>
-</ul>
-<h2 id="2-下载文件"><a href="#2-下载文件" class="headerlink" title="2.下载文件"></a>2.下载文件</h2><p>文件下载请求，本质上也是一个POST请求，因此，流程大体相同。下面的示例正是按照流程顺序进行了处理。如果项目中有多处地方使用HTTP请求，我们可以适当对其进行封装。</p>
-<h3 id="封装文件下载器"><a href="#封装文件下载器" class="headerlink" title="封装文件下载器"></a>封装文件下载器</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 从网络Url中下载文件</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> urlStr</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> fileName</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> savePath</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@throws</span> IOException</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span>  <span class="title">downLoadFromUrl</span><span class="params">(String urlStr,String fileName,String savePath)</span> </span></span><br><span class="line"><span class="function">			<span class="keyword">throws</span> IOException</span>&#123;</span><br><span class="line">    URL url = <span class="keyword">new</span> URL(urlStr);</span><br><span class="line">    HttpURLConnection conn = (HttpURLConnection)url.openConnection();</span><br><span class="line">    <span class="comment">//设置超时间为3秒</span></span><br><span class="line">    conn.setConnectTimeout(<span class="number">3</span>*<span class="number">1000</span>);</span><br><span class="line">    <span class="comment">//防止屏蔽程序抓取而返回403错误</span></span><br><span class="line">    conn.setRequestProperty(<span class="string">"User-Agent"</span>, <span class="string">"Mozilla/4.0 (compatible; MSIE 5.0; </span></span><br><span class="line"><span class="string">    				Windows NT; DigExt)"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//得到输入流</span></span><br><span class="line">    InputStream inputStream = conn.getInputStream();</span><br><span class="line"></span><br><span class="line">	 <span class="comment">//转储文件</span></span><br><span class="line">    saveToLocal(inputStream, savePath, fileName);</span><br><span class="line"></span><br><span class="line">    System.out.println(<span class="string">"info:"</span>+url+<span class="string">" download success"</span>);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="执行文件转储"><a href="#执行文件转储" class="headerlink" title="执行文件转储"></a>执行文件转储</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 文件转储</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> in</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> fileName</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> savePath</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@throws</span> IOException</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">saveToLocal</span><span class="params">(InputStream in, String fileName, String savePath)</span> </span></span><br><span class="line"><span class="function">			<span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    <span class="comment">//获取字节流</span></span><br><span class="line">    <span class="keyword">byte</span>[] getData = readInputStream(in);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//父文件夹位置</span></span><br><span class="line">    File saveDir = <span class="keyword">new</span> File(savePath);</span><br><span class="line">    <span class="keyword">if</span>(!saveDir.exists())&#123;</span><br><span class="line">        saveDir.mkdir();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    File file = <span class="keyword">new</span> File(saveDir+File.separator+fileName);</span><br><span class="line">    FileOutputStream fos = <span class="keyword">new</span> FileOutputStream(file);</span><br><span class="line">    fos.write(getData);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//关闭输入输出流</span></span><br><span class="line">    <span class="keyword">if</span>(fos!=<span class="keyword">null</span>)&#123;</span><br><span class="line">        fos.close();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(in!=<span class="keyword">null</span>)&#123;</span><br><span class="line">        in.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="输入流转字节流"><a href="#输入流转字节流" class="headerlink" title="输入流转字节流"></a>输入流转字节流</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 从输入流中获取字节数组</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> inputStream</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@throws</span> IOException</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span>  <span class="keyword">byte</span>[] readInputStream(InputStream inputStream) </span><br><span class="line">			<span class="keyword">throws</span> IOException &#123;</span><br><span class="line">    <span class="keyword">byte</span>[] buffer = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span>];</span><br><span class="line">    <span class="keyword">int</span> len = <span class="number">0</span>;</span><br><span class="line">    ByteArrayOutputStream bos = <span class="keyword">new</span> ByteArrayOutputStream();</span><br><span class="line">    <span class="keyword">while</span>((len = inputStream.read(buffer)) != -<span class="number">1</span>) &#123;</span><br><span class="line">        bos.write(buffer, <span class="number">0</span>, len);</span><br><span class="line">    &#125;</span><br><span class="line">    bos.close();</span><br><span class="line">    <span class="keyword">return</span> bos.toByteArray();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h2><p>如果想学习如何用URLConnection发送Get请求和Post请求，可参考这篇好文：<a href="https://www.cnblogs.com/nick-huang/p/3859353.html" target="_blank" rel="noopener">通过java.net.URLConnection发送HTTP请求的方法</a></p>
+<p>例：”0 0 12 ? * WED” 意思是：每个星期三的中午12点执行。</p>
+<a id="more"></a>
+<p>个别子表达式可以包含范围或者列表。例如：上面例子中的WED可以换成”MON-FRI”，”MON,WED,FRI”，甚至”MON-WED,SAT”。</p>
+<h2 id="子表达式范围"><a href="#子表达式范围" class="headerlink" title="子表达式范围"></a>子表达式范围</h2><ol>
+<li>Seconds (0~59)</li>
+<li>Minutes (0~59)</li>
+<li>Hours (0~23)</li>
+<li>Day-of-Month (1~31,但是要注意有些月份没有31天)</li>
+<li>Month (0~11，或者”JAN, FEB, MAR, APR, MAY, JUN, JUL, AUG, SEP, OCT, NOV,DEC”)</li>
+<li>Day-of-Week (1~7,1=SUN 或者”SUN, MON, TUE, WED, THU, FRI, SAT”)</li>
+<li>Year (1970~2099)</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>字段名</th>
+<th style="text-align:center">允许的值</th>
+<th style="text-align:center">允许的特殊字符</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>秒</td>
+<td style="text-align:center">0-59</td>
+<td style="text-align:center">, - * /</td>
+</tr>
+<tr>
+<td>分</td>
+<td style="text-align:center">0-59</td>
+<td style="text-align:center">, - * /</td>
+</tr>
+<tr>
+<td>小时</td>
+<td style="text-align:center">0-23</td>
+<td style="text-align:center">, - * /</td>
+</tr>
+<tr>
+<td>日</td>
+<td style="text-align:center">1-31</td>
+<td style="text-align:center">, - * ? / L W C</td>
+</tr>
+<tr>
+<td>月</td>
+<td style="text-align:center">1-12 or JAN-DEC</td>
+<td style="text-align:center">, - * /</td>
+</tr>
+<tr>
+<td>周几</td>
+<td style="text-align:center">1-7 or SUN-SAT</td>
+<td style="text-align:center">, - * ? / L C #</td>
+</tr>
+<tr>
+<td>年(可选字段)</td>
+<td style="text-align:center">empty</td>
+<td style="text-align:center">1970-2099 , - * /</td>
+</tr>
+</tbody>
+</table>
+<h2 id="字符含义"><a href="#字符含义" class="headerlink" title="字符含义"></a>字符含义</h2><p>* ：代表所有可能的值。因此，“*”在Month中表示每个月，在Day-of-Month中表示每天，在Hours表示每小时</p>
+<p>- ：表示指定范围。</p>
+<p>, ：表示列出枚举值。例如：在Minutes子表达式中，“5,20”表示在5分钟和20分钟触发。</p>
+<p>/ ：被用于指定增量。例如：在Minutes子表达式中，“0/15”表示从0分钟开始，每15分钟执行一次。”3/20”表示从第三分钟开始，每20分钟执行一次。和”3,23,43”（表示第3，23，43分钟触发）的含义一样。</p>
+<p>? ：用在Day-of-Month和Day-of-Week中，指“没有具体的值”。当两个子表达式其中一个被指定了值以后，为了避免冲突，需要将另外一个的值设为“?”。例如：想在每月20日触发调度，不管20号是星期几，只能用如下写法：0 0 0 20 <em> ?，其中最后以为只能用“?”，而不能用“</em>”。</p>
+<p>L ：用在day-of-month和day-of-week字串中。它是单词“last”的缩写。它在两个子表达式中的含义是不同的。<br>在day-of-month中，“L”表示一个月的最后一天，一月31号，3月30号。<br>在day-of-week中，“L”表示一个星期的最后一天，也就是“7”或者“SAT”<br>如果“L”前有具体内容，它就有其他的含义了。例如：“6L”表示这个月的倒数第六天。“FRIL”表示这个月的最后一个星期五。<br>注意：在使用“L”参数时，不要指定列表或者范围，这样会出现问题。</p>
+<p>W ：“Weekday”的缩写。只能用在day-of-month字段。用来描叙最接近指定天的工作日（周一到周五）。例如：在day-of-month字段用“15W”指“最接近这个月第15天的工作日”，即如果这个月第15天是周六，那么触发器将会在这个月第14天即周五触发；如果这个月第15天是周日，那么触发器将会在这个月第 16天即周一触发；如果这个月第15天是周二，那么就在触发器这天触发。注意一点：这个用法只会在当前月计算值，不会越过当前月。“W”字符仅能在 day-of-month指明一天，不能是一个范围或列表。也可以用“LW”来指定这个月的最后一个工作日，即最后一个星期五。</p>
+<p># ：只能用在day-of-week字段。用来指定这个月的第几个周几。例：在day-of-week字段用”6#3” or “FRI#3”指这个月第3个周五（6指周五，3指第3个）。如果指定的日期不存在，触发器就不会触发。</p>
+<h2 id="表达式例子"><a href="#表达式例子" class="headerlink" title="表达式例子"></a>表达式例子</h2><table>
+<thead>
+<tr>
+<th>表达式</th>
+<th style="text-align:center">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0 <em> </em> <em> </em> ?</td>
+<td style="text-align:center">每1分钟触发一次</td>
+</tr>
+<tr>
+<td>0 0 <em> </em> * ?</td>
+<td style="text-align:center">每天每1小时触发一次</td>
+</tr>
+<tr>
+<td>0 0 10 <em> </em> ?</td>
+<td style="text-align:center">每天10点触发一次</td>
+</tr>
+<tr>
+<td>0 <em> 14 </em> * ?</td>
+<td style="text-align:center">在每天下午2点到下午2:59期间的每1分钟触发 </td>
+</tr>
+<tr>
+<td>0 30 9 1 * ?</td>
+<td style="text-align:center">每月1号上午9点半</td>
+</tr>
+<tr>
+<td>0 15 10 15 * ?</td>
+<td style="text-align:center">每月15日上午10:15触发</td>
+</tr>
+<tr>
+<td><em>/5 </em> <em> </em> * ?</td>
+<td style="text-align:center">每隔5秒执行一次</td>
+</tr>
+<tr>
+<td>0 <em>/1 </em> <em> </em> ?</td>
+<td style="text-align:center">每隔1分钟执行一次</td>
+</tr>
+<tr>
+<td>0 0 5-15 <em> </em> ?</td>
+<td style="text-align:center">每天5-15点整点触发</td>
+</tr>
+<tr>
+<td>0 0/3 <em> </em> * ?</td>
+<td style="text-align:center">每三分钟触发一次</td>
+</tr>
+<tr>
+<td>0 0-5 14 <em> </em> ?</td>
+<td style="text-align:center">在每天下午2点到下午2:05期间的每1分钟触发 </td>
+</tr>
+<tr>
+<td>0 0/5 14 <em> </em> ?</td>
+<td style="text-align:center">在每天下午2点到下午2:55期间的每5分钟触发</td>
+</tr>
+<tr>
+<td>0 0/5 14,18 <em> </em> ?</td>
+<td style="text-align:center">在每天下午2点到2:55期间和下午6点到6:55期间的每5分钟触发</td>
+</tr>
+<tr>
+<td>0 0/30 9-17 <em> </em> ?</td>
+<td style="text-align:center">朝九晚五工作时间内每半小时</td>
+</tr>
+<tr>
+<td>0 0 10,14,16 <em> </em> ?</td>
+<td style="text-align:center">每天上午10点，下午2点，4点 </td>
+</tr>
+<tr>
+<td>0 0 12 ? * WED</td>
+<td style="text-align:center">表示每个星期三中午12点</td>
+</tr>
+<tr>
+<td>0 0 17 ? * TUES,THUR,SAT</td>
+<td style="text-align:center">每周二、四、六下午五点</td>
+</tr>
+<tr>
+<td>0 10,44 14 ? 3 WED</td>
+<td style="text-align:center">每年三月的星期三的下午2:10和2:44触发 </td>
+</tr>
+<tr>
+<td>0 15 10 ? * MON-FRI</td>
+<td style="text-align:center">周一至周五的上午10:15触发</td>
+</tr>
+<tr>
+<td>0 0 23 L * ?</td>
+<td style="text-align:center">每月最后一天23点执行一次</td>
+</tr>
+<tr>
+<td>0 15 10 L * ?</td>
+<td style="text-align:center">每月最后一日的上午10:15触发 </td>
+</tr>
+<tr>
+<td>0 15 10 ? * 6L</td>
+<td style="text-align:center">每月的最后一个星期五上午10:15触发 </td>
+</tr>
+<tr>
+<td>0 15 10 <em> </em> ? 2005</td>
+<td style="text-align:center">2005年的每天上午10:15触发 </td>
+</tr>
+<tr>
+<td>0 15 10 ? * 6L 2002-2005</td>
+<td style="text-align:center">2002年至2005年的每月的最后一个星期五上午10:15触发 </td>
+</tr>
+<tr>
+<td>0 15 10 ? * 6#3</td>
+<td style="text-align:center">每月的第三个星期五上午10:15触发</td>
+</tr>
+</tbody>
+</table>
 
       
     </div>
@@ -405,7 +546,13 @@
           
             <a href="/tags/Java/" rel="tag"># Java</a>
           
-            <a href="/tags/URLConnection/" rel="tag"># URLConnection</a>
+            <a href="/tags/Spring/" rel="tag"># Spring</a>
+          
+            <a href="/tags/Quartz/" rel="tag"># Quartz</a>
+          
+            <a href="/tags/持久化/" rel="tag"># 持久化</a>
+          
+            <a href="/tags/对象注入/" rel="tag"># 对象注入</a>
           
         </div>
       
@@ -418,8 +565,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/nginx部署hexo的方法.html" rel="next" title="nginx部署hexo的方法">
-                <i class="fa fa-chevron-left"></i> nginx部署hexo的方法
+              <a href="/hexo-next优化之路.html" rel="next" title="hexo-next优化之路">
+                <i class="fa fa-chevron-left"></i> hexo-next优化之路
               </a>
             
           </div>
@@ -427,10 +574,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/Quartz基本用法总结.html" rel="prev" title="Quartz系列一：基本用法总结">
-                Quartz系列一：基本用法总结 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -565,7 +708,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Get请求和Post请求"><span class="nav-number">1.</span> <span class="nav-text">1.Get请求和Post请求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-下载文件"><span class="nav-number">2.</span> <span class="nav-text">2.下载文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#封装文件下载器"><span class="nav-number">2.1.</span> <span class="nav-text">封装文件下载器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#执行文件转储"><span class="nav-number">2.2.</span> <span class="nav-text">执行文件转储</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#输入流转字节流"><span class="nav-number">2.3.</span> <span class="nav-text">输入流转字节流</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考："><span class="nav-number">3.</span> <span class="nav-text">参考：</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#子表达式范围"><span class="nav-number">1.</span> <span class="nav-text">子表达式范围</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符含义"><span class="nav-number">2.</span> <span class="nav-text">字符含义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#表达式例子"><span class="nav-number">3.</span> <span class="nav-text">表达式例子</span></a></li></ol></div>
             
 
           </div>

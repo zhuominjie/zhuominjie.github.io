@@ -82,7 +82,7 @@
 <meta name="description" content="会JAVA、Spring开发的艺术家和会小提琴、ukulele的程序员">
 <meta property="og:type" content="website">
 <meta property="og:title" content="大卓の哆啦A梦">
-<meta property="og:url" content="http://www.dadroid.cn/tags/Hexo/index.html">
+<meta property="og:url" content="http://www.dadroid.cn/tags/hexo/index.html">
 <meta property="og:site_name" content="大卓の哆啦A梦">
 <meta property="og:description" content="会JAVA、Spring开发的艺术家和会小提琴、ukulele的程序员">
 <meta property="og:locale" content="zh-Hans">
@@ -118,13 +118,13 @@
 
 
 
-  <link rel="canonical" href="http://www.dadroid.cn/tags/Hexo/"/>
+  <link rel="canonical" href="http://www.dadroid.cn/tags/hexo/"/>
 
 
 
 
 
-  <title>标签: Hexo | 大卓の哆啦A梦</title>
+  <title>标签: hexo | 大卓の哆啦A梦</title>
   
 
 
@@ -244,7 +244,7 @@
 
     <div id="posts" class="posts-collapse">
       <div class="collection-title">
-        <h2>Hexo<small>标签</small>
+        <h2>hexo<small>标签</small>
         </h2>
       </div>
 
@@ -256,37 +256,9 @@
 
       <h3 class="post-title">
         
-            <a class="post-title-link" href="/hexo-next优化之路.html" itemprop="url">
+            <a class="post-title-link" href="/nginx部署hexo的方法.html" itemprop="url">
               
-                <span itemprop="name">hexo-next优化之路</span>
-              
-            </a>
-        
-      </h3>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-05-01T13:35:22+08:00"
-              content="2018-05-01" >
-          05-01
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h3 class="post-title">
-        
-            <a class="post-title-link" href="/SEO优化之路.html" itemprop="url">
-              
-                <span itemprop="name">Hexo NexT github部署SEO优化教程</span>
+                <span itemprop="name">nginx部署hexo的方法</span>
               
             </a>
         
@@ -294,9 +266,9 @@
 
       <div class="post-meta">
         <time class="post-time" itemprop="dateCreated"
-              datetime="2018-04-30T15:03:24+08:00"
-              content="2018-04-30" >
-          04-30
+              datetime="2018-04-18T14:36:47+08:00"
+              content="2018-04-18" >
+          04-18
         </time>
       </div>
 
@@ -356,7 +328,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -378,7 +350,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -694,6 +666,47 @@
               success: function(newcounter) {
                 var $element = $(document.getElementById(url));
                 $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+.leancloud-visitors-count').text(newcounter.get('time'));
               },
               error: function(newcounter, error) {
                 console.log('Failed to create');
