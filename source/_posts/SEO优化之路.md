@@ -1,10 +1,10 @@
 ---
 layout: hexo
-title: SEO优化之路
+title: Hexo系列二：Github部署站点的SEO优化教程
 date: 2018-04-30 15:03:24
 tags: [Hexo, SEO]
 categories: Hexo
-keywords: [hexo, SEO, 百度站长平台, Google Search Console, hexo-baidu-url-submit]
+keywords: [hexo, next, SEO, 百度站长平台, Google Search Console, hexo-baidu-url-submit]
 ---
 个人博客搭建完成，就算在互联网的世界里安了一个家。从阿里云的万网申请到了域名，我们的家也就有了门牌号。然而，要在茫茫人海中被人发现，仅仅靠口口相传是不够的。我们需要在黄页上登记自己的住址和成员，这样，有缘人才能登门拜访。
 <!--more-->

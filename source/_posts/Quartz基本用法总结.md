@@ -1,5 +1,5 @@
 ---
-title: Quartz基本用法总结
+title: Quartz系列一：基本用法总结
 date: 2018-04-28 16:13:42
 tags: [Java, Spring, Quartz, 持久化, 对象注入]
 categories: Java
