@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="zuul,micro service,spring cloud" />
 
 
 
@@ -79,16 +79,18 @@
 
 
 
-<meta name="description" content="会JAVA、Spring开发的艺术家和会小提琴、ukulele的程序员">
-<meta property="og:type" content="website">
-<meta property="og:title" content="大卓の哆啦A梦">
-<meta property="og:url" content="http://www.dadroid.cn/archives/2018/05/index.html">
+<meta name="description" content="Zuul代理转发zuul代理转发的方式有两种：  URL映射：**优点是不用对被代理的服务做任务修改，适合旧系统迁移到微服务架构时采用。过渡状态中，通常会保留旧代码继续使用，同时逐步将功能一点点迁移到新平台。旧功能的访问便可以采用这种方法，使得项目可以在用户毫无感知的情况下迁移到微服务架构。缺点**是每增加一个服务就需要配置一条内容，不支持动态提供后端的服务。 服务化映射：在实现微服务架构时，服务">
+<meta name="keywords" content="zuul,micro service,spring cloud">
+<meta property="og:type" content="article">
+<meta property="og:title" content="微服务一：Zuul">
+<meta property="og:url" content="http://www.dadroid.cn/micro-service-1-zuul.html">
 <meta property="og:site_name" content="大卓の哆啦A梦">
-<meta property="og:description" content="会JAVA、Spring开发的艺术家和会小提琴、ukulele的程序员">
+<meta property="og:description" content="Zuul代理转发zuul代理转发的方式有两种：  URL映射：**优点是不用对被代理的服务做任务修改，适合旧系统迁移到微服务架构时采用。过渡状态中，通常会保留旧代码继续使用，同时逐步将功能一点点迁移到新平台。旧功能的访问便可以采用这种方法，使得项目可以在用户毫无感知的情况下迁移到微服务架构。缺点**是每增加一个服务就需要配置一条内容，不支持动态提供后端的服务。 服务化映射：在实现微服务架构时，服务">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-05-16T08:50:00.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="大卓の哆啦A梦">
-<meta name="twitter:description" content="会JAVA、Spring开发的艺术家和会小提琴、ukulele的程序员">
+<meta name="twitter:title" content="微服务一：Zuul">
+<meta name="twitter:description" content="Zuul代理转发zuul代理转发的方式有两种：  URL映射：**优点是不用对被代理的服务做任务修改，适合旧系统迁移到微服务架构时采用。过渡状态中，通常会保留旧代码继续使用，同时逐步将功能一点点迁移到新平台。旧功能的访问便可以采用这种方法，使得项目可以在用户毫无感知的情况下迁移到微服务架构。缺点**是每增加一个服务就需要配置一条内容，不支持动态提供后端的服务。 服务化映射：在实现微服务架构时，服务">
 
 
 
@@ -118,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://www.dadroid.cn/archives/2018/05/"/>
+  <link rel="canonical" href="http://www.dadroid.cn/micro-service-1-zuul.html"/>
 
 
 
 
 
-  <title>归档 | 大卓の哆啦A梦</title>
+  <title>微服务一：Zuul | 大卓の哆啦A梦</title>
   
 
 
@@ -143,7 +145,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -271,259 +273,212 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
+  <div id="posts" class="posts-expand">
+    
 
-      <span class="archive-page-counter">
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.dadroid.cn/micro-service-1-zuul.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="韧卓">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="大卓の哆啦A梦">
+    </span>
+
+    
+      <header class="post-header">
+
         
         
+          <h2 class="post-title" itemprop="name headline">微服务一：Zuul</h2>
         
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-15T14:28:11+08:00">
+                2018-05-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
           
-        
-        嗯..! 目前共计 10 篇日志。 继续努力。
-      </span>
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
 
-      
-
-        
-        
-        
-
-        
+                
+                
+              
+            </span>
           
-          <div class="collection-title">
-            <h2 class="archive-year" id="archive-year-2018">2018</h2>
-          </div>
-        
-        
 
-        
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/micro-service-1-zuul.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/micro-service-1-zuul.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+          
+          
+             <span id="/micro-service-1-zuul.html" class="leancloud_visitors" data-flag-title="微服务一：Zuul">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
 
-      <h3 class="post-title">
-        
-            <a class="post-title-link" href="/micro-service-1-zuul.html" itemprop="url">
-              
-                <span itemprop="name">微服务一：Zuul</span>
-              
-            </a>
-        
-      </h3>
+          
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-05-15T14:28:11+08:00"
-              content="2018-05-15" >
-          05-15
-        </time>
-      </div>
+          
 
-    </header>
-  </article>
+          
 
+        </div>
+      </header>
+    
 
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h3 class="post-title">
-        
-            <a class="post-title-link" href="/zuul exception-balance server access error.html" itemprop="url">
-              
-                <span itemprop="name">微服务异常记录1：Zuul无法访问负载均衡服务</span>
-              
-            </a>
-        
-      </h3>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-05-15T14:28:11+08:00"
-              content="2018-05-15" >
-          05-15
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h3 class="post-title">
-        
-            <a class="post-title-link" href="/mybaits常用语法.html" itemprop="url">
-              
-                <span itemprop="name">MyBatis常用语法</span>
-              
-            </a>
-        
-      </h3>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-05-11T14:57:46+08:00"
-              content="2018-05-11" >
-          05-11
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
 
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h3 class="post-title">
-        
-            <a class="post-title-link" href="/常用Liunx命令.html" itemprop="url">
-              
-                <span itemprop="name">常用Liunx命令</span>
-              
-            </a>
-        
-      </h3>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-05-11T14:57:46+08:00"
-              content="2018-05-11" >
-          05-11
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
+      
+        <h2 id="Zuul代理转发"><a href="#Zuul代理转发" class="headerlink" title="Zuul代理转发"></a>Zuul代理转发</h2><p>zuul代理转发的方式有两种：</p>
+<ol>
+<li><strong>URL映射：**</strong>优点<strong>是不用对被代理的服务做任务修改，适合旧系统迁移到微服务架构时采用。过渡状态中，通常会保留旧代码继续使用，同时逐步将功能一点点迁移到新平台。旧功能的访问便可以采用这种方法，使得项目可以在用户毫无感知的情况下迁移到微服务架构。</strong>缺点**是每增加一个服务就需要配置一条内容，不支持动态提供后端的服务。</li>
+<li><strong>服务化映射：</strong>在实现微服务架构时，服务名与服务实例地址的关系在eureka server中已经存在了，所以只需要将Zuul注册到eureka server上去发现其他服务，就可以实现对serviceId的映射。</li>
+</ol>
+<a id="more"></a>
+<h4 id="URL映射"><a href="#URL映射" class="headerlink" title="URL映射"></a>URL映射</h4><h2 id="客户端存在context-path"><a href="#客户端存在context-path" class="headerlink" title="客户端存在context-path"></a>客户端存在context-path</h2><p><strong>客户端</strong><br>application.property配置</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">spring.application.name=service-cloudapp</span><br><span class="line"></span><br><span class="line">server.context-path=/SPLD</span><br></pre></td></tr></table></figure>
+<p>说明: 直接访问路径为——<code>http://ip:port/SPLD/api</code></p>
+<p><strong>zuul</strong><br>application.property配置</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#注册Eureka服务发现</span><br><span class="line">eureka.client.serviceUrl.defaultZone: http://localhost:8060/eureka/</span><br><span class="line"></span><br><span class="line">#转发</span><br><span class="line">zuul.routes.app.path=/SPLD/**</span><br><span class="line">zuul.routes.app.serviceId=service-cloudapp</span><br></pre></td></tr></table></figure>
+<p>那么访问路径是：<code>http://ip:port/SPLD/SPLD/api</code></p>
+<p>如何去掉重复的前缀呢？<br>可以在zuul中，路由后面增加配置如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">zuul.routes.app.stripPrefix=false</span><br></pre></td></tr></table></figure>
+<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><ul>
+<li>当<code>stripPrefix=true</code>的时候，<strong>代理前缀</strong>默认会从请求路径中<strong>移除</strong>。访问<code>http://zuul-ip:port/SPLD/api</code>重定向到<code>http://spld-ip:port/api</code>  </li>
+<li>当<code>stripPrefix=false</code>的时候，会<strong>保留代理前缀</strong>。访问<code>http://zuul-ip:port/SPLD/api</code>会重定向到<code>http://spld-ip:port/SPLD/api</code>。 </li>
+</ul>
+<p>参考文章：<br><a href="http://www.cnblogs.com/ityouknow/p/6944096.html" target="_blank" rel="noopener">springcloud(十)：服务网关zuul</a></p>
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h3 class="post-title">
-        
-            <a class="post-title-link" href="/Quartz系列二：Cron表达式详解.html" itemprop="url">
-              
-                <span itemprop="name">Quartz系列二：Cron表达式详解</span>
-              
-            </a>
-        
-      </h3>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-05-08T14:00:03+08:00"
-              content="2018-05-08" >
-          05-08
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h3 class="post-title">
-        
-            <a class="post-title-link" href="/nginx部署hexo的方法.html" itemprop="url">
-              
-                <span itemprop="name">Hexo系列三：Nginx独立部署Hexo的方法</span>
-              
-            </a>
-        
-      </h3>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-05-01T13:35:22+08:00"
-              content="2018-05-01" >
-          05-01
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/zuul/" rel="tag"># zuul</a>
+          
+            <a href="/tags/micro-service/" rel="tag"># micro service</a>
+          
+            <a href="/tags/spring-cloud/" rel="tag"># spring cloud</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/zuul exception-balance server access error.html" rel="next" title="微服务异常记录1：Zuul无法访问负载均衡服务">
+                <i class="fa fa-chevron-left"></i> 微服务异常记录1：Zuul无法访问负载均衡服务
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -531,6 +486,13 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
 
         </div>
         
@@ -551,8 +513,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -612,6 +583,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Zuul代理转发"><span class="nav-number">1.</span> <span class="nav-text">Zuul代理转发</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#URL映射"><span class="nav-number">1.0.1.</span> <span class="nav-text">URL映射</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#客户端存在context-path"><span class="nav-number">2.</span> <span class="nav-text">客户端存在context-path</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#原理"><span class="nav-number">3.</span> <span class="nav-text">原理</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -752,6 +739,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
