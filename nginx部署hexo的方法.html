@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="前言在自己的生产环境中部署hexo静态博客，通常有两种方法：  nohup命令执行hexo s：由于hexo s是框架提供的调试方法，不是部署方式，因此在生产环境会存在性能问题，不建议使用； nginx部署静态资源：将本地调试好的hexo打包生成的public目录部署到nginx上。nginx性能好，访问速度快。">
+<meta name="description" content="前言在自己的生产环境中部署hexo静态博客，通常有两种方法：nohup命令：通过nohup执行hexo s实现。由于hexo s是框架提供的调试方法，不是部署方式，因此在生产环境会存在性能问题，不建议使用；Nginx服务器：通过nginx部署静态资源，将本地调试好的hexo工程打包生成的public目录部署到nginx上。nginx性能好，访问速度快。">
 <meta name="keywords" content="hexo,next,nginx,nohup,root,alias">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hexo系列三：Nginx独立部署Hexo的方法">
 <meta property="og:url" content="http://www.dadroid.cn/nginx部署hexo的方法.html">
 <meta property="og:site_name" content="大卓の哆啦A梦">
-<meta property="og:description" content="前言在自己的生产环境中部署hexo静态博客，通常有两种方法：  nohup命令执行hexo s：由于hexo s是框架提供的调试方法，不是部署方式，因此在生产环境会存在性能问题，不建议使用； nginx部署静态资源：将本地调试好的hexo打包生成的public目录部署到nginx上。nginx性能好，访问速度快。">
+<meta property="og:description" content="前言在自己的生产环境中部署hexo静态博客，通常有两种方法：nohup命令：通过nohup执行hexo s实现。由于hexo s是框架提供的调试方法，不是部署方式，因此在生产环境会存在性能问题，不建议使用；Nginx服务器：通过nginx部署静态资源，将本地调试好的hexo工程打包生成的public目录部署到nginx上。nginx性能好，访问速度快。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-11T06:14:46.000Z">
+<meta property="og:updated_time" content="2018-05-18T06:05:51.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo系列三：Nginx独立部署Hexo的方法">
-<meta name="twitter:description" content="前言在自己的生产环境中部署hexo静态博客，通常有两种方法：  nohup命令执行hexo s：由于hexo s是框架提供的调试方法，不是部署方式，因此在生产环境会存在性能问题，不建议使用； nginx部署静态资源：将本地调试好的hexo打包生成的public目录部署到nginx上。nginx性能好，访问速度快。">
+<meta name="twitter:description" content="前言在自己的生产环境中部署hexo静态博客，通常有两种方法：nohup命令：通过nohup执行hexo s实现。由于hexo s是框架提供的调试方法，不是部署方式，因此在生产环境会存在性能问题，不建议使用；Nginx服务器：通过nginx部署静态资源，将本地调试好的hexo工程打包生成的public目录部署到nginx上。nginx性能好，访问速度快。">
 
 
 
@@ -292,7 +292,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="韧卓">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/Avatar_Jack Sparrow.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -397,22 +397,18 @@
       
 
       
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在自己的生产环境中部署hexo静态博客，通常有两种方法：</p>
-<ol>
-<li>nohup命令执行hexo s：由于hexo s是框架提供的调试方法，不是部署方式，因此在生产环境会存在性能问题，不建议使用；</li>
-<li>nginx部署静态资源：将本地调试好的hexo打包生成的public目录部署到nginx上。nginx性能好，访问速度快。</li>
-</ol>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在自己的生产环境中部署hexo静态博客，通常有两种方法：<br><strong>nohup命令</strong>：通过<code>nohup</code>执行<code>hexo s</code>实现。由于hexo s是框架提供的调试方法，不是部署方式，因此在生产环境会存在性能问题，不建议使用；<br><strong>Nginx服务器</strong>：通过<code>nginx</code>部署静态资源，将本地调试好的hexo工程打包生成的<code>public</code>目录部署到<code>nginx</code>上。<code>nginx</code>性能好，访问速度快。</p>
 <a id="more"></a> 
 <h2 id="Hexo"><a href="#Hexo" class="headerlink" title="Hexo"></a>Hexo</h2><h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><p><strong>处理二级目录</strong>：当生产环境中，静态博客部署在二级目录下（如：“http://域名(ip)/blog”这种情况），需要修改hexo工程下的_config.yml配置文件，否则打包生成的css、js文件目录会缺失（默认在根目录），导致无法加载样式。一般修改<code>root</code>和<code>url</code>,增加二级目录</p>
-<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># URL</span></span><br><span class="line"><span class="comment">## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'</span></span><br><span class="line"><span class="attr">url:</span> <span class="attr">http://yoursite.com/blog</span></span><br><span class="line"><span class="attr">root:</span> <span class="string">/blog</span></span><br><span class="line"><span class="attr">permalink:</span> <span class="string">:year/:month/:day/:title/</span></span><br><span class="line"><span class="attr">permalink_defaults:</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># URL</span></span><br><span class="line"><span class="comment">## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' </span></span><br><span class="line"><span class="comment">## and root as '/child/'</span></span><br><span class="line"><span class="attr">url:</span> <span class="attr">http://yoursite.com/blog</span></span><br><span class="line"><span class="attr">root:</span> <span class="string">/blog</span></span><br><span class="line"><span class="attr">permalink:</span> <span class="string">:year/:month/:day/:title/</span></span><br><span class="line"><span class="attr">permalink_defaults:</span></span><br></pre></td></tr></table></figure>
 <p><strong>部署在根目录无需处理</strong></p>
 <p><strong>打包</strong>：通常在调试环境无需打包，修改后使用<code>hexo s</code>，即可生效，可以直接在本地查看效果。但是，以静态资源的方式部署需要打包生成静态资源，命令为：<code>hexo generate</code>。</p>
-<h2 id="nginx"><a href="#nginx" class="headerlink" title="nginx"></a>nginx</h2><h3 id="配置静态资源路由"><a href="#配置静态资源路由" class="headerlink" title="配置静态资源路由"></a>配置静态资源路由</h3><p><strong>示例</strong>：hexo打包完成之后，以静态资源的方式部署到nginx，增加一个<code>location</code>模块。路由的细节有两种：<code>root</code>和<code>alias</code>，主要区别就是怎么解析location后面的uri。以下代码以<code>root</code>为例：</p>
+<h2 id="Nginx"><a href="#Nginx" class="headerlink" title="Nginx"></a>Nginx</h2><h3 id="配置静态资源路由"><a href="#配置静态资源路由" class="headerlink" title="配置静态资源路由"></a>配置静态资源路由</h3><p><strong>示例</strong>：hexo打包完成之后，以静态资源的方式部署到nginx，增加一个<code>location</code>模块。路由的细节有两种：<code>root</code>和<code>alias</code>，主要区别就是怎么解析location后面的uri。以下代码以<code>root</code>为例：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">location /blog &#123;</span><br><span class="line">	root html;</span><br><span class="line">	index index.html;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><strong>root规则:</strong> 以上的示例，说明访问的实际路由为：html/blog/index.html</p>
 <p><strong>alias规则:</strong> 同样的路径，alias需要按下面这么写，location后面的blog不会接到alias后面，而且alias指定的目录名后面一定要加上”/“。（<code>^~</code>表示uri以某个常规字符串开头，用于匹配url路径（而且不对url做编码处理，例如请求/static/20%/aa，可以被规则^~ /static/ /aa 匹配到（注意是空格））。下面是alias示例：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">location ^~ /blog/ &#123;</span><br><span class="line">	alias html/blog/;</span><br><span class="line">	index index.html;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="nginx常用命令"><a href="#nginx常用命令" class="headerlink" title="nginx常用命令"></a>nginx常用命令</h3><ul>
+<h3 id="Nginx常用命令"><a href="#Nginx常用命令" class="headerlink" title="Nginx常用命令"></a>Nginx常用命令</h3><ul>
 <li>启动：nginx</li>
 <li>停止：nginx -s stop</li>
 <li>重启：nginx -s restart</li>
@@ -534,6 +530,10 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
+              <img class="site-author-image" itemprop="image"
+                src="/images/Avatar_Jack Sparrow.jpg"
+                alt="韧卓" />
+            
               <p class="site-author-name" itemprop="name">韧卓</p>
               <p class="site-description motion-element" itemprop="description"></p>
           </div>
@@ -600,7 +600,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hexo"><span class="nav-number">2.</span> <span class="nav-text">Hexo</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#配置"><span class="nav-number">2.1.</span> <span class="nav-text">配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#nginx"><span class="nav-number">3.</span> <span class="nav-text">nginx</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#配置静态资源路由"><span class="nav-number">3.1.</span> <span class="nav-text">配置静态资源路由</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nginx常用命令"><span class="nav-number">3.2.</span> <span class="nav-text">nginx常用命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考："><span class="nav-number">3.3.</span> <span class="nav-text">参考：</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hexo"><span class="nav-number">2.</span> <span class="nav-text">Hexo</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#配置"><span class="nav-number">2.1.</span> <span class="nav-text">配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Nginx"><span class="nav-number">3.</span> <span class="nav-text">Nginx</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#配置静态资源路由"><span class="nav-number">3.1.</span> <span class="nav-text">配置静态资源路由</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Nginx常用命令"><span class="nav-number">3.2.</span> <span class="nav-text">Nginx常用命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考："><span class="nav-number">3.3.</span> <span class="nav-text">参考：</span></a></li></ol></li></ol></div>
             
 
           </div>
