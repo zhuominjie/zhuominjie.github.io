@@ -1,9 +1,9 @@
 ---
 title: Hexo系列一：NexT主题优化之路
 date: 2018-04-18 14:36:47
-tags: [Hexo, Next, tags,文章阴影,文章列表间距,搜索]
+tags: [Hexo, Next, tags,文章阴影,文章列表间距,搜索，Pisces]
 categories: Hexo
-keywords: [文章阴影,文章列表间距,搜索]
+keywords: [文章阴影,文章列表间距,搜索, Pisces宽度]
 ---
 选择了Hexo + Next完成个人博客建站之后，仍然会有很多不足之处。此时，万能的搜索引擎和git社区为我们提供了琳琅满目的解决方案。本文将陆续记录本站采用过的优化措施，以供大家参考。
 <!--more-->
@@ -99,4 +99,45 @@ search:
 ```
 local_search:
   enable: true
-```  
+```
+
+## 修改Pisces主题内容区宽度
+
+默认的宽度觉得有点窄，想改宽一点，可以在`source/css/_schemes/Picses/_layout.styl`文件末尾添加如下代码:
+
+```css
+/*扩展宽度*/
+header{ width: 80% !important; }
+header.post-header {
+  width: auto !important;
+}
+.container .main-inner { width: 80%; }
+.content-wrap { width: calc(100% - 260px); }
+
+.header {
+  +tablet() {
+    width: auto !important;
+  }
+  +mobile() {
+    width: auto !important;
+  }
+}
+
+.container .main-inner {
+  +tablet() {
+    width: auto !important;
+  }
+  +mobile() {
+    width: auto !important;
+  }
+}
+
+.content-wrap {
+  +tablet() {
+    width: 100% !important;
+  }
+  +mobile() {
+    width: 100% !important;
+  }
+}
+```
