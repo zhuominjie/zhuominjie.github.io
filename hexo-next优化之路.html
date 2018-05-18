@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next mist use-motion" lang="zh-Hans">
+<html class="theme-next pisces use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="文章阴影,文章列表间距,搜索" />
+  <meta name="keywords" content="文章阴影,文章列表间距,搜索,Pisces宽度" />
 
 
 
@@ -80,14 +80,14 @@
 
 
 <meta name="description" content="选择了Hexo + Next完成个人博客建站之后，仍然会有很多不足之处。此时，万能的搜索引擎和git社区为我们提供了琳琅满目的解决方案。本文将陆续记录本站采用过的优化措施，以供大家参考。">
-<meta name="keywords" content="文章阴影,文章列表间距,搜索">
+<meta name="keywords" content="文章阴影,文章列表间距,搜索,Pisces宽度">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hexo系列一：NexT主题优化之路">
 <meta property="og:url" content="http://www.dadroid.cn/hexo-next优化之路.html">
 <meta property="og:site_name" content="大卓の哆啦A梦">
 <meta property="og:description" content="选择了Hexo + Next完成个人博客建站之后，仍然会有很多不足之处。此时，万能的搜索引擎和git社区为我们提供了琳琅满目的解决方案。本文将陆续记录本站采用过的优化措施，以供大家参考。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-11T06:15:53.000Z">
+<meta property="og:updated_time" content="2018-05-18T05:45:30.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo系列一：NexT主题优化之路">
 <meta name="twitter:description" content="选择了Hexo + Next完成个人博客建站之后，仍然会有很多不足之处。此时，万能的搜索引擎和git社区为我们提供了琳琅满目的解决方案。本文将陆续记录本站采用过的优化措施，以供大家参考。">
@@ -98,7 +98,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Mist',
+    scheme: 'Pisces',
     version: '5.1.4',
     sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
@@ -422,9 +422,9 @@
 <h3 id="启用搜索"><a href="#启用搜索" class="headerlink" title="启用搜索"></a>启用搜索</h3><p><strong>第一步：</strong>在hexo的_config.yml配置文件增加如下内容：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">search:</span><br><span class="line">  path: search.xml</span><br><span class="line">  field: post</span><br><span class="line">  format: html</span><br><span class="line">  limit: 10000</span><br></pre></td></tr></table></figure>
 <p><strong>第二步：</strong>在NexT的_config.yml配置文件修改如下内容：</p>
-<pre><code>local_search:
-  enable: true
-</code></pre>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">local_search:</span><br><span class="line">  enable: true</span><br></pre></td></tr></table></figure>
+<h2 id="修改Pisces主题内容区宽度"><a href="#修改Pisces主题内容区宽度" class="headerlink" title="修改Pisces主题内容区宽度"></a>修改Pisces主题内容区宽度</h2><p>默认的宽度觉得有点窄，想改宽一点，可以在<code>source/css/_schemes/Picses/_layout.styl</code>文件末尾添加如下代码:</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*扩展宽度*/</span></span><br><span class="line"><span class="selector-tag">header</span>&#123; <span class="attribute">width</span>: <span class="number">80%</span> <span class="meta">!important</span>; &#125;</span><br><span class="line"><span class="selector-tag">header</span><span class="selector-class">.post-header</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: auto <span class="meta">!important</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.container</span> <span class="selector-class">.main-inner</span> &#123; <span class="attribute">width</span>: <span class="number">80%</span>; &#125;</span><br><span class="line"><span class="selector-class">.content-wrap</span> &#123; <span class="attribute">width</span>: <span class="built_in">calc</span>(100% - 260px); &#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.header</span> &#123;</span><br><span class="line">  +tablet() &#123;</span><br><span class="line">    <span class="selector-tag">width</span>: <span class="selector-tag">auto</span> !<span class="selector-tag">important</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  +<span class="selector-tag">mobile</span>() &#123;</span><br><span class="line">    <span class="attribute">width</span>: auto <span class="meta">!important</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.container</span> <span class="selector-class">.main-inner</span> &#123;</span><br><span class="line">  +tablet() &#123;</span><br><span class="line">    <span class="selector-tag">width</span>: <span class="selector-tag">auto</span> !<span class="selector-tag">important</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  +<span class="selector-tag">mobile</span>() &#123;</span><br><span class="line">    <span class="attribute">width</span>: auto <span class="meta">!important</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.content-wrap</span> &#123;</span><br><span class="line">  +tablet() &#123;</span><br><span class="line">    <span class="selector-tag">width</span>: 100% !<span class="selector-tag">important</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  +<span class="selector-tag">mobile</span>() &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100%</span> <span class="meta">!important</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -451,7 +451,7 @@
           
             <a href="/tags/文章列表间距/" rel="tag"># 文章列表间距</a>
           
-            <a href="/tags/搜索/" rel="tag"># 搜索</a>
+            <a href="/tags/搜索，Pisces/" rel="tag"># 搜索，Pisces</a>
           
         </div>
       
@@ -607,7 +607,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#缩小首页文章列表间距并增加阴影效果"><span class="nav-number">1.</span> <span class="nav-text">缩小首页文章列表间距并增加阴影效果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#增加标签"><span class="nav-number">2.</span> <span class="nav-text">增加标签</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#步骤一"><span class="nav-number">2.1.</span> <span class="nav-text">步骤一</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#步骤二"><span class="nav-number">2.2.</span> <span class="nav-text">步骤二</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#步骤三"><span class="nav-number">2.3.</span> <span class="nav-text">步骤三</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#步骤四"><span class="nav-number">2.4.</span> <span class="nav-text">步骤四</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#增加分类"><span class="nav-number">3.</span> <span class="nav-text">增加分类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加站内搜索"><span class="nav-number">4.</span> <span class="nav-text">添加站内搜索</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装插件"><span class="nav-number">4.1.</span> <span class="nav-text">安装插件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启用搜索"><span class="nav-number">4.2.</span> <span class="nav-text">启用搜索</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#缩小首页文章列表间距并增加阴影效果"><span class="nav-number">1.</span> <span class="nav-text">缩小首页文章列表间距并增加阴影效果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#增加标签"><span class="nav-number">2.</span> <span class="nav-text">增加标签</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#步骤一"><span class="nav-number">2.1.</span> <span class="nav-text">步骤一</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#步骤二"><span class="nav-number">2.2.</span> <span class="nav-text">步骤二</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#步骤三"><span class="nav-number">2.3.</span> <span class="nav-text">步骤三</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#步骤四"><span class="nav-number">2.4.</span> <span class="nav-text">步骤四</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#增加分类"><span class="nav-number">3.</span> <span class="nav-text">增加分类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加站内搜索"><span class="nav-number">4.</span> <span class="nav-text">添加站内搜索</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装插件"><span class="nav-number">4.1.</span> <span class="nav-text">安装插件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启用搜索"><span class="nav-number">4.2.</span> <span class="nav-text">启用搜索</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改Pisces主题内容区宽度"><span class="nav-number">5.</span> <span class="nav-text">修改Pisces主题内容区宽度</span></a></li></ol></div>
             
 
           </div>
@@ -650,7 +650,7 @@
 
 
 
-  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next" rel="external nofollow">NexT.Mist</a> v5.1.4</div>
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next" rel="external nofollow">NexT.Pisces</a> v5.1.4</div>
 
 
 
@@ -756,6 +756,13 @@
 
   
   
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
 
   
   <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
