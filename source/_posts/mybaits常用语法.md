@@ -1,9 +1,14 @@
 ---
 title: MyBatis常用语法
-date: 2018-05-11 14:57:46
-tags: [Linux, scp]
-keywords: [Linux, scp]
+tags:
+  - Linux
+  - scp
+keywords:
+  - Linux
+  - scp
 categories: Linux
+abbrlink: 5a838215
+date: 2018-05-11 14:57:46
 ---
 
 ## mybaits 中没有else要用chose when otherwise 代替

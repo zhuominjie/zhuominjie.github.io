@@ -1,8 +1,11 @@
 ---
 title: JAVA服务通过URL下载文件
-date: 2018-04-18 14:36:47
-tags: [Java, URLConnection]
+tags:
+  - Java
+  - URLConnection
 categories: Java
+abbrlink: c0372a48
+date: 2018-04-18 14:36:47
 ---
 
 如何通过Java（模拟浏览器）发送HTTP请求，下载文件是WEB应用经常处理的场景。Java有原生的API可用于发送HTTP请求，即：java.net.URL、java.net.URLConnection。这些API本身已经足够好用，但不够简便。所以，也流行有许多Java HTTP请求的framework，如Apache的HttpClient等。

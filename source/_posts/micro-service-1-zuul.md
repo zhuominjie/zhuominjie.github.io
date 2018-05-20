@@ -1,9 +1,16 @@
 ---
 title: 微服务一：Zuul
-date: 2018-05-15 14:28:11
-tags: [zuul, micro service, spring cloud]
-keywords: [zuul, micro service, spring cloud]
+tags:
+  - zuul
+  - micro service
+  - spring cloud
+keywords:
+  - zuul
+  - micro service
+  - spring cloud
 categories: Java
+abbrlink: 3da87cd8
+date: 2018-05-15 14:28:11
 ---
 
 ## Zuul代理转发

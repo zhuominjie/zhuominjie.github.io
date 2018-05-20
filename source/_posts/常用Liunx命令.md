@@ -1,9 +1,14 @@
 ---
 title: 常用Liunx命令
-date: 2018-05-11 14:57:46
-tags: [Linux, scp]
-keywords: [Linux, scp]
+tags:
+  - Linux
+  - scp
+keywords:
+  - Linux
+  - scp
 categories: Linux
+abbrlink: cbdebe31
+date: 2018-05-11 14:57:46
 ---
 
 ## SCP-文件传输

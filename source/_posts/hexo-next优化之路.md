@@ -1,9 +1,20 @@
 ---
 title: Hexo系列一：NexT主题优化之路
-date: 2018-04-18 14:36:47
-tags: [Hexo, Next, tags,文章阴影,文章列表间距,搜索，Pisces]
+tags:
+  - Hexo
+  - Next
+  - tags
+  - 文章阴影
+  - 文章列表间距
+  - 搜索，Pisces
 categories: Hexo
-keywords: [文章阴影,文章列表间距,搜索, Pisces宽度]
+keywords:
+  - 文章阴影
+  - 文章列表间距
+  - 搜索
+  - Pisces宽度
+abbrlink: dc01d1e2
+date: 2018-04-18 14:36:47
 ---
 选择了Hexo + Next完成个人博客建站之后，仍然会有很多不足之处。此时，万能的搜索引擎和git社区为我们提供了琳琅满目的解决方案。本文将陆续记录本站采用过的优化措施，以供大家参考。
 <!--more-->
@@ -141,3 +152,31 @@ header.post-header {
   }
 }
 ```
+## 去掉图片默认的边框
+将Next主题/themes/next/source/css/_common/components/post/post-expand.styl文件中的img的border的值修改为none
+
+```
+//将border的值修改为none即可去掉边框，默认值为 1px solid $gray-lighter
+  img {
+    box-sizing: border-box;
+    margin: auto;
+    padding: 3px;
+    border: none; 
+  }
+```
+## 持久化链接优化
+写的文章复制到微信中链接被分开了，无法直接点击链接访问。看了其他人的博客，大多数是转换为英文的，也没说实现方法。看到一个abbrlink的方法，使用解决了这一问题。
+### 安装abbr-link插件
+```
+npm install hexo-abbrlink --save
+```
+### 配置博客站点文件
+```
+permalink: posts/:abbrlink/
+# abbrlink config
+abbrlink:
+  alg: crc32  #support crc16(default) and crc32
+  rep: hex    #support dec(default) and hex
+```
+### 部署
+执行`hexo clean`和`hexo s`，使得配置生效

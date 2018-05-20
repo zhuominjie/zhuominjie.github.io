@@ -1,9 +1,18 @@
 ---
 title: Hexo系列三：Nginx独立部署Hexo的方法
-date: 2018-05-01 13:35:22
-tags: [hexo, nginx]
+tags:
+  - hexo
+  - nginx
 categories: Hexo
-keywords: [hexo, next, nginx, nohup, root, alias]
+keywords:
+  - hexo
+  - next
+  - nginx
+  - nohup
+  - root
+  - alias
+abbrlink: 668799af
+date: 2018-05-01 13:35:22
 ---
 
 ## 前言

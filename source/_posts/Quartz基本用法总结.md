@@ -1,8 +1,14 @@
 ---
 title: Quartz系列一：基本用法总结
-date: 2018-04-28 16:13:42
-tags: [Java, Spring, Quartz, 持久化, 对象注入]
+tags:
+  - Java
+  - Spring
+  - Quartz
+  - 持久化
+  - 对象注入
 categories: Java
+abbrlink: f6df2318
+date: 2018-04-28 16:13:42
 ---
 
 OpenSymphony所提供的Quartz是任务调度领域享誉盛名的开源框架。Spring提供了集成Quartz的功能，可以让开发人员以更面向Spring的方式创建基于Quartz的任务调度应用。任务调度本身设计多线程并发、运行时间规则制定及解析、运行现场保持与恢复、线程池维护等诸多方面的工作。如果以自定义线程池的原始方法开发，难点很大。

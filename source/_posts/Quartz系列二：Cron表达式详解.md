@@ -1,9 +1,20 @@
 ---
 title: Quartz系列二：Cron表达式详解
-date: 2018-05-08 14:00:03
-tags: [Java, Spring, Quartz, 持久化, 对象注入]
-keywords: [Java, Spring, Quartz, CronExpression, Cron]
+tags:
+  - Java
+  - Spring
+  - Quartz
+  - 持久化
+  - 对象注入
+keywords:
+  - Java
+  - Spring
+  - Quartz
+  - CronExpression
+  - Cron
 categories: Java
+abbrlink: f507bee4
+date: 2018-05-08 14:00:03
 ---
 
 CronExpression：用于配置cronTrigger的实例，由七个子表达式组成。这些表达式之间用空格分隔。

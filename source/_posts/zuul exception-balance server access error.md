@@ -1,9 +1,18 @@
 ---
 title: 微服务异常记录1：Zuul无法访问负载均衡服务
-date: 2018-05-15 14:28:11
-tags: [zuul, eureka, micro service, spring cloud]
-keywords: [zuul, eureka, micro service, spring cloud]
+tags:
+  - zuul
+  - eureka
+  - micro service
+  - spring cloud
+keywords:
+  - zuul
+  - eureka
+  - micro service
+  - spring cloud
 categories: Java
+abbrlink: 6b5d0213
+date: 2018-05-15 14:28:11
 ---
 ## 问题描述
 使用zuul的负载均衡功能时，无法访问负载均衡服务
