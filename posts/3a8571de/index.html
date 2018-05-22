@@ -82,14 +82,14 @@
 <meta name="description" content="前言在自己的生产环境中部署hexo静态博客，通常有两种方法：nohup命令：通过nohup执行hexo s实现。由于hexo s是框架提供的调试方法，不是部署方式，因此在生产环境会存在性能问题，不建议使用；Nginx服务器：通过nginx部署静态资源，将本地调试好的hexo工程打包生成的public目录部署到nginx上。nginx性能好，访问速度快。">
 <meta name="keywords" content="hexo,next,nginx,nohup,root,alias">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hexo系列三：Nginx独立部署Hexo的方法">
-<meta property="og:url" content="http://www.dadroid.cn/nginx部署hexo的方法.html">
+<meta property="og:title" content="Hexo：Nginx独立部署方法">
+<meta property="og:url" content="http://www.dadroid.cn/posts/3a8571de/index.html">
 <meta property="og:site_name" content="大卓の哆啦A梦">
 <meta property="og:description" content="前言在自己的生产环境中部署hexo静态博客，通常有两种方法：nohup命令：通过nohup执行hexo s实现。由于hexo s是框架提供的调试方法，不是部署方式，因此在生产环境会存在性能问题，不建议使用；Nginx服务器：通过nginx部署静态资源，将本地调试好的hexo工程打包生成的public目录部署到nginx上。nginx性能好，访问速度快。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-18T06:05:51.000Z">
+<meta property="og:updated_time" content="2018-05-21T06:04:52.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo系列三：Nginx独立部署Hexo的方法">
+<meta name="twitter:title" content="Hexo：Nginx独立部署方法">
 <meta name="twitter:description" content="前言在自己的生产环境中部署hexo静态博客，通常有两种方法：nohup命令：通过nohup执行hexo s实现。由于hexo s是框架提供的调试方法，不是部署方式，因此在生产环境会存在性能问题，不建议使用；Nginx服务器：通过nginx部署静态资源，将本地调试好的hexo工程打包生成的public目录部署到nginx上。nginx性能好，访问速度快。">
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://www.dadroid.cn/nginx部署hexo的方法.html"/>
+  <link rel="canonical" href="http://www.dadroid.cn/posts/3a8571de/"/>
 
 
 
 
 
-  <title>Hexo系列三：Nginx独立部署Hexo的方法 | 大卓の哆啦A梦</title>
+  <title>Hexo：Nginx独立部署方法 | 大卓の哆啦A梦</title>
   
 
 
@@ -287,7 +287,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.dadroid.cn/nginx部署hexo的方法.html">
+    <link itemprop="mainEntityOfPage" href="http://www.dadroid.cn/posts/3a8571de/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="韧卓">
@@ -304,7 +304,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">Hexo系列三：Nginx独立部署Hexo的方法</h2>
+          <h2 class="post-title" itemprop="name headline">Hexo：Nginx独立部署方法</h2>
         
 
         <div class="post-meta">
@@ -357,8 +357,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/nginx部署hexo的方法.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/nginx部署hexo的方法.html" itemprop="commentCount"></span>
+                <a href="/posts/3a8571de/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/posts/3a8571de/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -366,7 +366,7 @@
 
           
           
-             <span id="/nginx部署hexo的方法.html" class="leancloud_visitors" data-flag-title="Hexo系列三：Nginx独立部署Hexo的方法">
+             <span id="/posts/3a8571de/" class="leancloud_visitors" data-flag-title="Hexo：Nginx独立部署方法">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -449,8 +449,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/SEO优化之路.html" rel="next" title="Hexo系列二：Github部署站点的SEO优化教程">
-                <i class="fa fa-chevron-left"></i> Hexo系列二：Github部署站点的SEO优化教程
+              <a href="/posts/undefined/" rel="next" title="Hexo：Github部署站点的SEO优化教程">
+                <i class="fa fa-chevron-left"></i> Hexo：Github部署站点的SEO优化教程
               </a>
             
           </div>
@@ -459,8 +459,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/Quartz系列二：Cron表达式详解.html" rel="prev" title="Quartz系列二：Cron表达式详解">
-                Quartz系列二：Cron表达式详解 <i class="fa fa-chevron-right"></i>
+              <a href="/posts/f507bee4/" rel="prev" title="Quartz：Cron表达式详解">
+                Quartz：Cron表达式详解 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -545,7 +545,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
