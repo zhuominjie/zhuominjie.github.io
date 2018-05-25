@@ -1,5 +1,5 @@
 ---
-title: JAVA服务通过URL下载文件
+title: JAVA：文件下载
 tags:
   - Java
   - URLConnection

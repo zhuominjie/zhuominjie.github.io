@@ -1,5 +1,5 @@
 ---
-title: MyBatis常用语法
+title: 数据库：MyBatis常用语法
 tags:
   - Linux
   - scp
@@ -11,10 +11,11 @@ abbrlink: 5a838215
 date: 2018-05-11 14:57:46
 ---
 
-## mybaits 中没有else要用chose when otherwise 代替
+## Else判断分支
+
 使用MyBatis写动态SQL查询相比Hiberntate是非常方便的。select不仅能够根据mapper接口中的返回值自动匹配
 
-查询selectOne还是selectList，而且在查询中还可以灵活的定制查询的方式，添加if 或者 choose等标签进行查询。
+查询selectOne还是selectList，而且在查询中还可以灵活的定制查询的方式，添加if 或者 choose等标签进行查询。mybaits中没有else要用“chose when otherwise”代替
 
 
 ```xml

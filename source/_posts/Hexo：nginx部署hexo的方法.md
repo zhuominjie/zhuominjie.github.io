@@ -1,5 +1,5 @@
 ---
-title: Hexo系列三：Nginx独立部署Hexo的方法
+title: Hexo：Nginx独立部署方法
 tags:
   - hexo
   - nginx
@@ -11,7 +11,7 @@ keywords:
   - nohup
   - root
   - alias
-abbrlink: 668799af
+abbrlink: 3a8571de
 date: 2018-05-01 13:35:22
 ---
 

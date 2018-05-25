@@ -1,5 +1,5 @@
 ---
-title: 常用Liunx命令
+title: Liunx：常用命令
 tags:
   - Linux
   - scp

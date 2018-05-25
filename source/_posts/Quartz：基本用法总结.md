@@ -1,5 +1,5 @@
 ---
-title: Quartz系列一：基本用法总结
+title: Quartz：基本用法总结
 tags:
   - Java
   - Spring

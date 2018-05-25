@@ -1,5 +1,5 @@
 ---
-title: Quartz系列二：Cron表达式详解
+title: Quartz：Cron表达式详解
 tags:
   - Java
   - Spring

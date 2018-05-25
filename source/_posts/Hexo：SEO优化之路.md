@@ -1,6 +1,6 @@
 ---
 layout: hexo
-title: Hexo系列二：Github部署站点的SEO优化教程
+title: Hexo：Github部署站点的SEO优化教程
 date: 2018-04-30 15:03:24
 tags: [Hexo, SEO]
 categories: Hexo

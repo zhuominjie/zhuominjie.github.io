@@ -1,5 +1,5 @@
 ---
-title: Hexo系列一：NexT主题优化之路
+title: Hexo：NexT主题优化之路
 tags:
   - Hexo
   - Next
