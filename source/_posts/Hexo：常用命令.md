@@ -1,7 +1,14 @@
 ---
 title: Hexo：常用命令
-abbrlink: c8dcc28b
 tags:
+  - Hexo
+  - 草稿
+categories: Hexo
+keywords:
+  - Hexo
+  - 草稿
+abbrlink: c8dcc28b
+date: 2018-05-15 14:36:47
 ---
 
 ## 草稿
@@ -10,7 +17,7 @@ tags:
 ```
 hexo new draft "new draft"
 ```
-会在source/_drafts目录下生成一个new-draft.md文件。但是这个文件不被显示在页面上，链接也访问不到。也就是说如果你想把某一篇文章移除显示，又不舍得删除，可以把它移动到_drafts目录之中。
+会在`source/_drafts`目录下生成一个`new-draft.md`文件。但是这个文件不被显示在页面上，链接也访问不到。也就是说如果你想把某一篇文章移除显示，又不舍得删除，可以把它移动到`_drafts`目录之中。
 
 如果你希望强行预览草稿，更改配置文件：
 
