@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="大卓の哆啦A梦">
 <meta property="og:description" content="Else判断分支使用MyBatis写动态SQL查询相比Hiberntate是非常方便的。select不仅能够根据mapper接口中的返回值自动匹配 查询selectOne还是selectList，而且在查询中还可以灵活的定制查询的方式，添加if 或者 choose等标签进行查询。mybaits中没有else要用“chose when otherwise”代替 &amp;lt;!--批量插入用户--&amp;gt;">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-22T06:53:13.000Z">
+<meta property="og:updated_time" content="2018-06-04T10:43:39.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据库：MyBatis常用语法">
 <meta name="twitter:description" content="Else判断分支使用MyBatis写动态SQL查询相比Hiberntate是非常方便的。select不仅能够根据mapper接口中的返回值自动匹配 查询selectOne还是selectList，而且在查询中还可以灵活的定制查询的方式，添加if 或者 choose等标签进行查询。mybaits中没有else要用“chose when otherwise”代替 &amp;lt;!--批量插入用户--&amp;gt;">
@@ -400,6 +400,68 @@
         <h2 id="Else判断分支"><a href="#Else判断分支" class="headerlink" title="Else判断分支"></a>Else判断分支</h2><p>使用MyBatis写动态SQL查询相比Hiberntate是非常方便的。select不仅能够根据mapper接口中的返回值自动匹配</p>
 <p>查询selectOne还是selectList，而且在查询中还可以灵活的定制查询的方式，添加if 或者 choose等标签进行查询。mybaits中没有else要用“chose when otherwise”代替</p>
 <figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--批量插入用户--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"getItems"</span> <span class="attr">parameterType</span>=<span class="string">"com.ipro.shopping.to.IntegerEntity"</span> <span class="attr">resultType</span>=<span class="string">"itemsType"</span>&gt;</span>  </span><br><span class="line">   select * from itemsType  </span><br><span class="line">   <span class="tag">&lt;<span class="name">where</span>&gt;</span>  </span><br><span class="line">      <span class="comment">&lt;!--方式一使用choose的方式查询--&gt;</span>  </span><br><span class="line">     <span class="comment">&lt;!-- &lt;choose&gt;  </span></span><br><span class="line"><span class="comment">         &lt;when test="parentId !=0 "&gt;parentTypeId=#&#123;parentId&#125;&lt;/when&gt;  </span></span><br><span class="line"><span class="comment">         &lt;when test="parentId==0"&gt;parentTypeId is null&lt;/when&gt;  </span></span><br><span class="line"><span class="comment">      &lt;/choose&gt; --&gt;</span>  </span><br><span class="line">     <span class="comment">&lt;!--方式二使用if的方式查询--&gt;</span>  </span><br><span class="line">      <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"parentId!=0"</span>&gt;</span>  </span><br><span class="line">         parentTypeId=#&#123;parentId&#125;  </span><br><span class="line">      <span class="tag">&lt;/<span class="name">if</span>&gt;</span>  </span><br><span class="line">      <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"parentId==0"</span>&gt;</span>  </span><br><span class="line">        parentTypeId is null  </span><br><span class="line">      <span class="tag">&lt;/<span class="name">if</span>&gt;</span>  </span><br><span class="line">   <span class="tag">&lt;/<span class="name">where</span>&gt;</span>  </span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h2 id="导出表结构和数据"><a href="#导出表结构和数据" class="headerlink" title="导出表结构和数据"></a>导出表结构和数据</h2><p>使用<code>mysqldump</code>命令，具体用法如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mysqldump -u用戶名 -p密码 -d 数据库名 表名 &gt; 脚本名;</span><br></pre></td></tr></table></figure>
+<p>导出整个数据库结构和数据</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mysqldump -h localhost -uroot -p123456 database &gt; dump.sql</span><br></pre></td></tr></table></figure>
+<p>导出单个数据表结构和数据</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mysqldump -h localhost -uroot -p123456  database table &gt; dump.sql</span><br></pre></td></tr></table></figure>
+<p>导出整个数据库结构（不包含数据）</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mysqldump -h localhost -uroot -p123456  -d database &gt; dump.sql</span><br></pre></td></tr></table></figure>
+<p>导出单个数据表结构（不包含数据）</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mysqldump -h localhost -uroot -p123456  -d database table &gt; dump.sql</span><br></pre></td></tr></table></figure>
+<h3 id="可能异常"><a href="#可能异常" class="headerlink" title="可能异常"></a>可能异常</h3><p>可能在执行导出命令时，会遇到如下异常：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mysqldump: Error: &apos;Got error 28 from storage engine&apos; when trying to dump tablespaces</span><br><span class="line">mysqldump: Couldn&apos;t execute &apos;show fields from `consumption`&apos;: Got error 28 from storage engine (1030)</span><br></pre></td></tr></table></figure>
+<p><strong>原因</strong> 是系统空间不足，可以清理一下缓存。</p>
+<h2 id="数据库外键关联"><a href="#数据库外键关联" class="headerlink" title="数据库外键关联"></a>数据库外键关联</h2><p>外键关联有四种模式，分别如下：</p>
+<p><strong>CASCADE:</strong> 从父表中删除或更新对应的行，同时自动的删除或更新子表中匹配的行。<code>ON DELETE CANSCADE</code>和<code>ON UPDATE CANSCADE</code>都被<code>InnoDB</code>所支持。</p>
+<p><strong>SET NULL:</strong> 从父表中删除或更新对应的行，同时将子表中的外键列设为空。注意，这些在外键列没有被设为<code>NOT NULL</code>时才有效。<code>ON DELETE SET NULL</code>和<code>ON UPDATE SET SET NULL</code>都被<code>InnoDB</code>所支持。</p>
+<p><strong>NO ACTION:</strong> <code>InnoDB</code>拒绝删除或者更新父表。</p>
+<p><strong>RESTRICT:</strong> 拒绝删除或者更新父表。指定<code>RESTRICT</code>（或者<code>NO ACTION</code>）和忽略<code>ON DELETE</code>或者<code>ON UPDATE</code>选项的效果是一样的</p>
+<h2 id="按天分组查询"><a href="#按天分组查询" class="headerlink" title="按天分组查询"></a>按天分组查询</h2><table>
+<thead>
+<tr>
+<th>username</th>
+<th style="text-align:center">create_time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>张三</td>
+<td style="text-align:center">2018-03-13 09:48:34</td>
+</tr>
+<tr>
+<td>李四</td>
+<td style="text-align:center">2018-03-14 09:24:32</td>
+</tr>
+</tbody>
+</table>
+<p>查询某天：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">SELECT DATE_FORMAT( create_time, &quot;%Y-%m-%d) as date, COUNT( * ) as count</span><br><span class="line">FROM test</span><br><span class="line">GROUP BY DATE_FORMAT( create_time, &quot;%Y-%m-%d)</span><br></pre></td></tr></table></figure>
+<p>结果：</p>
+<table>
+<thead>
+<tr>
+<th>date</th>
+<th style="text-align:center">count</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2018-03-13</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td>2018-03-14</td>
+<td style="text-align:center">1</td>
+</tr>
+</tbody>
+</table>
+<p>如果想要查询某时的统计信息，可以修改<code>DATE_FORMAT</code>内容：</p>
+<p><code>create_time, &quot;%Y-%m-%d %H&quot;</code></p>
+<p>依次类推，其实就是对<code>create_time</code>进行处理，然后再对处理后的数据分组。</p>
+<h2 id="模糊匹配"><a href="#模糊匹配" class="headerlink" title="模糊匹配"></a>模糊匹配</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">like CONCAT(&apos;%&apos;, #&#123;port&#125;, &apos;%&apos;)</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -431,8 +493,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/posts/f507bee4/" rel="next" title="Quartz：Cron表达式详解">
-                <i class="fa fa-chevron-left"></i> Quartz：Cron表达式详解
+              <a href="/posts/cbdebe31/" rel="next" title="Liunx：常用命令">
+                <i class="fa fa-chevron-left"></i> Liunx：常用命令
               </a>
             
           </div>
@@ -441,8 +503,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/posts/cbdebe31/" rel="prev" title="Liunx：常用命令">
-                Liunx：常用命令 <i class="fa fa-chevron-right"></i>
+              <a href="/posts/b778229b/" rel="prev" title="微服务：Zuul代理转发">
+                微服务：Zuul代理转发 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -527,7 +589,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">21</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -538,7 +600,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -549,7 +611,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">24</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -582,7 +644,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Else判断分支"><span class="nav-number">1.</span> <span class="nav-text">Else判断分支</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Else判断分支"><span class="nav-number">1.</span> <span class="nav-text">Else判断分支</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#导出表结构和数据"><span class="nav-number">2.</span> <span class="nav-text">导出表结构和数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#可能异常"><span class="nav-number">2.1.</span> <span class="nav-text">可能异常</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库外键关联"><span class="nav-number">3.</span> <span class="nav-text">数据库外键关联</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#按天分组查询"><span class="nav-number">4.</span> <span class="nav-text">按天分组查询</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模糊匹配"><span class="nav-number">5.</span> <span class="nav-text">模糊匹配</span></a></li></ol></div>
             
 
           </div>
