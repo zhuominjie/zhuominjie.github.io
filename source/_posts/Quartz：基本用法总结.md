@@ -306,5 +306,4 @@ org.quartz.dataSource.quartzDataSource.maxConnections = 5
 ```
 其他内容和`RAMJobStore`模式相同。
 
-这里，记录下一个大坑：完成上面的配置之后，仍然无法连接到数据库，报错的内容是`C3P0的connectionProvider初始化失败`。查了很多资料，再结合错误信息，花了半天时间，才发现：原来quartz默认使用了C3P0的数据源，然而quartz的依赖包中并没有C3P0的依赖，因此无法初始化连接器。解决方法：只要在maven管理的POM.xml中把C3P0的依赖加上就可以了。
 

@@ -33,7 +33,25 @@ scp ~/local_path/local_filename username@servername:/remote_path
 ```
 scp  -r ~/local_dir username@servername:/remote_path/remote_dir
 ```
+<!--more-->
 
+## 查看内存
+### free命令 
 
+```
+              total        used        free      shared  buff/cache   available
+Mem:        8010180     1027572      454540       74152     6528068     6504456
+Swap:             0           0           0
+```
 
+**total:**总计物理内存的大小。
+**used:**已使用多大。
+**free:**可用有多少。
+**Shared:**多个进程共享的内存总额。
+**Buffers/cached:**磁盘缓存的大小。 
 
+`Mem`的`used/free`是从`OS`的角度来看，因为对于`OS`，`buffers/cached`都是属于被使用的
+
+## 修改密码
+1. 登录账户后，输入`passwd`
+2. 输入一遍旧密码，输入两遍新密码，密码不能太简单
