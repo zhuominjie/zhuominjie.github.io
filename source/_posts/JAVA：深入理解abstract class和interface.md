@@ -1,8 +1,9 @@
 ---
-title: JAVA：[转]深入理解abstract class和interface
+title: 'JAVA：[转]深入理解abstract class和interface'
+categories: JAVA
+abbrlink: a494d8f4
 date: 2018-06-07 09:31:38
 tags:
-categories: JAVA
 ---
 ## 理解抽象类
 abstract class和interface在Java语言中都是用来进行抽象类（本文中的抽象类并非从abstract class翻译而来，它表示的是一个抽象体，而abstract class为Java语言中用于定义抽象类的一种方法，请读者注意区分）定义的，那么什么是抽象类，使用抽象类能为我们带来什么好处呢？
