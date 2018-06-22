@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="大卓の哆啦A梦">
 <meta property="og:description" content="OpenSymphony所提供的Quartz是任务调度领域享誉盛名的开源框架。Spring提供了集成Quartz的功能，可以让开发人员以更面向Spring的方式创建基于Quartz的任务调度应用。任务调度本身设计多线程并发、运行时间规则制定及解析、运行现场保持与恢复、线程池维护等诸多方面的工作。如果以自定义线程池的原始方法开发，难点很大。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-21T06:03:42.000Z">
+<meta property="og:updated_time" content="2018-06-05T02:08:37.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Quartz：基本用法总结">
 <meta name="twitter:description" content="OpenSymphony所提供的Quartz是任务调度领域享誉盛名的开源框架。Spring提供了集成Quartz的功能，可以让开发人员以更面向Spring的方式创建基于Quartz的任务调度应用。任务调度本身设计多线程并发、运行时间规则制定及解析、运行现场保持与恢复、线程池维护等诸多方面的工作。如果以自定义线程池的原始方法开发，难点很大。">
@@ -431,7 +431,6 @@
 <h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><p>默认情况下，调度器的详情信息会被存储在内存，模式为：<code>RAMJobStore</code>，而且也不需要填写quartz.properties的配置。然而，如果是持久化的模式，那么quartz.properties就必须填写，因为文件中制定了信息存储模式和数据源信息。</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 线程调度器实例名</span><br><span class="line">org.quartz.scheduler.instanceName = quartzScheduler</span><br><span class="line"># 线程池的线程数，即最多3个任务同时跑</span><br><span class="line">org.quartz.threadPool.threadCount = 3</span><br><span class="line"></span><br><span class="line"># 如何存储任务和触发器等信息</span><br><span class="line">org.quartz.jobStore.class = org.quartz.impl.jdbcjobstore.JobStoreTX</span><br><span class="line"># 驱动代理</span><br><span class="line">org.quartz.jobStore.driverDelegateClass = org.quartz.impl.jdbcjobstore.StdJDBCDelegate</span><br><span class="line"># 表前缀</span><br><span class="line">org.quartz.jobStore.tablePrefix = qrtz_ </span><br><span class="line"># 数据源</span><br><span class="line">org.quartz.jobStore.dataSource = quartzDataSource</span><br><span class="line"># 是否集群</span><br><span class="line">org.quartz.jobStore.isClustered = false</span><br><span class="line"></span><br><span class="line"># 数据源</span><br><span class="line"># 驱动</span><br><span class="line">org.quartz.dataSource.quartzDataSource.driver = com.mysql.cj.jdbc.Driver</span><br><span class="line"># 连接URL</span><br><span class="line">org.quartz.dataSource.quartzDataSource.URL = jdbc:mysql://localhost:3306/quartz?characterEncoding=utf-8&amp;useSSL=true&amp;&amp;serverTimezone=Asia/Shanghai</span><br><span class="line"># 用户名</span><br><span class="line">org.quartz.dataSource.quartzDataSource.user = root</span><br><span class="line"># 密码</span><br><span class="line">org.quartz.dataSource.quartzDataSource.password = 123456</span><br><span class="line"># 最大连接数</span><br><span class="line">org.quartz.dataSource.quartzDataSource.maxConnections = 5</span><br></pre></td></tr></table></figure>
 <p>其他内容和<code>RAMJobStore</code>模式相同。</p>
-<p>这里，记录下一个大坑：完成上面的配置之后，仍然无法连接到数据库，报错的内容是<code>C3P0的connectionProvider初始化失败</code>。查了很多资料，再结合错误信息，花了半天时间，才发现：原来quartz默认使用了C3P0的数据源，然而quartz的依赖包中并没有C3P0的依赖，因此无法初始化连接器。解决方法：只要在maven管理的POM.xml中把C3P0的依赖加上就可以了。</p>
 
       
     </div>
@@ -566,7 +565,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">28</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -577,7 +576,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -588,7 +587,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-count">31</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
