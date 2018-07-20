@@ -568,6 +568,23 @@
           
             <h2 id="查询字段为null或者不为null"><a href="#查询字段为null或者不为null" class="headerlink" title="查询字段为null或者不为null"></a>查询字段为null或者不为null</h2><p>在<code>mysql</code>中，查询某字段为空时，切记不可用<code>= null</code>，而是 <code>is null</code>，不为空则是<code>is not null</code>，示例如下：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">select * from table where column is null;</span><br><span class="line">select * from table where column is not null;</span><br></pre></td></tr></table></figure>
+<h2 id="group-by-异常"><a href="#group-by-异常" class="headerlink" title="group by 异常"></a>group by 异常</h2><p>MySQL5.7 后将<code>sql_mode</code>的<code>ONLY_FULL_GROUP_BY</code>模式默认设置为打开状态，这样一来，很多之前的sql语句可能会出现错误，错误信息如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Error Code: 1055. Expression #3 of SELECT list is not in GROUP BY clause and contains nonaggregated column &apos;×××&apos; which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by</span><br></pre></td></tr></table></figure>
+<p>解决方法：</p>
+<p>1、查看sql_mode</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">select @@sql_mode</span><br></pre></td></tr></table></figure>
+<p>查询出来的值为：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION</span><br></pre></td></tr></table></figure>
+<p>2、去掉ONLY_FULL_GROUP_BY，重新设置值</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">set @@sql_mode =&apos;STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER</span><br><span class="line">,NO_ENGINE_SUBSTITUTION&apos;;</span><br></pre></td></tr></table></figure>
+<p>3、上面是改变了全局sql_mode，对于新建的数据库有效。对于已存在的数据库，则需要在对应的数据下执行</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">set sql_mode =&apos;STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION&apos;;</span><br></pre></td></tr></table></figure>
+<p>4、以上的改表方式只能临时生效，在MySQL重启之后就失效了，想要一劳永逸的办法，就是修改配置文件。RPM的安装方式，配置文件位于<code>/etc/my.cnf</code>，增加如下配置：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sql_mode=STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION</span><br></pre></td></tr></table></figure>
+<h2 id="忽略表名大小写"><a href="#忽略表名大小写" class="headerlink" title="忽略表名大小写"></a>忽略表名大小写</h2><p>在配置文件<code>my.cnf</code>在增加如下配置：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#默认是0，区分大小写；1忽略大小写</span><br><span class="line">lower_case_table_names=1</span><br></pre></td></tr></table></figure>
+<p>如果原有的数据库表中有大写的表名，在配置生效后，会出现该表查找不到的异常。在配置之前，将含有大写的表导出，在配置生效之后，重新导入，可以消除异常。</p>
+
           
         
       

@@ -14,7 +14,7 @@
   <entry>
     <title><![CDATA[数据库：MySQL常用语句]]></title>
     <url>%2Fposts%2Fa81bce10%2F</url>
-    <content type="text"><![CDATA[查询字段为null或者不为null在mysql中，查询某字段为空时，切记不可用= null，而是 is null，不为空则是is not null，示例如下： select * from table where column is null;select * from table where column is not null;]]></content>
+    <content type="text"><![CDATA[查询字段为null或者不为null在mysql中，查询某字段为空时，切记不可用= null，而是 is null，不为空则是is not null，示例如下： select * from table where column is null;select * from table where column is not null; group by 异常MySQL5.7 后将sql_mode的ONLY_FULL_GROUP_BY模式默认设置为打开状态，这样一来，很多之前的sql语句可能会出现错误，错误信息如下： Error Code: 1055. Expression #3 of SELECT list is not in GROUP BY clause and contains nonaggregated column &apos;×××&apos; which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by 解决方法： 1、查看sql_mode select @@sql_mode 查询出来的值为： ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION 2、去掉ONLY_FULL_GROUP_BY，重新设置值 set @@sql_mode =&apos;STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION&apos;; 3、上面是改变了全局sql_mode，对于新建的数据库有效。对于已存在的数据库，则需要在对应的数据下执行 set sql_mode =&apos;STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION&apos;; 4、以上的改表方式只能临时生效，在MySQL重启之后就失效了，想要一劳永逸的办法，就是修改配置文件。RPM的安装方式，配置文件位于/etc/my.cnf，增加如下配置： sql_mode=STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION 忽略表名大小写在配置文件my.cnf在增加如下配置： #默认是0，区分大小写；1忽略大小写lower_case_table_names=1 如果原有的数据库表中有大写的表名，在配置生效后，会出现该表查找不到的异常。在配置之前，将含有大写的表导出，在配置生效之后，重新导入，可以消除异常。]]></content>
       <categories>
         <category>数据库</category>
       </categories>
@@ -135,11 +135,11 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[数据库：MyBatis常用语法]]></title>
-    <url>%2Fposts%2F5a838215%2F</url>
-    <content type="text"><![CDATA[Else判断分支使用MyBatis写动态SQL查询相比Hiberntate是非常方便的。select不仅能够根据mapper接口中的返回值自动匹配 查询selectOne还是selectList，而且在查询中还可以灵活的定制查询的方式，添加if 或者 choose等标签进行查询。mybaits中没有else要用“chose when otherwise”代替 &lt;!--批量插入用户--&gt;&lt;select id="getItems" parameterType="com.ipro.shopping.to.IntegerEntity" resultType="itemsType"&gt; select * from itemsType &lt;where&gt; &lt;!--方式一使用choose的方式查询--&gt; &lt;!-- &lt;choose&gt; &lt;when test="parentId !=0 "&gt;parentTypeId=#&#123;parentId&#125;&lt;/when&gt; &lt;when test="parentId==0"&gt;parentTypeId is null&lt;/when&gt; &lt;/choose&gt; --&gt; &lt;!--方式二使用if的方式查询--&gt; &lt;if test="parentId!=0"&gt; parentTypeId=#&#123;parentId&#125; &lt;/if&gt; &lt;if test="parentId==0"&gt; parentTypeId is null &lt;/if&gt; &lt;/where&gt; &lt;/select&gt; 导出表结构和数据使用mysqldump命令，具体用法如下： mysqldump -u用戶名 -p密码 -d 数据库名 表名 &gt; 脚本名; 导出整个数据库结构和数据 mysqldump -h localhost -uroot -p123456 database &gt; dump.sql 导出单个数据表结构和数据 mysqldump -h localhost -uroot -p123456 database table &gt; dump.sql 导出整个数据库结构（不包含数据） mysqldump -h localhost -uroot -p123456 -d database &gt; dump.sql 导出单个数据表结构（不包含数据） mysqldump -h localhost -uroot -p123456 -d database table &gt; dump.sql 可能异常可能在执行导出命令时，会遇到如下异常： mysqldump: Error: &apos;Got error 28 from storage engine&apos; when trying to dump tablespacesmysqldump: Couldn&apos;t execute &apos;show fields from `consumption`&apos;: Got error 28 from storage engine (1030) 原因 是系统空间不足，可以清理一下缓存。 数据库外键关联外键关联有四种模式，分别如下： CASCADE: 从父表中删除或更新对应的行，同时自动的删除或更新子表中匹配的行。ON DELETE CANSCADE和ON UPDATE CANSCADE都被InnoDB所支持。 SET NULL: 从父表中删除或更新对应的行，同时将子表中的外键列设为空。注意，这些在外键列没有被设为NOT NULL时才有效。ON DELETE SET NULL和ON UPDATE SET SET NULL都被InnoDB所支持。 NO ACTION: InnoDB拒绝删除或者更新父表。 RESTRICT: 拒绝删除或者更新父表。指定RESTRICT（或者NO ACTION）和忽略ON DELETE或者ON UPDATE选项的效果是一样的 按天分组查询 username create_time 张三 2018-03-13 09:48:34 李四 2018-03-14 09:24:32 查询某天： SELECT DATE_FORMAT( create_time, &quot;%Y-%m-%d) as date, COUNT( * ) as countFROM testGROUP BY DATE_FORMAT( create_time, &quot;%Y-%m-%d) 结果： date count 2018-03-13 1 2018-03-14 1 如果想要查询某时的统计信息，可以修改DATE_FORMAT内容： create_time, &quot;%Y-%m-%d %H&quot; 依次类推，其实就是对create_time进行处理，然后再对处理后的数据分组。 模糊匹配like CONCAT(&apos;%&apos;, #&#123;port&#125;, &apos;%&apos;)]]></content>
+    <title><![CDATA[Liunx：常用命令]]></title>
+    <url>%2Fposts%2Fcbdebe31%2F</url>
+    <content type="text"><![CDATA[SCP-文件传输从服务器下载文件scp username@servername:/remote_path/filename ~/local_destination 从服务器下载整个目录scp -r username@servername:/remote_path/remote_dir/ ~/local_destination 上传本地文件到服务器scp ~/local_path/local_filename username@servername:/remote_path 上传目录到服务器scp -r ~/local_dir username@servername:/remote_path/remote_dir 查看内存free命令 total used free shared buff/cache availableMem: 8010180 1027572 454540 74152 6528068 6504456Swap: 0 0 0 total:总计物理内存的大小。used:已使用多大。free:可用有多少。Shared:多个进程共享的内存总额。Buffers/cached:磁盘缓存的大小。 Mem的used/free是从OS的角度来看，因为对于OS，buffers/cached都是属于被使用的 修改密码 登录账户后，输入passwd 输入一遍旧密码，输入两遍新密码，密码不能太简单 软连接通常数据文件会和应用部署所在系统盘分开。此时，为了既能保持整体一致性，又不会占用系统盘资源，通常会在应用部署的文件夹下建立一个指向数据盘的软连接。 命令：ln -s abc(源文件) efg(目标快捷方式) ln -s /data/upload/ ./upload 效果：当前目录产生如下文件目录 lrwxrwxrwx 1 root root 13 6月 20 15:35 upload -&gt; /data/upload/ 注意：必须使用绝对路径，否则会出现符号连接的层数过多的错误。]]></content>
       <categories>
-        <category>数据库</category>
+        <category>Linux</category>
       </categories>
       <tags>
         <tag>Linux</tag>
@@ -147,11 +147,11 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Liunx：常用命令]]></title>
-    <url>%2Fposts%2Fcbdebe31%2F</url>
-    <content type="text"><![CDATA[SCP-文件传输从服务器下载文件scp username@servername:/remote_path/filename ~/local_destination 从服务器下载整个目录scp -r username@servername:/remote_path/remote_dir/ ~/local_destination 上传本地文件到服务器scp ~/local_path/local_filename username@servername:/remote_path 上传目录到服务器scp -r ~/local_dir username@servername:/remote_path/remote_dir 查看内存free命令 total used free shared buff/cache availableMem: 8010180 1027572 454540 74152 6528068 6504456Swap: 0 0 0 total:总计物理内存的大小。used:已使用多大。free:可用有多少。Shared:多个进程共享的内存总额。Buffers/cached:磁盘缓存的大小。 Mem的used/free是从OS的角度来看，因为对于OS，buffers/cached都是属于被使用的 修改密码 登录账户后，输入passwd 输入一遍旧密码，输入两遍新密码，密码不能太简单 软连接通常数据文件会和应用部署所在系统盘分开。此时，为了既能保持整体一致性，又不会占用系统盘资源，通常会在应用部署的文件夹下建立一个指向数据盘的软连接。 命令：ln -s abc(源文件) efg(目标快捷方式) ln -s /data/upload/ ./upload 效果：当前目录产生如下文件目录 lrwxrwxrwx 1 root root 13 6月 20 15:35 upload -&gt; /data/upload/ 注意：必须使用绝对路径，否则会出现符号连接的层数过多的错误。]]></content>
+    <title><![CDATA[数据库：MyBatis常用语法]]></title>
+    <url>%2Fposts%2F5a838215%2F</url>
+    <content type="text"><![CDATA[Else判断分支使用MyBatis写动态SQL查询相比Hiberntate是非常方便的。select不仅能够根据mapper接口中的返回值自动匹配 查询selectOne还是selectList，而且在查询中还可以灵活的定制查询的方式，添加if 或者 choose等标签进行查询。mybaits中没有else要用“chose when otherwise”代替 &lt;!--批量插入用户--&gt;&lt;select id="getItems" parameterType="com.ipro.shopping.to.IntegerEntity" resultType="itemsType"&gt; select * from itemsType &lt;where&gt; &lt;!--方式一使用choose的方式查询--&gt; &lt;!-- &lt;choose&gt; &lt;when test="parentId !=0 "&gt;parentTypeId=#&#123;parentId&#125;&lt;/when&gt; &lt;when test="parentId==0"&gt;parentTypeId is null&lt;/when&gt; &lt;/choose&gt; --&gt; &lt;!--方式二使用if的方式查询--&gt; &lt;if test="parentId!=0"&gt; parentTypeId=#&#123;parentId&#125; &lt;/if&gt; &lt;if test="parentId==0"&gt; parentTypeId is null &lt;/if&gt; &lt;/where&gt; &lt;/select&gt; 导出表结构和数据使用mysqldump命令，具体用法如下： mysqldump -u用戶名 -p密码 -d 数据库名 表名 &gt; 脚本名; 导出整个数据库结构和数据 mysqldump -h localhost -uroot -p123456 database &gt; dump.sql 导出单个数据表结构和数据 mysqldump -h localhost -uroot -p123456 database table &gt; dump.sql 导出整个数据库结构（不包含数据） mysqldump -h localhost -uroot -p123456 -d database &gt; dump.sql 导出单个数据表结构（不包含数据） mysqldump -h localhost -uroot -p123456 -d database table &gt; dump.sql 可能异常可能在执行导出命令时，会遇到如下异常： mysqldump: Error: &apos;Got error 28 from storage engine&apos; when trying to dump tablespacesmysqldump: Couldn&apos;t execute &apos;show fields from `consumption`&apos;: Got error 28 from storage engine (1030) 原因 是系统空间不足，可以清理一下缓存。 数据库外键关联外键关联有四种模式，分别如下： CASCADE: 从父表中删除或更新对应的行，同时自动的删除或更新子表中匹配的行。ON DELETE CANSCADE和ON UPDATE CANSCADE都被InnoDB所支持。 SET NULL: 从父表中删除或更新对应的行，同时将子表中的外键列设为空。注意，这些在外键列没有被设为NOT NULL时才有效。ON DELETE SET NULL和ON UPDATE SET SET NULL都被InnoDB所支持。 NO ACTION: InnoDB拒绝删除或者更新父表。 RESTRICT: 拒绝删除或者更新父表。指定RESTRICT（或者NO ACTION）和忽略ON DELETE或者ON UPDATE选项的效果是一样的 按天分组查询 username create_time 张三 2018-03-13 09:48:34 李四 2018-03-14 09:24:32 查询某天： SELECT DATE_FORMAT( create_time, &quot;%Y-%m-%d) as date, COUNT( * ) as countFROM testGROUP BY DATE_FORMAT( create_time, &quot;%Y-%m-%d) 结果： date count 2018-03-13 1 2018-03-14 1 如果想要查询某时的统计信息，可以修改DATE_FORMAT内容： create_time, &quot;%Y-%m-%d %H&quot; 依次类推，其实就是对create_time进行处理，然后再对处理后的数据分组。 模糊匹配like CONCAT(&apos;%&apos;, #&#123;port&#125;, &apos;%&apos;)]]></content>
       <categories>
-        <category>Linux</category>
+        <category>数据库</category>
       </categories>
       <tags>
         <tag>Linux</tag>
@@ -167,8 +167,8 @@
       </categories>
       <tags>
         <tag>Java</tag>
-        <tag>Spring</tag>
         <tag>Quartz</tag>
+        <tag>Spring</tag>
         <tag>持久化</tag>
         <tag>对象注入</tag>
       </tags>
@@ -206,8 +206,8 @@
       </categories>
       <tags>
         <tag>Java</tag>
-        <tag>Spring</tag>
         <tag>Quartz</tag>
+        <tag>Spring</tag>
         <tag>持久化</tag>
         <tag>对象注入</tag>
       </tags>
