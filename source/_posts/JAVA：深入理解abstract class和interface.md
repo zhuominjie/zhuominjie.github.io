@@ -1,6 +1,6 @@
 ---
 title: 'JAVA：[转]深入理解abstract class和interface'
-categories: JAVA
+categories: Java
 abbrlink: a494d8f4
 date: 2018-06-07 09:31:38
 tags:

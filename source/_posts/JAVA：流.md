@@ -8,7 +8,7 @@ keywords:
   - InputStream
   - OutputStream
   - java
-categories: JAVA
+categories: Java
 abbrlink: 9c74640c
 date: 2018-06-09 21:26:45
 ---

@@ -6,7 +6,7 @@ tags:
 keywords:
   - Linux
   - scp
-categories: Linux
+categories: 数据库
 abbrlink: 5a838215
 date: 2018-05-11 14:57:46
 ---
