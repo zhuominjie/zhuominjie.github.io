@@ -70,4 +70,30 @@ ln -s /data/upload/ ./upload
 lrwxrwxrwx 1 root root       13 6月  20 15:35 upload -> /data/upload/
 ```
 
-注意：必须使用绝对路径，否则会出现`符号连接的层数过多`的错误。
+**注意：**必须使用绝对路径，否则会出现`符号连接的层数过多`的错误。
+
+## 查看进程的完整路径
+在使用`ps -ef`查看当前进程时，看到的路径通常是不完整的，比如：
+
+```
+#查看命令
+ps -aux |grep nginx
+
+#显示内容
+root     12996     1  0 19:44 ?        00:00:00 nginx: master process ../sbin/nginx
+```
+其中，最后的`../sbin/nginx`就是启动进程的命令。那么如何才能查看到完整路径呢？
+
+linux为每一个启动的进程都建立了一个文件夹，目录位于`/proc/`，以上面的进程为例：
+
+```
+#输入命令
+cd /proc/12996
+ll
+
+#查看结果
+lrwxrwxrwx 1 root root 0 7月  30 20:04 cwd -> /usr/local/nginx-1.15.2/conf
+lrwxrwxrwx 1 root root 0 7月  30 20:04 exe -> /usr/local/nginx-1.15.2/sbin/nginx
+```
+
+由此可见，完整路径为：`/usr/local/nginx-1.15.2/sbin/nginx`
