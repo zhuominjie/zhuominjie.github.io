@@ -4,6 +4,72 @@
 
     
   <url>
+    <loc>http://www.dadroid.cn/posts/4e971816/</loc>
+    <lastmod>2018-07-31T01:43:12.000Z</lastmod>
+    <data>
+        <display>
+        <title>Appium:分布式测试环境搭建</title>
+        <pubTime>2018-07-30T03:01:10.000Z</pubTime>
+        
+        <tag>Appium</tag>
+         
+        <tag>Grid</tag>
+         
+        <tag>Selenium</tag>
+         
+         
+           
+             
+              <breadCrumb title="Appium" url="http://www.dadroid.cn/categories/Appium/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.dadroid.cn/posts/8747ea0e/</loc>
+    <lastmod>2018-07-31T01:43:12.000Z</lastmod>
+    <data>
+        <display>
+        <title>Nginx:安装和常用命令</title>
+        <pubTime>2018-07-30T11:23:59.000Z</pubTime>
+        
+        <tag>Nginx</tag>
+         
+         
+           
+             
+              <breadCrumb title="Nginx" url="http://www.dadroid.cn/categories/Nginx/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.dadroid.cn/posts/cbdebe31/</loc>
+    <lastmod>2018-07-31T01:33:01.000Z</lastmod>
+    <data>
+        <display>
+        <title>Liunx：常用命令</title>
+        <pubTime>2018-05-11T06:57:46.000Z</pubTime>
+        
+        <tag>Linux</tag>
+         
+        <tag>scp</tag>
+         
+         
+           
+             
+              <breadCrumb title="Linux" url="http://www.dadroid.cn/categories/Linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.dadroid.cn/posts/a81bce10/</loc>
     <lastmod>2018-07-20T02:15:34.000Z</lastmod>
     <data>
@@ -108,28 +174,6 @@
 
     
   <url>
-    <loc>http://www.dadroid.cn/posts/cbdebe31/</loc>
-    <lastmod>2018-06-20T07:48:05.000Z</lastmod>
-    <data>
-        <display>
-        <title>Liunx：常用命令</title>
-        <pubTime>2018-05-11T06:57:46.000Z</pubTime>
-        
-        <tag>Linux</tag>
-         
-        <tag>scp</tag>
-         
-         
-           
-             
-              <breadCrumb title="Linux" url="http://www.dadroid.cn/categories/Linux/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://www.dadroid.cn/posts/fbabd5d1/</loc>
     <lastmod>2018-06-12T05:07:07.000Z</lastmod>
     <data>
@@ -181,9 +225,9 @@
         
         <tag>Java</tag>
          
-        <tag>Quartz</tag>
-         
         <tag>Spring</tag>
+         
+        <tag>Quartz</tag>
          
         <tag>持久化</tag>
          
@@ -428,21 +472,23 @@
 
     
   <url>
-    <loc>http://www.dadroid.cn/posts/3a8571de/</loc>
+    <loc>http://www.dadroid.cn/posts/b778229b/</loc>
     <lastmod>2018-05-21T06:04:52.000Z</lastmod>
     <data>
         <display>
-        <title>Hexo：Nginx独立部署方法</title>
-        <pubTime>2018-05-01T05:35:22.000Z</pubTime>
+        <title>微服务：Zuul代理转发</title>
+        <pubTime>2018-05-15T06:28:11.000Z</pubTime>
         
-        <tag>hexo</tag>
+        <tag>zuul</tag>
          
-        <tag>nginx</tag>
+        <tag>micro service</tag>
+         
+        <tag>spring cloud</tag>
          
          
            
              
-              <breadCrumb title="Hexo" url="http://www.dadroid.cn/categories/Hexo/"/>
+              <breadCrumb title="Java" url="http://www.dadroid.cn/categories/Java/"/>
           
         </display>
     </data>
@@ -476,23 +522,21 @@
 
     
   <url>
-    <loc>http://www.dadroid.cn/posts/b778229b/</loc>
+    <loc>http://www.dadroid.cn/posts/3a8571de/</loc>
     <lastmod>2018-05-21T06:04:52.000Z</lastmod>
     <data>
         <display>
-        <title>微服务：Zuul代理转发</title>
-        <pubTime>2018-05-15T06:28:11.000Z</pubTime>
+        <title>Hexo：Nginx独立部署方法</title>
+        <pubTime>2018-05-01T05:35:22.000Z</pubTime>
         
-        <tag>zuul</tag>
+        <tag>hexo</tag>
          
-        <tag>micro service</tag>
-         
-        <tag>spring cloud</tag>
+        <tag>nginx</tag>
          
          
            
              
-              <breadCrumb title="Java" url="http://www.dadroid.cn/categories/Java/"/>
+              <breadCrumb title="Hexo" url="http://www.dadroid.cn/categories/Hexo/"/>
           
         </display>
     </data>
@@ -509,9 +553,9 @@
         
         <tag>Java</tag>
          
-        <tag>Quartz</tag>
-         
         <tag>Spring</tag>
+         
+        <tag>Quartz</tag>
          
         <tag>持久化</tag>
          
