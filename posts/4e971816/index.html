@@ -87,10 +87,12 @@
 <meta property="og:site_name" content="大卓の哆啦A梦">
 <meta property="og:description" content="需求同时向大量的跨平台机器推送脚本，执行测试。 环境搭建1.Selenium Standalone Server1、下载jar包，地址为：https://www.seleniumhq.org/download/ 2、启动服务 java -jar selenium-server-standalone-&amp;lt;version&amp;gt;.jar -role hub 服务启动后，访问：localhost：4">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-31T01:43:12.000Z">
+<meta property="og:image" content="http://p8v39fxp8.bkt.clouddn.com/static/images/selenium-grid架构图.png?imageView2/2/w/1536">
+<meta property="og:updated_time" content="2018-08-17T02:06:42.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Appium:分布式测试环境搭建">
 <meta name="twitter:description" content="需求同时向大量的跨平台机器推送脚本，执行测试。 环境搭建1.Selenium Standalone Server1、下载jar包，地址为：https://www.seleniumhq.org/download/ 2、启动服务 java -jar selenium-server-standalone-&amp;lt;version&amp;gt;.jar -role hub 服务启动后，访问：localhost：4">
+<meta name="twitter:image" content="http://p8v39fxp8.bkt.clouddn.com/static/images/selenium-grid架构图.png?imageView2/2/w/1536">
 
 
 
@@ -404,6 +406,7 @@
 <p>服务启动后，访问：<code>localhost：4444</code>验证。</p>
 <p>3、编辑节点配置文件</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;capabilities&quot;:</span><br><span class="line">      [</span><br><span class="line">        &#123;</span><br><span class="line">          &quot;browserName&quot;: &quot;&lt;e.g._iPhone5_or_iPad4&gt;&quot;,</span><br><span class="line">          &quot;version&quot;:&quot;&lt;version_of_iOS_e.g._7.1&gt;&quot;,</span><br><span class="line">          &quot;maxInstances&quot;: 1,</span><br><span class="line">          &quot;platform&quot;:&quot;&lt;platform_e.g._MAC_or_ANDROID&gt;&quot;</span><br><span class="line">        &#125;</span><br><span class="line">      ],</span><br><span class="line">  &quot;configuration&quot;:</span><br><span class="line">  &#123;</span><br><span class="line">    &quot;cleanUpCycle&quot;:2000,</span><br><span class="line">    &quot;timeout&quot;:30000,</span><br><span class="line">    &quot;proxy&quot;: &quot;org.openqa.grid.selenium.proxy.DefaultRemoteProxy&quot;,</span><br><span class="line">    &quot;url&quot;:&quot;http://&lt;host_name_appium_server_or_ip-address_appium_server&gt;:&lt;appium_port&gt;/wd/hub&quot;,</span><br><span class="line">    &quot;host&quot;: &lt;host_name_appium_server_or_ip-address_appium_server&gt;,</span><br><span class="line">    &quot;port&quot;: &lt;appium_port&gt;,</span><br><span class="line">    &quot;maxSession&quot;: 1,</span><br><span class="line">    &quot;register&quot;: true,</span><br><span class="line">    &quot;registerCycle&quot;: 5000,</span><br><span class="line">    &quot;hubPort&quot;: &lt;grid_port&gt;,</span><br><span class="line">    &quot;hubHost&quot;: &quot;&lt;Grid_host_name_or_grid_ip-address&gt;&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
 <p>如果没有给出 url、host 和 port，配置会自动指向 localhost:whatever-port-Appium-started-on。</p>
 <p>如果你的 Appium Server 和 Selenium Grid 没有运行在同一台机器上，为确保 Selenium Grid 连接正常，请在你的 host &amp; url 上使用外部域名或 IP 地址，而不是 localhost 和 127.0.0.1</p>
 <p>4、指定配置文件启动Appuium节点<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">appium -p 4724 -bp 4714 --nodeconfig &quot;json文件路径&quot;</span><br></pre></td></tr></table></figure></p>
@@ -411,6 +414,15 @@
 <p>启动后，控制台输出如下：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[Appium] Appium support for versions of node &lt; 8 has been deprecated and will be removed in a future version. Please upgrade!</span><br><span class="line">[Appium] Welcome to Appium v1.8.1</span><br><span class="line">[Appium] Non-default server args:</span><br><span class="line">[Appium]   port: 4724</span><br><span class="line">[Appium]   bootstrapPort: 4714</span><br><span class="line">[Appium]   nodeconfig: SM-G9550</span><br><span class="line">[debug] [Appium] Starting auto register thread for grid. Will try to register every 5000 ms.</span><br><span class="line">[Appium] Appium REST http interface listener started on 0.0.0.0:4724</span><br><span class="line">[debug] [Appium] Appium successfully registered with the grid on http://localhost:4444</span><br></pre></td></tr></table></figure>
 <h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>Selenium Grid会发生阻塞，如果上一个测试任务因为异常无法继续执行会发生阻塞，后面的测试任务无法继续执行</p>
+<h2 id="Selenium-Grid-架构"><a href="#Selenium-Grid-架构" class="headerlink" title="Selenium Grid 架构"></a>Selenium Grid 架构</h2><img src="http://p8v39fxp8.bkt.clouddn.com/static/images/selenium-grid架构图.png?imageView2/2/w/1536">
+<p>什么时 Hub呢？</p>
+<p>它是你加载所有测试的机器。</p>
+<p>一个Grid里只有一个Hub。</p>
+<p>hub是测试运行的地方，但是你看到的测试是在node上的浏览器上执行的。</p>
+<p>什么是Nodes？</p>
+<p>这台机器将执行您在hub上加载的测试</p>
+<p>他可以是一个或者多个nodes在一个grid里，Grid中有不同浏览器和操作系统。</p>
+<h4 id="做成多线程方式"><a href="#做成多线程方式" class="headerlink" title="做成多线程方式"></a>做成多线程方式</h4><p>Selenium Grid只是提供多系统、多浏览器的执行环境，而不是说任务一个test case丢给它就能并行运行。并行的运行我这里就交给testng了</p>
 
       
     </div>
@@ -541,7 +553,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-count">32</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -552,7 +564,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -563,7 +575,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">35</span>
+                  <span class="site-state-item-count">37</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -596,7 +608,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#需求"><span class="nav-number">1.</span> <span class="nav-text">需求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#环境搭建"><span class="nav-number">2.</span> <span class="nav-text">环境搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Selenium-Standalone-Server"><span class="nav-number">2.1.</span> <span class="nav-text">1.Selenium Standalone Server</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题"><span class="nav-number">3.</span> <span class="nav-text">问题</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#需求"><span class="nav-number">1.</span> <span class="nav-text">需求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#环境搭建"><span class="nav-number">2.</span> <span class="nav-text">环境搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Selenium-Standalone-Server"><span class="nav-number">2.1.</span> <span class="nav-text">1.Selenium Standalone Server</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题"><span class="nav-number">3.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Selenium-Grid-架构"><span class="nav-number">4.</span> <span class="nav-text">Selenium Grid 架构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#做成多线程方式"><span class="nav-number">4.0.1.</span> <span class="nav-text">做成多线程方式</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>

@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="大卓の哆啦A梦">
 <meta property="og:description" content="Else判断分支使用MyBatis写动态SQL查询相比Hiberntate是非常方便的。select不仅能够根据mapper接口中的返回值自动匹配 查询selectOne还是selectList，而且在查询中还可以灵活的定制查询的方式，添加if 或者 choose等标签进行查询。mybaits中没有else要用“chose when otherwise”代替 &amp;lt;!--批量插入用户--&amp;gt;">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-06-21T02:11:08.000Z">
+<meta property="og:updated_time" content="2018-08-02T06:50:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据库：MyBatis常用语法">
 <meta name="twitter:description" content="Else判断分支使用MyBatis写动态SQL查询相比Hiberntate是非常方便的。select不仅能够根据mapper接口中的返回值自动匹配 查询selectOne还是selectList，而且在查询中还可以灵活的定制查询的方式，添加if 或者 choose等标签进行查询。mybaits中没有else要用“chose when otherwise”代替 &amp;lt;!--批量插入用户--&amp;gt;">
@@ -462,6 +462,8 @@
 <p><code>create_time, &quot;%Y-%m-%d %H&quot;</code></p>
 <p>依次类推，其实就是对<code>create_time</code>进行处理，然后再对处理后的数据分组。</p>
 <h2 id="模糊匹配"><a href="#模糊匹配" class="headerlink" title="模糊匹配"></a>模糊匹配</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">like CONCAT(&apos;%&apos;, #&#123;port&#125;, &apos;%&apos;)</span><br></pre></td></tr></table></figure>
+<h2 id="插入数据后返回id"><a href="#插入数据后返回id" class="headerlink" title="插入数据后返回id"></a>插入数据后返回id</h2><p><code>&lt;insert id=&quot;insertSelective&quot; parameterType=&quot;com.cmcc.Bean&quot;&gt;</code>标签最后加入<code>useGeneratedKeys=&quot;true&quot; keyProperty=&quot;id&quot;</code>。新标签如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;insert id=&quot;insertSelective&quot; parameterType=&quot;com.cmcc.Bean&quot; useGeneratedKeys=&quot;true&quot; keyProperty=&quot;id&quot; &gt;</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -589,7 +591,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-count">32</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -600,7 +602,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -611,7 +613,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">35</span>
+                  <span class="site-state-item-count">37</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -644,7 +646,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Else判断分支"><span class="nav-number">1.</span> <span class="nav-text">Else判断分支</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#导出表结构和数据"><span class="nav-number">2.</span> <span class="nav-text">导出表结构和数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#可能异常"><span class="nav-number">2.1.</span> <span class="nav-text">可能异常</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库外键关联"><span class="nav-number">3.</span> <span class="nav-text">数据库外键关联</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#按天分组查询"><span class="nav-number">4.</span> <span class="nav-text">按天分组查询</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模糊匹配"><span class="nav-number">5.</span> <span class="nav-text">模糊匹配</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Else判断分支"><span class="nav-number">1.</span> <span class="nav-text">Else判断分支</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#导出表结构和数据"><span class="nav-number">2.</span> <span class="nav-text">导出表结构和数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#可能异常"><span class="nav-number">2.1.</span> <span class="nav-text">可能异常</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库外键关联"><span class="nav-number">3.</span> <span class="nav-text">数据库外键关联</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#按天分组查询"><span class="nav-number">4.</span> <span class="nav-text">按天分组查询</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模糊匹配"><span class="nav-number">5.</span> <span class="nav-text">模糊匹配</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#插入数据后返回id"><span class="nav-number">6.</span> <span class="nav-text">插入数据后返回id</span></a></li></ol></div>
             
 
           </div>

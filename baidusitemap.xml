@@ -4,8 +4,32 @@
 
     
   <url>
+    <loc>http://www.dadroid.cn/posts/9b7d34c3/</loc>
+    <lastmod>2018-08-17T02:07:06.000Z</lastmod>
+    <data>
+        <display>
+        <title>Java:并发编程lock</title>
+        <pubTime>2018-08-01T04:34:32.000Z</pubTime>
+        
+        <tag>Java</tag>
+         
+        <tag>并发</tag>
+         
+        <tag>lock</tag>
+         
+         
+           
+             
+              <breadCrumb title="Java" url="http://www.dadroid.cn/categories/Java/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.dadroid.cn/posts/4e971816/</loc>
-    <lastmod>2018-07-31T01:43:12.000Z</lastmod>
+    <lastmod>2018-08-17T02:06:42.000Z</lastmod>
     <data>
         <display>
         <title>Appium:分布式测试环境搭建</title>
@@ -21,6 +45,48 @@
            
              
               <breadCrumb title="Appium" url="http://www.dadroid.cn/categories/Appium/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.dadroid.cn/posts/c157b8b0/</loc>
+    <lastmod>2018-08-17T02:05:59.000Z</lastmod>
+    <data>
+        <display>
+        <title>Spring：基本知识</title>
+        <pubTime>2018-08-17T01:31:24.000Z</pubTime>
+        
+        <tag>Spring</tag>
+         
+         
+           
+             
+              <breadCrumb title="Spring" url="http://www.dadroid.cn/categories/Spring/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.dadroid.cn/posts/5a838215/</loc>
+    <lastmod>2018-08-02T06:50:00.000Z</lastmod>
+    <data>
+        <display>
+        <title>数据库：MyBatis常用语法</title>
+        <pubTime>2018-05-11T06:57:46.000Z</pubTime>
+        
+        <tag>Linux</tag>
+         
+        <tag>scp</tag>
+         
+         
+           
+             
+              <breadCrumb title="数据库" url="http://www.dadroid.cn/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
           
         </display>
     </data>
@@ -145,28 +211,6 @@
            
              
               <breadCrumb title="Java" url="http://www.dadroid.cn/categories/Java/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.dadroid.cn/posts/5a838215/</loc>
-    <lastmod>2018-06-21T02:11:08.000Z</lastmod>
-    <data>
-        <display>
-        <title>数据库：MyBatis常用语法</title>
-        <pubTime>2018-05-11T06:57:46.000Z</pubTime>
-        
-        <tag>Linux</tag>
-         
-        <tag>scp</tag>
-         
-         
-           
-             
-              <breadCrumb title="数据库" url="http://www.dadroid.cn/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
           
         </display>
     </data>
