@@ -1,0 +1,1846 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-dora.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-dora.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="一、生成 SSL 证书SSL(Secure Sockets Layer 安全套接层)，及其继任者传输层安全（Transport Layer Security，TLS）是为网络通信提供安全及数据完整性的一种安全协议。TLS与SSL在传输层对网络连接进行加密，一般可分为单向认证和双向认证。RabbitMQ 采用的是双向认证方式。 1.创建目录# mkdir testca# cd testca# mkd">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RabbitMQ:配置SSL安全访问">
+<meta property="og:url" content="http://www.dadroid.cn/posts/348c654f/index.html">
+<meta property="og:site_name" content="大卓の哆啦A梦">
+<meta property="og:description" content="一、生成 SSL 证书SSL(Secure Sockets Layer 安全套接层)，及其继任者传输层安全（Transport Layer Security，TLS）是为网络通信提供安全及数据完整性的一种安全协议。TLS与SSL在传输层对网络连接进行加密，一般可分为单向认证和双向认证。RabbitMQ 采用的是双向认证方式。 1.创建目录# mkdir testca# cd testca# mkd">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://p8v39fxp8.bkt.clouddn.com/static/images/cipher_suite_java.png?imageView2/2/w/1536">
+<meta property="og:updated_time" content="2018-09-11T06:24:38.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="RabbitMQ:配置SSL安全访问">
+<meta name="twitter:description" content="一、生成 SSL 证书SSL(Secure Sockets Layer 安全套接层)，及其继任者传输层安全（Transport Layer Security，TLS）是为网络通信提供安全及数据完整性的一种安全协议。TLS与SSL在传输层对网络连接进行加密，一般可分为单向认证和双向认证。RabbitMQ 采用的是双向认证方式。 1.创建目录# mkdir testca# cd testca# mkd">
+<meta name="twitter:image" content="http://p8v39fxp8.bkt.clouddn.com/static/images/cipher_suite_java.png?imageView2/2/w/1536">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.dadroid.cn/posts/348c654f/"/>
+
+
+
+
+
+  <title>RabbitMQ:配置SSL安全访问 | 大卓の哆啦A梦</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">大卓の哆啦A梦</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.dadroid.cn/posts/348c654f/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="韧卓">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/duolaameng.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="大卓の哆啦A梦">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">RabbitMQ:配置SSL安全访问</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-10T19:06:22+08:00">
+                2018-09-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/RabbitMQ/" itemprop="url" rel="index">
+                    <span itemprop="name">RabbitMQ</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/posts/348c654f/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/posts/348c654f/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/posts/348c654f/" class="leancloud_visitors" data-flag-title="RabbitMQ:配置SSL安全访问">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="一、生成-SSL-证书"><a href="#一、生成-SSL-证书" class="headerlink" title="一、生成 SSL 证书"></a>一、生成 SSL 证书</h2><p>SSL(Secure Sockets Layer 安全套接层)，及其继任者<code>传输层安全</code>（Transport Layer Security，TLS）是为网络通信提供安全及数据完整性的一种安全协议。<code>TLS</code>与<code>SSL</code>在传输层对网络连接进行加密，一般可分为<code>单向认证</code>和<code>双向认证</code>。<code>RabbitMQ</code> 采用的是双向认证方式。</p>
+<h4 id="1-创建目录"><a href="#1-创建目录" class="headerlink" title="1.创建目录"></a>1.创建目录</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># mkdir testca</span><br><span class="line"># cd testca</span><br><span class="line"># mkdir certs private</span><br><span class="line"># chmod 700 private</span><br><span class="line"># echo 01 &gt; serial</span><br><span class="line"># touch index.txt</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h4 id="2-在该目录下，生成openssl-cnf文件，内容如下："><a href="#2-在该目录下，生成openssl-cnf文件，内容如下：" class="headerlink" title="2.在该目录下，生成openssl.cnf文件，内容如下："></a>2.在该目录下，生成<code>openssl.cnf</code>文件，内容如下：</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[ ca ]</span><br><span class="line">default_ca = testca</span><br><span class="line"></span><br><span class="line">[ testca ]</span><br><span class="line">dir = .</span><br><span class="line">certificate = $dir/cacert.pem</span><br><span class="line">database = $dir/index.txt</span><br><span class="line">new_certs_dir = $dir/certs</span><br><span class="line">private_key = $dir/private/cakey.pem</span><br><span class="line">serial = $dir/serial</span><br><span class="line"></span><br><span class="line">default_crl_days = 7</span><br><span class="line">default_days = 365</span><br><span class="line">default_md = sha256</span><br><span class="line"></span><br><span class="line">policy = testca_policy</span><br><span class="line">x509_extensions = certificate_extensions</span><br><span class="line"></span><br><span class="line">[ testca_policy ]</span><br><span class="line">commonName = supplied</span><br><span class="line">stateOrProvinceName = optional</span><br><span class="line">countryName = optional</span><br><span class="line">emailAddress = optional</span><br><span class="line">organizationName = optional</span><br><span class="line">organizationalUnitName = optional</span><br><span class="line">domainComponent = optional</span><br><span class="line"></span><br><span class="line">[ certificate_extensions ]</span><br><span class="line">basicConstraints = CA:false</span><br><span class="line"></span><br><span class="line">[ req ]</span><br><span class="line">default_bits = 2048</span><br><span class="line">default_keyfile = ./private/cakey.pem</span><br><span class="line">default_md = sha256</span><br><span class="line">prompt = yes</span><br><span class="line">distinguished_name = root_ca_distinguished_name</span><br><span class="line">x509_extensions = root_ca_extensions</span><br><span class="line"></span><br><span class="line">[ root_ca_distinguished_name ]</span><br><span class="line">commonName = hostname</span><br><span class="line"></span><br><span class="line">[ root_ca_extensions ]</span><br><span class="line">basicConstraints = CA:true</span><br><span class="line">keyUsage = keyCertSign, cRLSign</span><br><span class="line"></span><br><span class="line">[ client_ca_extensions ]</span><br><span class="line">basicConstraints = CA:false</span><br><span class="line">keyUsage = digitalSignature</span><br><span class="line">extendedKeyUsage = 1.3.6.1.5.5.7.3.2</span><br><span class="line"></span><br><span class="line">[ server_ca_extensions ]</span><br><span class="line">basicConstraints = CA:false</span><br><span class="line">keyUsage = keyEncipherment</span><br><span class="line">extendedKeyUsage = 1.3.6.1.5.5.7.3.1</span><br></pre></td></tr></table></figure>
+<h4 id="3-颁发自己的-CA-证书"><a href="#3-颁发自己的-CA-证书" class="headerlink" title="3.颁发自己的 CA 证书"></a>3.颁发自己的 CA 证书</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># openssl req -x509 -config openssl.cnf -newkey rsa:2048 -days 365 -out cacert.pem -outform PEM -subj /CN=MyTestCA/ -nodes</span><br><span class="line"># openssl x509 -in cacert.pem -out cacert.cer -outform DER</span><br></pre></td></tr></table></figure>
+<h4 id="4-生成服务器证书"><a href="#4-生成服务器证书" class="headerlink" title="4.生成服务器证书"></a>4.生成服务器证书</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># cd ..</span><br><span class="line"># ls</span><br><span class="line">testca</span><br><span class="line"># mkdir server</span><br><span class="line"># cd server</span><br><span class="line"># openssl genrsa -out key.pem 2048</span><br><span class="line"># openssl req -new -key key.pem -out req.pem -outform PEM -subj /CN=$(hostname)/O=server/ -nodes</span><br><span class="line"># cd ../testca</span><br><span class="line"># openssl ca -config openssl.cnf -in ../server/req.pem -out ../server/cert.pem -notext -batch -extensions server_ca_extensions</span><br><span class="line"># cd ../server</span><br><span class="line"># openssl pkcs12 -export -out keycert.p12 -in cert.pem -inkey key.pem -passout pass:MySecretPassword</span><br></pre></td></tr></table></figure>
+<h4 id="5-生成客户端证书"><a href="#5-生成客户端证书" class="headerlink" title="5.生成客户端证书"></a>5.生成客户端证书</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># cd ..</span><br><span class="line"># ls</span><br><span class="line">server testca</span><br><span class="line"># mkdir client</span><br><span class="line"># cd client</span><br><span class="line"># openssl genrsa -out key.pem 2048</span><br><span class="line"># openssl req -new -key key.pem -out req.pem -outform PEM -subj /CN=$(hostname)/O=client/ -nodes</span><br><span class="line"># cd ../testca</span><br><span class="line"># openssl ca -config openssl.cnf -in ../client/req.pem -out ../client/cert.pem -notext -batch -extensions client_ca_extensions</span><br><span class="line"># cd ../client</span><br><span class="line"># openssl pkcs12 -export -out keycert.p12 -in cert.pem -inkey key.pem -passout pass:MySecretPassword</span><br></pre></td></tr></table></figure>
+<p>后续需要要使用的文件分别是：<code>testca/cacert.pem</code>、<code>server/cert.pem</code>、<code>server/key.pem</code>、<code>client/cert.pem</code>、<code>client/key.pem</code>、<code>client/keycert.p12</code></p>
+<h4 id="6-番外"><a href="#6-番外" class="headerlink" title="6.番外"></a>6.番外</h4><p>此外，生成证书的过程也有git上的大神写好的<code>shell</code>脚本可以使用，项目地址为：<br><a href="https://github.com/Berico-Technologies/CMF-AMQP-Configuration" target="_blank" rel="noopener">https://github.com/Berico-Technologies/CMF-AMQP-Configuration</a></p>
+<p>可直接通过git命令进行clone到本地（最好新建个文件夹AMQPSSL）：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git clone https://github.com/Berico-Technologies/CMF-AMQP-Configuration.git</span><br></pre></td></tr></table></figure>
+<p>在clone后的项目目录中，doc文件夹下有详细的说明shell脚本如何使用。</p>
+<ol>
+<li>确保已经安装好了openssl，具体安装方法请自行google；</li>
+</ol>
+<p>切换到 CMF-AMQP-Configuration/ssl 文件夹，运行</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sh setup_ca.sh MyRabbitMQCA</span><br></pre></td></tr></table></figure>
+<p>名称定义为”MyRabbitMQCA”，这个名字可以自行指定，用于在证书中显示证书颁发机构名。</p>
+<ol start="2">
+<li>生成服务器证书</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sh make_server_cert.sh rabbitmq-server rabbit</span><br></pre></td></tr></table></figure>
+<p>一个参数是服务器名，第二个参数是密码。</p>
+<ol start="3">
+<li>生成客户端证书</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sh create_client_cert.sh rabbit-client rabbit</span><br></pre></td></tr></table></figure>
+<p>第一个参数是客户端名称，第二个参数是密码。</p>
+<p>执行完以上步骤之后，会在ssl目录下生成：ca、server、client三个文件夹。</p>
+<h2 id="二、配置-RabbitMQ-服务器"><a href="#二、配置-RabbitMQ-服务器" class="headerlink" title="二、配置 RabbitMQ 服务器"></a>二、配置 RabbitMQ 服务器</h2><h4 id="1-配置RabbitMQ环境"><a href="#1-配置RabbitMQ环境" class="headerlink" title="1.配置RabbitMQ环境"></a>1.配置RabbitMQ环境</h4><p>Mac上RabbitMQ的配置文件通常位于<code>/usr/local/etc/rabbitmq</code>，在该目录下创建<code>rabbitmq.conf</code>和<code>advanced.config</code>两个文件，并修改<code>rabbitmq-env.conf</code>内容如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">CONFIG_FILE=/usr/local/etc/rabbitmq/rabbitmq</span><br><span class="line">RABBITMQ_ADVANCED_CONFIG_FILE=//usr/local/etc/rabbitmq/advanced</span><br><span class="line">#NODE_IP_ADDRESS=127.0.0.1</span><br><span class="line">NODENAME=rabbit@localhost</span><br></pre></td></tr></table></figure>
+<h4 id="2-基本配置-rabbitmq-conf-修改"><a href="#2-基本配置-rabbitmq-conf-修改" class="headerlink" title="2.基本配置 rabbitmq.conf 修改"></a>2.基本配置 rabbitmq.conf 修改</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">listeners.ssl.default=5671</span><br><span class="line">  </span><br><span class="line">ssl_options.cacertfile=/usr/local/etc/rabbitmq/ca/cacert.pem</span><br><span class="line">ssl_options.certfile=/usr/local/etc/rabbitmq/ca/cert.pem</span><br><span class="line">ssl_options.keyfile=/usr/local/etc/rabbitmq/ca/key.pem</span><br><span class="line">ssl_options.verify=verify_peer</span><br><span class="line">ssl_options.fail_if_no_peer_cert=false</span><br></pre></td></tr></table></figure>
+<h4 id="3-高级配置-advanced-config-修改"><a href="#3-高级配置-advanced-config-修改" class="headerlink" title="3.高级配置 advanced.config 修改"></a>3.高级配置 advanced.config 修改</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">%% list allowed ciphers</span><br><span class="line">[ </span><br><span class="line"> &#123;ssl, [&#123;versions, [&apos;tlsv1.2&apos;, &apos;tlsv1.1&apos;]&#125;]&#125;,</span><br><span class="line"> &#123;rabbit, [</span><br><span class="line">           &#123;ssl_listeners, [5671]&#125;,</span><br><span class="line">           &#123;ssl_options, [&#123;cacertfile,&quot;/usr/local/etc/rabbitmq/ca/cacert.pem&quot;&#125;,</span><br><span class="line">                          &#123;certfile,  &quot;/usr/local/etc/rabbitmq/ca/cert.pem&quot;&#125;,</span><br><span class="line">                          &#123;keyfile,   &quot;/usr/local/etc/rabbitmq/ca/key.pem&quot;&#125;,</span><br><span class="line">                          &#123;versions, [&apos;tlsv1.2&apos;, &apos;tlsv1.1&apos;]&#125;,</span><br><span class="line">                          %% This list is just an example!</span><br><span class="line">                          %% Not all cipher suites are available on all machines.</span><br><span class="line">                          %% Cipher suite order is important: preferred suites</span><br><span class="line">                          %% should be listed first.</span><br><span class="line">                          %% Different suites have different security and CPU load characteristics.</span><br><span class="line">                          &#123;ciphers,  [                                 &#123;ecdhe_ecdsa,aes_256_gcm,null,sha384&#125;,</span><br><span class="line">                                      &#123;ecdhe_rsa,aes_256_gcm,null,sha384&#125;,</span><br><span class="line">                                      &#123;ecdhe_ecdsa,aes_256_cbc,sha384,sha384&#125;,</span><br><span class="line">                                      &#123;ecdhe_rsa,aes_256_cbc,sha384,sha384&#125;,</span><br><span class="line">                                      &#123;ecdh_ecdsa,aes_256_gcm,null,sha384&#125;,</span><br><span class="line">                                      &#123;ecdh_rsa,aes_256_gcm,null,sha384&#125;,</span><br><span class="line">                                      &#123;ecdh_ecdsa,aes_256_cbc,sha384,sha384&#125;,</span><br><span class="line">                                      &#123;ecdh_rsa,aes_256_cbc,sha384,sha384&#125;,</span><br><span class="line">                                      &#123;dhe_rsa,aes_256_gcm,null,sha384&#125;,</span><br><span class="line">                                      &#123;dhe_dss,aes_256_gcm,null,sha384&#125;,</span><br><span class="line">                                      &#123;dhe_rsa,aes_256_cbc,sha256&#125;,</span><br><span class="line">                                      &#123;dhe_dss,aes_256_cbc,sha256&#125;,</span><br><span class="line">                                      &#123;rsa,aes_256_gcm,null,sha384&#125;,</span><br><span class="line">                                      &#123;rsa,aes_256_cbc,sha256&#125;,</span><br><span class="line">                                      &#123;ecdhe_ecdsa,aes_128_gcm,null,sha256&#125;,</span><br><span class="line">                                      &#123;ecdhe_rsa,aes_128_gcm,null,sha256&#125;,</span><br><span class="line">                                      &#123;ecdhe_ecdsa,aes_128_cbc,sha256,sha256&#125;,</span><br><span class="line">                                      &#123;ecdhe_rsa,aes_128_cbc,sha256,sha256&#125;,</span><br><span class="line">                                      &#123;ecdh_ecdsa,aes_128_gcm,null,sha256&#125;,</span><br><span class="line">                                      &#123;ecdh_rsa,aes_128_gcm,null,sha256&#125;,</span><br><span class="line">                                      &#123;ecdh_ecdsa,aes_128_cbc,sha256,sha256&#125;,</span><br><span class="line">                                      &#123;ecdh_rsa,aes_128_cbc,sha256,sha256&#125;,</span><br><span class="line">                                      &#123;dhe_rsa,aes_128_gcm,null,sha256&#125;,</span><br><span class="line">                                      &#123;dhe_dss,aes_128_gcm,null,sha256&#125;,</span><br><span class="line">                                      &#123;dhe_rsa,aes_128_cbc,sha256&#125;,</span><br><span class="line">                                      &#123;ecdh_rsa,aes_128_gcm,null,sha256&#125;</span><br><span class="line">                                     ]&#125;,</span><br><span class="line">                            &#123;fail_if_no_peer_cert,true&#125;</span><br><span class="line">                         ]&#125;</span><br><span class="line">          ]&#125;</span><br><span class="line">].</span><br></pre></td></tr></table></figure>
+<h2 id="三、配置-Java-客户端"><a href="#三、配置-Java-客户端" class="headerlink" title="三、配置 Java 客户端"></a>三、配置 Java 客户端</h2><p>使用JDK自带的keytool工具，可以导入秘钥，进行证书管理。在Java的代码中，通过实例化 <code>Trust Manager</code>实现客户端的认证。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">keytool -import -alias server1 -file /path/to/server/certificate.pem -keystore /path/to/rabbitstore</span><br></pre></td></tr></table></figure>
+<p>上面的命令将导入<code>server/certificate.pem</code>到<code>rabbitstore</code>，并且与<code>server1</code>关联。keytool在确认证书是否被信任的过程会要求设置密码保护。</p>
+<p>下面展示了Java如何使用<code>Key Manager</code>和<code>Trust Manager</code>进行客户端认证。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">import java.io.FileInputStream;</span><br><span class="line">import java.security.KeyStore;</span><br><span class="line"></span><br><span class="line">import javax.net.ssl.KeyManagerFactory;</span><br><span class="line">import javax.net.ssl.SSLContext;</span><br><span class="line">import javax.net.ssl.TrustManagerFactory;</span><br><span class="line"></span><br><span class="line">import com.rabbitmq.client.Channel;</span><br><span class="line">import com.rabbitmq.client.Connection;</span><br><span class="line">import com.rabbitmq.client.ConnectionFactory;</span><br><span class="line">import com.rabbitmq.client.GetResponse;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">public class Example2 &#123;</span><br><span class="line">    </span><br><span class="line">     public static void main(String[] args) throws Exception</span><br><span class="line">     &#123;</span><br><span class="line">       char[] keyPassphrase = &quot;MySecretPassword&quot;.toCharArray();</span><br><span class="line">       KeyStore ks = KeyStore.getInstance(&quot;PKCS12&quot;);</span><br><span class="line">       </span><br><span class="line">       ks.load(new FileInputStream(Class.class.getResource(&quot;/&quot;).getPath() + &quot;keycert.p12&quot;), keyPassphrase);</span><br><span class="line"></span><br><span class="line">       KeyManagerFactory kmf = KeyManagerFactory.getInstance(&quot;SunX509&quot;);</span><br><span class="line">       kmf.init(ks, keyPassphrase);</span><br><span class="line"></span><br><span class="line">       char[] trustPassphrase = &quot;rabbitstore&quot;.toCharArray();</span><br><span class="line">       KeyStore tks = KeyStore.getInstance(&quot;JKS&quot;);</span><br><span class="line">       tks.load(new FileInputStream(Class.class.getResource(&quot;/&quot;).getPath() + &quot;rabbitstore&quot;), trustPassphrase);</span><br><span class="line"></span><br><span class="line">       TrustManagerFactory tmf = TrustManagerFactory.getInstance(&quot;SunX509&quot;);</span><br><span class="line">       tmf.init(tks);</span><br><span class="line"></span><br><span class="line">       SSLContext c = SSLContext.getInstance(&quot;TLSv1.1&quot;);</span><br><span class="line">       c.init(kmf.getKeyManagers(), tmf.getTrustManagers(), null);</span><br><span class="line"></span><br><span class="line">       ConnectionFactory factory = new ConnectionFactory();</span><br><span class="line">       factory.setHost(&quot;&quot;);</span><br><span class="line">       factory.setPort(5671);</span><br><span class="line">       </span><br><span class="line">       factory.setUsername(&quot;&quot;);</span><br><span class="line">       factory.setPassword(&quot;&quot;);</span><br><span class="line">       </span><br><span class="line">       factory.useSslProtocol(c);</span><br><span class="line"></span><br><span class="line">       Connection conn = factory.newConnection(); </span><br><span class="line">       Channel channel = conn.createChannel();</span><br><span class="line"></span><br><span class="line">       channel.queueDeclare(&quot;rabbitmq-java-test&quot;, false, true, true, null);</span><br><span class="line">       channel.basicPublish(&quot;&quot;, &quot;rabbitmq-java-test&quot;, null, &quot;Hello, World&quot;.getBytes());</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">       GetResponse chResponse = channel.basicGet(&quot;rabbitmq-java-test&quot;, false);</span><br><span class="line">       if(chResponse == null) &#123;</span><br><span class="line">           System.out.println(&quot;No message retrieved&quot;);</span><br><span class="line">       &#125; else &#123;</span><br><span class="line">           byte[] body = chResponse.getBody();</span><br><span class="line">           System.out.println(&quot;Recieved: &quot; + new String(body));</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">       channel.close();</span><br><span class="line">       conn.close();</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="四、配置有效性检查"><a href="#四、配置有效性检查" class="headerlink" title="四、配置有效性检查"></a>四、配置有效性检查</h2><h4 id="1-证书有效性校验"><a href="#1-证书有效性校验" class="headerlink" title="1.证书有效性校验"></a>1.证书有效性校验</h4><p>打开一个终端，输入以下命令启动服务端：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">openssl s_server -accept 8443 -cert server/cert.pem -key server/key.pem -CAfile testca/cacert.pem</span><br></pre></td></tr></table></figure>
+<p>在另外一个终端，输入以下命令启动客户端：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">openssl s_client -connect localhost:8443 -cert client/cert.pem -key client/key.pem -CAfile testca/cacert.pem</span><br></pre></td></tr></table></figure>
+<p>如果生产的证书是有效的，将会在客户端返回连接成功的消息，结尾如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Verify return code: 0 (ok)</span><br></pre></td></tr></table></figure>
+<h4 id="2-验证RabbitMQ配置有效性"><a href="#2-验证RabbitMQ配置有效性" class="headerlink" title="2.验证RabbitMQ配置有效性"></a>2.验证RabbitMQ配置有效性</h4><p><strong>查看日志</strong></p>
+<p>在RabbitMQ启动的控制台，可以看到日志的位置如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Logs: /usr/local/var/log/rabbitmq/rabbit@localhost.log</span><br><span class="line">      /usr/local/var/log/rabbitmq/rabbit@localhost_upgrade.log</span><br></pre></td></tr></table></figure>
+<p>查看日志的内容，可以看到如下内容，说明<code>TLS</code>配置已经生效：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">started SSL Listener on [::]:5671</span><br></pre></td></tr></table></figure>
+<p><strong>手动建立openssl连接</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">openssl s_client -connect localhost:5671 -cert client/cert.pem -key client/key.pem -CAfile testca/cacert.pem</span><br></pre></td></tr></table></figure>
+<p>如果连接成功，会看到和前面<code>8443</code>端口连接相同的结束信息，并且会在<code>RabbitMQ</code>的日志中查看到如下消息：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">accepting AMQP connection &lt;0.223.0&gt; (127.0.0.1:58954 -&gt; 127.0.0.1:5671)</span><br></pre></td></tr></table></figure>
+<h2 id="五、异常处理"><a href="#五、异常处理" class="headerlink" title="五、异常处理"></a>五、异常处理</h2><h4 id="1-客户端证书密码错误"><a href="#1-客户端证书密码错误" class="headerlink" title="1.客户端证书密码错误"></a>1.客户端证书密码错误</h4><p>如果在<code>Java</code>客户端中，导入<code>keycert.p12</code>证书的密码设置错误，控制台会返回如下异常。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">java.io.IOException: failed to decrypt safe contents entry: javax.crypto.BadPaddingException: Given final block not properly padded</span><br></pre></td></tr></table></figure>
+<h4 id="2-客户端和服务器的加密套协商失败"><a href="#2-客户端和服务器的加密套协商失败" class="headerlink" title="2.客户端和服务器的加密套协商失败"></a>2.客户端和服务器的加密套协商失败</h4><p>使用<code>openssl</code>或者<code>Java</code>客户端进行远程连接时，会使用<code>openssl</code>或者<code>JDK</code>的加密套，但是，<code>RabbitMQ</code>的服务端中，默认的加密套（cipher suite）不一定会有与之一致的加密算法，这将在<strong>握手</strong>阶段就发生协商加密套失败，客户端的错误返回如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">javax.net.ssl.SSLHandshakeException: Received fatal alert: insufficient_security</span><br></pre></td></tr></table></figure>
+<p>查看<code>RabbitMQ</code>的日志，可以看到详细的错误如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">TLS server: In state hello at tls_handshake.erl:197 generated SERVER ALERT: Fatal - Insufficient Security - no_suitable_ciphers</span><br></pre></td></tr></table></figure>
+<p>可以知道是握手阶段的加密套协商失败，因此，可以通过<code>wireshark</code>抓包，查看客户端发出请求所包含的加密套。我的Java客户端加密套如下所示：</p>
+<img src="http://p8v39fxp8.bkt.clouddn.com/static/images/cipher_suite_java.png?imageView2/2/w/1536">
+<p>从图中，可以看到<code>OpenSSL</code>定义的加密套名称，我选择其中的一个，在github上找到对应的<code>Erlang</code>名称，添加到<code>RabbitMQ</code>的<code>advance.config</code>中，重启服务之后，就能够完成握手了。</p>
+<h2 id="附件"><a href="#附件" class="headerlink" title="附件"></a>附件</h2><table>
+<thead>
+<tr>
+<th>OpenSSL</th>
+<th style="text-align:center">IANA</th>
+<th style="text-align:center">Erlang</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TLS_PSK_WITH_NULL_SHA</td>
+<td style="text-align:center">PSK-NULL-SHA</td>
+<td style="text-align:center">{psk, null, sha, default_prf}</td>
+</tr>
+<tr>
+<td>TLS_DHE_PSK_WITH_NULL_SHA</td>
+<td style="text-align:center">DHE-PSK-NULL-SHA</td>
+<td style="text-align:center">{dhe_psk, null, sha, default_prf}</td>
+</tr>
+<tr>
+<td>TLS_RSA_PSK_WITH_NULL_SHA</td>
+<td style="text-align:center">RSA-PSK-NULL-SHA</td>
+<td style="text-align:center">{rsa_psk, null, sha, default_prf}</td>
+</tr>
+<tr>
+<td>TLS_RSA_WITH_AES_128_CBC_SHA</td>
+<td style="text-align:center">AES128-SHA</td>
+<td style="text-align:center">{rsa, aes_128_cbc, sha, default_prf}</td>
+</tr>
+<tr>
+<td>TLS_DHE_DSS_WITH_AES_128_CBC_SHA</td>
+<td style="text-align:center">DHE-DSS-AES128-SHA</td>
+<td style="text-align:center">{dhe_dss, aes_128_cbc, sha, default_prf}</td>
+</tr>
+<tr>
+<td>TLS_DHE_RSA_WITH_AES_128_CBC_SHA</td>
+<td style="text-align:center">DHE-RSA-AES128-SHA</td>
+<td style="text-align:center">{dhe_rsa, aes_128_cbc, sha, default_prf}</td>
+</tr>
+<tr>
+<td>TLS_DH_anon_WITH_AES_128_CBC_SHA</td>
+<td style="text-align:center">ADH-AES128-SHA</td>
+<td style="text-align:center">{dh_anon, aes_128_cbc, sha, default_prf}</td>
+</tr>
+<tr>
+<td>TLS_RSA_WITH_AES_256_CBC_SHA</td>
+<td style="text-align:center">AES256-SHA</td>
+<td style="text-align:center">{rsa, aes_256_cbc, sha, default_prf}</td>
+</tr>
+<tr>
+<td>TLS_DHE_DSS_WITH_AES_256_CBC_SHA</td>
+<td style="text-align:center">DHE-DSS-AES256-SHA</td>
+<td style="text-align:center">{dhe_dss, aes_256_cbc, sha, default_prf}</td>
+</tr>
+<tr>
+<td>TLS_DHE_RSA_WITH_AES_256_CBC_SHA</td>
+<td style="text-align:center">DHE-RSA-AES256-SHA</td>
+<td style="text-align:center">{dhe_rsa, aes_256_cbc, sha, default_prf}</td>
+</tr>
+<tr>
+<td>TLS_DH_anon_WITH_AES_256_CBC_SHA</td>
+<td style="text-align:center">ADH-AES256-SHA</td>
+<td style="text-align:center">{dh_anon, aes_256_cbc, sha, default_prf}</td>
+</tr>
+<tr>
+<td>TLS_RSA_WITH_AES_128_CBC_SHA256</td>
+<td style="text-align:center">AES128-SHA256</td>
+<td style="text-align:center">{rsa, aes_128_cbc, sha256, default_prf}</td>
+</tr>
+<tr>
+<td>TLS_RSA_WITH_AES_256_CBC_SHA256</td>
+<td style="text-align:center">AES256-SHA256</td>
+<td style="text-align:center">{rsa, aes_256_cbc, sha256, default_prf}</td>
+</tr>
+<tr>
+<td>TLS_DHE_DSS_WITH_AES_128_CBC_SHA256</td>
+<td style="text-align:center">DHE-DSS-AES128-SHA256</td>
+<td style="text-align:center">{dhe_dss, aes_128_cbc, sha256, default_prf}</td>
+</tr>
+<tr>
+<td>TLS_DHE_RSA_WITH_AES_128_CBC_SHA256</td>
+<td style="text-align:center">DHE-RSA-AES128-SHA256</td>
+<td style="text-align:center">{dhe_rsa, aes_128_cbc, sha256, default_prf}</td>
+</tr>
+<tr>
+<td>TLS_DHE_DSS_WITH_AES_256_CBC_SHA256</td>
+<td style="text-align:center">DHE-DSS-AES256-SHA256</td>
+<td style="text-align:center">{dhe_dss, aes_256_cbc, sha256, default_prf}</td>
+</tr>
+<tr>
+<td>TLS_DHE_RSA_WITH_AES_256_CBC_SHA256</td>
+<td style="text-align:center">DHE-RSA-AES256-SHA256</td>
+<td style="text-align:center">{dhe_rsa, aes_256_cbc, sha256, default_prf}</td>
+</tr>
+<tr>
+<td>TLS_DH_anon_WITH_AES_128_CBC_SHA256</td>
+<td style="text-align:center">ADH-AES128-SHA256</td>
+<td style="text-align:center">{dh_anon, aes_128_cbc, sha256, default_prf}</td>
+</tr>
+<tr>
+<td>TLS_DH_anon_WITH_AES_256_CBC_SHA256</td>
+<td style="text-align:center">ADH-AES256-SHA256</td>
+<td style="text-align:center">{dh_anon, aes_256_cbc, sha256, default_prf}</td>
+</tr>
+<tr>
+<td>TLS_PSK_WITH_RC4_128_SHA</td>
+<td style="text-align:center">PSK-RC4-SHA</td>
+<td style="text-align:center">{psk, rc4_128, sha, default_prf}</td>
+</tr>
+<tr>
+<td>TLS_PSK_WITH_3DES_EDE_CBC_SHA</td>
+<td style="text-align:center">PSK-3DES-EDE-CBC-SHA</td>
+<td style="text-align:center">{psk, ‘3des_ede_cbc’, sha, default_prf}</td>
+</tr>
+<tr>
+<td>TLS_PSK_WITH_AES_128_CBC_SHA</td>
+<td style="text-align:center">PSK-AES128-CBC-SHA</td>
+<td style="text-align:center">{psk, aes_128_cbc, sha, default_prf}</td>
+</tr>
+<tr>
+<td>TLS_PSK_WITH_AES_256_CBC_SHA</td>
+<td style="text-align:center">PSK-AES256-CBC-SHA</td>
+<td style="text-align:center">{psk, aes_256_cbc, sha, default_prf}</td>
+</tr>
+<tr>
+<td>TLS_DHE_PSK_WITH_RC4_128_SHA</td>
+<td style="text-align:center">DHE-PSK-RC4-SHA    {dhe_psk, rc4_128, sha, default_prf}</td>
+</tr>
+<tr>
+<td>TLS_DHE_PSK_WITH_3DES_EDE_CBC_SHA</td>
+<td style="text-align:center">DHE-PSK-3DES-EDE-CBC-SHA    {dhe_psk, ‘3des_ede_cbc’, sha, default_prf}</td>
+</tr>
+<tr>
+<td>TLS_DHE_PSK_WITH_AES_128_CBC_SHA</td>
+<td style="text-align:center">DHE-PSK-AES128-CBC-SHA    {dhe_psk, aes_128_cbc, sha, default_prf}</td>
+</tr>
+<tr>
+<td>TLS_DHE_PSK_WITH_AES_256_CBC_SHA</td>
+<td style="text-align:center">DHE-PSK-AES256-CBC-SHA    {dhe_psk, aes_256_cbc, sha, default_prf}</td>
+</tr>
+<tr>
+<td>TLS_RSA_PSK_WITH_RC4_128_SHA</td>
+<td style="text-align:center">RSA-PSK-RC4-SHA</td>
+<td style="text-align:center">{rsa_psk, rc4_128, sha, default_prf}</td>
+</tr>
+<tr>
+<td>TLS_RSA_PSK_WITH_3DES_EDE_CBC_SHA</td>
+<td style="text-align:center">RSA-PSK-3DES-EDE-CBC-SHA</td>
+<td style="text-align:center"></td>
+<td>{rsa_psk, ‘3des_ede_cbc’, sha, default_prf}</td>
+</tr>
+<tr>
+<td>TLS_RSA_PSK_WITH_AES_128_CBC_SHA</td>
+<td style="text-align:center">RSA-PSK-AES128-CBC-SHA</td>
+<td style="text-align:center">{rsa_psk, aes_128_cbc, sha, default_prf}</td>
+</tr>
+<tr>
+<td>TLS_RSA_PSK_WITH_AES_256_CBC_SHA</td>
+<td style="text-align:center">RSA-PSK-AES256-CBC-SHA</td>
+<td style="text-align:center">{rsa_psk, aes_256_cbc, sha, default_prf}</td>
+</tr>
+<tr>
+<td>TLS_RSA_WITH_AES_128_GCM_SHA256    AES128-GCM-SHA256</td>
+<td style="text-align:center">{rsa, aes_128_gcm, null, sha256}</td>
+</tr>
+<tr>
+<td>TLS_RSA_WITH_AES_256_GCM_SHA384    AES256-GCM-SHA384</td>
+<td style="text-align:center">{rsa, aes_256_gcm, null, sha384}</td>
+</tr>
+<tr>
+<td>TLS_DHE_RSA_WITH_AES_128_GCM_SHA256    DHE-RSA-AES128-GCM-SHA256</td>
+<td style="text-align:center">{dhe_rsa, aes_128_gcm, null, sha256}</td>
+</tr>
+<tr>
+<td>TLS_DHE_RSA_WITH_AES_256_GCM_SHA384    DHE-RSA-AES256-GCM-SHA384</td>
+<td style="text-align:center">{dhe_rsa, aes_256_gcm, null, sha384}</td>
+</tr>
+<tr>
+<td>TLS_DH_RSA_WITH_AES_128_GCM_SHA256    DH-RSA-AES128-GCM-SHA256</td>
+<td style="text-align:center">{dh_rsa, aes_128_gcm, null, sha256}</td>
+</tr>
+<tr>
+<td>TLS_DH_RSA_WITH_AES_256_GCM_SHA384    DH-RSA-AES256-GCM-SHA384</td>
+<td style="text-align:center">{dh_rsa, aes_256_gcm, null, sha384}</td>
+</tr>
+<tr>
+<td>TLS_DHE_DSS_WITH_AES_128_GCM_SHA256    DHE-DSS-AES128-GCM-SHA256</td>
+<td style="text-align:center">{dhe_dss, aes_128_gcm, null, sha256}</td>
+</tr>
+<tr>
+<td>TLS_DHE_DSS_WITH_AES_256_GCM_SHA384    DHE-DSS-AES256-GCM-SHA384</td>
+<td style="text-align:center">{dhe_dss, aes_256_gcm, null, sha384}</td>
+</tr>
+<tr>
+<td>TLS_DH_DSS_WITH_AES_128_GCM_SHA256    DH-DSS-AES128-GCM-SHA256</td>
+<td style="text-align:center">{dh_dss, aes_128_gcm, null, sha256}</td>
+</tr>
+<tr>
+<td>TLS_DH_DSS_WITH_AES_256_GCM_SHA384    DH-DSS-AES256-GCM-SHA384</td>
+<td style="text-align:center">{dh_dss, aes_256_gcm, null, sha384}</td>
+</tr>
+<tr>
+<td>TLS_DH_anon_WITH_AES_128_GCM_SHA256    ADH-AES128-GCM-SHA256</td>
+<td style="text-align:center">{dh_anon, aes_128_gcm, null, sha256}</td>
+</tr>
+<tr>
+<td>TLS_DH_anon_WITH_AES_256_GCM_SHA384    ADH-AES256-GCM-SHA384</td>
+<td style="text-align:center">{dh_anon, aes_256_gcm, null, sha384}</td>
+</tr>
+<tr>
+<td>TLS_PSK_WITH_AES_128_GCM_SHA256    PSK-AES128-GCM-SHA256</td>
+<td style="text-align:center">{psk, aes_128_gcm, null, sha256}</td>
+</tr>
+<tr>
+<td>TLS_PSK_WITH_AES_256_GCM_SHA384    PSK-AES256-GCM-SHA384</td>
+<td style="text-align:center">{psk, aes_256_gcm, null, sha384}</td>
+</tr>
+<tr>
+<td>TLS_DHE_PSK_WITH_AES_128_GCM_SHA256    DHE-PSK-AES128-GCM-SHA256</td>
+<td style="text-align:center">{dhe_psk, aes_128_gcm, null, sha256}</td>
+</tr>
+<tr>
+<td>TLS_DHE_PSK_WITH_AES_256_GCM_SHA384    DHE-PSK-AES256-GCM-SHA384</td>
+<td style="text-align:center">{dhe_psk, aes_256_gcm, null, sha384}</td>
+</tr>
+<tr>
+<td>TLS_RSA_PSK_WITH_AES_128_GCM_SHA256    RSA-PSK-AES128-GCM-SHA256</td>
+<td style="text-align:center">{rsa_psk, aes_128_gcm, null, sha256}</td>
+</tr>
+<tr>
+<td>TLS_RSA_PSK_WITH_AES_256_GCM_SHA384    RSA-PSK-AES256-GCM-SHA384</td>
+<td style="text-align:center">{rsa_psk, aes_256_gcm, null, sha384}</td>
+</tr>
+<tr>
+<td>TLS_PSK_WITH_AES_128_CBC_SHA256    PSK-AES128-CBC-SHA256</td>
+<td style="text-align:center">{psk, aes_128_cbc, sha256, default_prf}</td>
+</tr>
+<tr>
+<td>TLS_PSK_WITH_AES_256_CBC_SHA384    PSK-AES256-CBC-SHA384</td>
+<td style="text-align:center">{psk, aes_256_cbc, sha384, default_prf}</td>
+</tr>
+<tr>
+<td>TLS_PSK_WITH_NULL_SHA256    PSK-NULL-SHA256</td>
+<td style="text-align:center">{psk, null, sha256, default_prf}</td>
+</tr>
+<tr>
+<td>TLS_PSK_WITH_NULL_SHA384    PSK-NULL-SHA384</td>
+<td style="text-align:center">{psk, null, sha384, default_prf}</td>
+</tr>
+<tr>
+<td>TLS_DHE_PSK_WITH_AES_128_CBC_SHA256    DHE-PSK-AES128-CBC-SHA256</td>
+<td style="text-align:center">{dhe_psk, aes_128_cbc, sha256, default_prf}</td>
+</tr>
+<tr>
+<td>TLS_DHE_PSK_WITH_AES_256_CBC_SHA384</td>
+<td style="text-align:center">DHE-PSK-AES256-CBC-SHA384</td>
+<td style="text-align:center">{dhe_psk, aes_256_cbc, sha384, default_prf}</td>
+</tr>
+<tr>
+<td>TLS_DHE_PSK_WITH_NULL_SHA256</td>
+<td style="text-align:center">DHE-PSK-NULL-SHA256</td>
+<td style="text-align:center">{dhe_psk, null, sha256, default_prf}</td>
+</tr>
+<tr>
+<td>TLS_DHE_PSK_WITH_NULL_SHA384</td>
+<td style="text-align:center">DHE-PSK-NULL-SHA384</td>
+<td style="text-align:center">{dhe_psk, null, sha384, default_prf}</td>
+</tr>
+<tr>
+<td>TLS_RSA_PSK_WITH_AES_128_CBC_SHA256</td>
+<td style="text-align:center">RSA-PSK-AES128-CBC-SHA256</td>
+<td style="text-align:center">{rsa_psk, aes_128_cbc, sha256, default_prf}</td>
+</tr>
+<tr>
+<td>TLS_RSA_PSK_WITH_AES_256_CBC_SHA384</td>
+<td style="text-align:center">RSA-PSK-AES256-CBC-SHA384</td>
+<td style="text-align:center">{rsa_psk, aes_256_cbc, sha384, default_prf}</td>
+</tr>
+<tr>
+<td>TLS_RSA_PSK_WITH_NULL_SHA256</td>
+<td style="text-align:center">RSA-PSK-NULL-SHA256</td>
+<td style="text-align:center">{rsa_psk, null, sha256, default_prf}</td>
+</tr>
+<tr>
+<td>TLS_RSA_PSK_WITH_NULL_SHA384</td>
+<td style="text-align:center">RSA-PSK-NULL-SHA384</td>
+<td style="text-align:center">{rsa_psk, null, sha384, default_prf}</td>
+</tr>
+<tr>
+<td>TLS_ECDH_ECDSA_WITH_NULL_SHA</td>
+<td style="text-align:center">ECDH-ECDSA-NULL-SHA</td>
+<td style="text-align:center">{ecdh_ecdsa, null, sha, default_prf}</td>
+</tr>
+<tr>
+<td>TLS_ECDH_ECDSA_WITH_RC4_128_SHA</td>
+<td style="text-align:center">ECDH-ECDSA-RC4-SHA</td>
+<td style="text-align:center">{ecdh_ecdsa, rc4_128, sha, default_prf}</td>
+</tr>
+<tr>
+<td>TLS_ECDH_ECDSA_WITH_3DES_EDE_CBC_SHA</td>
+<td style="text-align:center">ECDH-ECDSA-DES-CBC3-SHA</td>
+<td style="text-align:center">{ecdh_ecdsa, ‘3des_ede_cbc’, sha, default_prf}</td>
+</tr>
+<tr>
+<td>TLS_ECDH_ECDSA_WITH_AES_128_CBC_SHA</td>
+<td style="text-align:center">ECDH-ECDSA-AES128-SHA</td>
+<td style="text-align:center">{ecdh_ecdsa, aes_128_cbc, sha, default_prf}</td>
+</tr>
+<tr>
+<td>TLS_ECDH_ECDSA_WITH_AES_256_CBC_SHA</td>
+<td style="text-align:center">ECDH-ECDSA-AES256-SHA</td>
+<td style="text-align:center">{ecdh_ecdsa, aes_256_cbc, sha, default_prf}</td>
+</tr>
+<tr>
+<td>TLS_ECDHE_ECDSA_WITH_NULL_SHA</td>
+<td style="text-align:center">ECDHE-ECDSA-NULL-SHA</td>
+<td style="text-align:center">{ecdhe_ecdsa, null, sha, default_prf}</td>
+</tr>
+<tr>
+<td>TLS_ECDHE_ECDSA_WITH_RC4_128_SHA</td>
+<td style="text-align:center">ECDHE-ECDSA-RC4-SHA</td>
+<td style="text-align:center">{ecdhe_ecdsa, rc4_128, sha, default_prf}</td>
+</tr>
+<tr>
+<td>TLS_ECDHE_ECDSA_WITH_3DES_EDE_CBC_SHA</td>
+<td style="text-align:center">ECDHE-ECDSA-DES-CBC3-SHA</td>
+<td style="text-align:center">{ecdhe_ecdsa, ‘3des_ede_cbc’, sha, default_prf}</td>
+</tr>
+<tr>
+<td>TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA</td>
+<td style="text-align:center">ECDHE-ECDSA-AES128-SHA</td>
+<td style="text-align:center">{ecdhe_ecdsa, aes_128_cbc, sha, default_prf}</td>
+</tr>
+<tr>
+<td>TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA</td>
+<td style="text-align:center">ECDHE-ECDSA-AES256-SHA</td>
+<td style="text-align:center">{ecdhe_ecdsa, aes_256_cbc, sha, default_prf}</td>
+</tr>
+<tr>
+<td>TLS_ECDH_RSA_WITH_NULL_SHA</td>
+<td style="text-align:center">ECDH-RSA-NULL-SHA</td>
+<td style="text-align:center">{ecdh_rsa, null, sha, default_prf}</td>
+</tr>
+<tr>
+<td>TLS_ECDH_RSA_WITH_RC4_128_SHA</td>
+<td style="text-align:center">ECDH-RSA-RC4-SHA</td>
+<td style="text-align:center">{ecdh_rsa, rc4_128, sha, default_prf}</td>
+</tr>
+<tr>
+<td>TLS_ECDH_RSA_WITH_3DES_EDE_CBC_SHA</td>
+<td style="text-align:center">ECDH-RSA-DES-CBC3-SHA</td>
+<td style="text-align:center">{ecdh_rsa, ‘3des_ede_cbc’, sha, default_prf}</td>
+</tr>
+<tr>
+<td>TLS_ECDH_RSA_WITH_AES_128_CBC_SHA</td>
+<td style="text-align:center">ECDH-RSA-AES128-SHA</td>
+<td style="text-align:center">{ecdh_rsa, aes_128_cbc, sha, default_prf}</td>
+</tr>
+<tr>
+<td>TLS_ECDH_RSA_WITH_AES_256_CBC_SHA</td>
+<td style="text-align:center">ECDH-RSA-AES256-SHA</td>
+<td style="text-align:center">{ecdh_rsa, aes_256_cbc, sha, default_prf}</td>
+</tr>
+<tr>
+<td>TLS_ECDHE_RSA_WITH_NULL_SHA</td>
+<td style="text-align:center">ECDHE-RSA-NULL-SHA</td>
+<td style="text-align:center">{ecdhe_rsa, null, sha, default_prf}</td>
+</tr>
+<tr>
+<td>TLS_ECDHE_RSA_WITH_RC4_128_SHA</td>
+<td style="text-align:center">ECDHE-RSA-RC4-SHA</td>
+<td style="text-align:center">{ecdhe_rsa, rc4_128, sha, default_prf}</td>
+</tr>
+<tr>
+<td>TLS_ECDHE_RSA_WITH_3DES_EDE_CBC_SHA    ECDHE-RSA-DES-CBC3-SHA    {ecdhe_rsa, ‘3des_ede_cbc’, sha, default_prf}</td>
+</tr>
+<tr>
+<td>TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA    ECDHE-RSA-AES128-SHA    {ecdhe_rsa, aes_128_cbc, sha, default_prf}</td>
+</tr>
+<tr>
+<td>TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA    ECDHE-RSA-AES256-SHA    {ecdhe_rsa, aes_256_cbc, sha, default_prf}</td>
+</tr>
+<tr>
+<td>TLS_ECDH_anon_WITH_NULL_SHA    AECDH-NULL-SHA    {ecdh_anon, null, sha, default_prf}</td>
+</tr>
+<tr>
+<td>TLS_ECDH_anon_WITH_RC4_128_SHA    AECDH-RC4-SHA    {ecdh_anon, rc4_128, sha, default_prf}</td>
+</tr>
+<tr>
+<td>TLS_ECDH_anon_WITH_3DES_EDE_CBC_SHA    AECDH-DES-CBC3-SHA    {ecdh_anon, ‘3des_ede_cbc’, sha, default_prf}</td>
+</tr>
+<tr>
+<td>TLS_ECDH_anon_WITH_AES_128_CBC_SHA    AECDH-AES128-SHA    {ecdh_anon, aes_128_cbc, sha, default_prf}</td>
+</tr>
+<tr>
+<td>TLS_ECDH_anon_WITH_AES_256_CBC_SHA    AECDH-AES256-SHA    {ecdh_anon, aes_256_cbc, sha, default_prf}</td>
+</tr>
+<tr>
+<td>TLS_SRP_SHA_WITH_3DES_EDE_CBC_SHA    SRP-3DES-EDE-CBC-SHA    {srp_anon, ‘3des_ede_cbc’, sha, default_prf}</td>
+</tr>
+<tr>
+<td>TLS_SRP_SHA_RSA_WITH_3DES_EDE_CBC_SHA    SRP-RSA-3DES-EDE-CBC-SHA    {srp_rsa, ‘3des_ede_cbc’, sha, default_prf}</td>
+</tr>
+<tr>
+<td>TLS_SRP_SHA_DSS_WITH_3DES_EDE_CBC_SHA    SRP-DSS-3DES-EDE-CBC-SHA    {srp_dss, ‘3des_ede_cbc’, sha, default_prf}</td>
+</tr>
+<tr>
+<td>TLS_SRP_SHA_WITH_AES_128_CBC_SHA    SRP-AES-128-CBC-SHA    {srp_anon, aes_128_cbc, sha, default_prf}</td>
+</tr>
+<tr>
+<td>TLS_SRP_SHA_RSA_WITH_AES_128_CBC_SHA    SRP-RSA-AES-128-CBC-SHA</td>
+<td style="text-align:center">{srp_rsa, aes_128_cbc, sha, default_prf}</td>
+</tr>
+<tr>
+<td>TLS_SRP_SHA_DSS_WITH_AES_128_CBC_SHA    SRP-DSS-AES-128-CBC-SHA</td>
+<td style="text-align:center">{srp_dss, aes_128_cbc, sha, default_prf}</td>
+</tr>
+<tr>
+<td>TLS_SRP_SHA_WITH_AES_256_CBC_SHA</td>
+<td style="text-align:center">SRP-AES-256-CBC-SHA</td>
+<td style="text-align:center">{srp_anon, aes_256_cbc, sha, default_prf}</td>
+</tr>
+<tr>
+<td>TLS_SRP_SHA_RSA_WITH_AES_256_CBC_SHA</td>
+<td style="text-align:center">SRP-RSA-AES-256-CBC-SHA</td>
+<td style="text-align:center">{srp_rsa, aes_256_cbc, sha, default_prf}</td>
+</tr>
+<tr>
+<td>TLS_SRP_SHA_DSS_WITH_AES_256_CBC_SHA</td>
+<td style="text-align:center">SRP-DSS-AES-256-CBC-SHA</td>
+<td style="text-align:center">{srp_dss, aes_256_cbc, sha, default_prf}</td>
+</tr>
+<tr>
+<td>TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256</td>
+<td style="text-align:center">ECDHE-ECDSA-AES128-SHA256</td>
+<td style="text-align:center">{ecdhe_ecdsa, aes_128_cbc, sha256, sha256}</td>
+</tr>
+<tr>
+<td>TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384    ECDHE-ECDSA-AES256-SHA384    {ecdhe_ecdsa, aes_256_cbc, sha384, sha384}</td>
+</tr>
+<tr>
+<td>TLS_ECDH_ECDSA_WITH_AES_128_CBC_SHA256    ECDH-ECDSA-AES128-SHA256    {ecdh_ecdsa, aes_128_cbc, sha256, sha256}</td>
+</tr>
+<tr>
+<td>TLS_ECDH_ECDSA_WITH_AES_256_CBC_SHA384    ECDH-ECDSA-AES256-SHA384    {ecdh_ecdsa, aes_256_cbc, sha384, sha384}</td>
+</tr>
+<tr>
+<td>TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256    ECDHE-RSA-AES128-SHA256    {ecdhe_rsa, aes_128_cbc, sha256, sha256}</td>
+</tr>
+<tr>
+<td>TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384    ECDHE-RSA-AES256-SHA384    {ecdhe_rsa, aes_256_cbc, sha384, sha384}</td>
+</tr>
+<tr>
+<td>TLS_ECDH_RSA_WITH_AES_128_CBC_SHA256    ECDH-RSA-AES128-SHA256    {ecdh_rsa, aes_128_cbc, sha256, sha256}</td>
+</tr>
+<tr>
+<td>TLS_ECDH_RSA_WITH_AES_256_CBC_SHA384    ECDH-RSA-AES256-SHA384    {ecdh_rsa, aes_256_cbc, sha384, sha384}</td>
+</tr>
+<tr>
+<td>TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256    ECDHE-ECDSA-AES128-GCM-SHA256    {ecdhe_ecdsa, aes_128_gcm, null, sha256}</td>
+</tr>
+<tr>
+<td>TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384    ECDHE-ECDSA-AES256-GCM-SHA384    {ecdhe_ecdsa, aes_256_gcm, null, sha384}</td>
+</tr>
+<tr>
+<td>TLS_ECDH_ECDSA_WITH_AES_128_GCM_SHA256</td>
+<td style="text-align:center">ECDH-ECDSA-AES128-GCM-SHA256</td>
+<td style="text-align:center">{ecdh_ecdsa, aes_128_gcm, null, sha256}</td>
+</tr>
+<tr>
+<td>TLS_ECDH_ECDSA_WITH_AES_256_GCM_SHA384</td>
+<td style="text-align:center">ECDH-ECDSA-AES256-GCM-SHA384</td>
+<td style="text-align:center">{ecdh_ecdsa, aes_256_gcm, null, sha384}</td>
+</tr>
+<tr>
+<td>TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256</td>
+<td style="text-align:center">ECDHE-RSA-AES128-GCM-SHA256</td>
+<td style="text-align:center">{ecdhe_rsa, aes_128_gcm, null, sha256}</td>
+</tr>
+<tr>
+<td>TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384</td>
+<td style="text-align:center">ECDHE-RSA-AES256-GCM-SHA384</td>
+<td style="text-align:center">{ecdhe_rsa, aes_256_gcm, null, sha384}</td>
+</tr>
+<tr>
+<td>TLS_ECDH_RSA_WITH_AES_128_GCM_SHA256    ECDH-RSA-AES128-GCM-SHA256</td>
+<td style="text-align:center">{ecdh_rsa, aes_128_gcm, null, sha256}</td>
+</tr>
+<tr>
+<td>TLS_ECDH_RSA_WITH_AES_256_GCM_SHA384    ECDH-RSA-AES256-GCM-SHA384</td>
+<td style="text-align:center">{ecdh_rsa, aes_256_gcm, null, sha384}</td>
+</tr>
+<tr>
+<td>TLS_ECDHE_PSK_WITH_RC4_128_SHA    ECDHE-PSK-RC4-SHA</td>
+<td style="text-align:center">{ecdhe_psk, rc4_128, sha, default_prf}</td>
+</tr>
+<tr>
+<td>TLS_ECDHE_PSK_WITH_3DES_EDE_CBC_SHA    ECDHE-PSK-3DES-EDE-CBC-SHA    {ecdhe_psk, ‘3des_ede_cbc’, sha, default_prf}</td>
+</tr>
+<tr>
+<td>TLS_ECDHE_PSK_WITH_AES_128_CBC_SHA    ECDHE-PSK-AES128-CBC-SHA    {ecdhe_psk, aes_128_cbc, sha, default_prf}</td>
+</tr>
+<tr>
+<td>TLS_ECDHE_PSK_WITH_AES_256_CBC_SHA    ECDHE-PSK-AES256-CBC-SHA    {ecdhe_psk, aes_256_cbc, sha, default_prf}</td>
+</tr>
+<tr>
+<td>TLS_ECDHE_PSK_WITH_AES_128_CBC_SHA256    ECDHE-PSK-AES128-CBC-SHA256    {ecdhe_psk, aes_128_cbc, sha256, default_prf}</td>
+</tr>
+<tr>
+<td>TLS_ECDHE_PSK_WITH_AES_256_CBC_SHA384</td>
+<td style="text-align:center">ECDHE-PSK-AES256-CBC-SHA384</td>
+<td style="text-align:center">{ecdhe_psk, aes_256_cbc, sha384, default_prf}</td>
+</tr>
+<tr>
+<td>TLS_ECDHE_PSK_WITH_NULL_SHA256</td>
+<td style="text-align:center">ECDHE-PSK-NULL-SHA256</td>
+<td style="text-align:center">{ecdhe_psk, null, sha256, default_prf}</td>
+</tr>
+<tr>
+<td>TLS_ECDHE_PSK_WITH_NULL_SHA384</td>
+<td style="text-align:center">ECDHE-PSK-NULL-SHA384</td>
+<td style="text-align:center">{ecdhe_psk, null, sha384, default_prf}</td>
+</tr>
+<tr>
+<td>TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256</td>
+<td style="text-align:center">ECDHE-RSA-CHACHA20-POLY1305</td>
+<td style="text-align:center">{ecdhe_rsa, chacha20_poly1305, null, sha256}</td>
+</tr>
+<tr>
+<td>TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256</td>
+<td style="text-align:center">ECDHE-ECDSA-CHACHA20-POLY1305</td>
+<td style="text-align:center">{ecdhe_ecdsa, chacha20_poly1305, null, sha256}</td>
+</tr>
+<tr>
+<td>TLS_DHE_RSA_WITH_CHACHA20_POLY1305_SHA256</td>
+<td style="text-align:center">DHE-RSA-CHACHA20-POLY1305</td>
+<td style="text-align:center">{dhe_rsa, chacha20_poly1305, null, sha256}</td>
+</tr>
+</tbody>
+</table>
+<p>映射表：<br><a href="https://github.com/rabbitmq/rabbitmq-website/issues/453" target="_blank" rel="noopener">https://github.com/rabbitmq/rabbitmq-website/issues/453</a><br>加密套概念：<br><a href="https://blog.helong.info/blog/2015/01/23/ssl_tls_ciphersuite_intro/" target="_blank" rel="noopener">https://blog.helong.info/blog/2015/01/23/ssl_tls_ciphersuite_intro/</a><br>加密协议：<br><a href="https://www.iana.org/assignments/tls-parameters/tls-parameters.xhtml#tls-parameters-4" target="_blank" rel="noopener">https://www.iana.org/assignments/tls-parameters/tls-parameters.xhtml#tls-parameters-4</a><br>openssl配置说明：<br><a href="http://www.jinbuguo.com/linux/openssl_install.html" target="_blank" rel="noopener">http://www.jinbuguo.com/linux/openssl_install.html</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/5ddc6624/" rel="next" title="JAVA:正则表达式用法">
+                <i class="fa fa-chevron-left"></i> JAVA:正则表达式用法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/duolaameng.png"
+                alt="韧卓" />
+            
+              <p class="site-author-name" itemprop="name">韧卓</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">35</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">40</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、生成-SSL-证书"><span class="nav-number">1.</span> <span class="nav-text">一、生成 SSL 证书</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-创建目录"><span class="nav-number">1.0.1.</span> <span class="nav-text">1.创建目录</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-在该目录下，生成openssl-cnf文件，内容如下："><span class="nav-number">1.0.2.</span> <span class="nav-text">2.在该目录下，生成openssl.cnf文件，内容如下：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-颁发自己的-CA-证书"><span class="nav-number">1.0.3.</span> <span class="nav-text">3.颁发自己的 CA 证书</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-生成服务器证书"><span class="nav-number">1.0.4.</span> <span class="nav-text">4.生成服务器证书</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-生成客户端证书"><span class="nav-number">1.0.5.</span> <span class="nav-text">5.生成客户端证书</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-番外"><span class="nav-number">1.0.6.</span> <span class="nav-text">6.番外</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、配置-RabbitMQ-服务器"><span class="nav-number">2.</span> <span class="nav-text">二、配置 RabbitMQ 服务器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-配置RabbitMQ环境"><span class="nav-number">2.0.1.</span> <span class="nav-text">1.配置RabbitMQ环境</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-基本配置-rabbitmq-conf-修改"><span class="nav-number">2.0.2.</span> <span class="nav-text">2.基本配置 rabbitmq.conf 修改</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-高级配置-advanced-config-修改"><span class="nav-number">2.0.3.</span> <span class="nav-text">3.高级配置 advanced.config 修改</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、配置-Java-客户端"><span class="nav-number">3.</span> <span class="nav-text">三、配置 Java 客户端</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、配置有效性检查"><span class="nav-number">4.</span> <span class="nav-text">四、配置有效性检查</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-证书有效性校验"><span class="nav-number">4.0.1.</span> <span class="nav-text">1.证书有效性校验</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-验证RabbitMQ配置有效性"><span class="nav-number">4.0.2.</span> <span class="nav-text">2.验证RabbitMQ配置有效性</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、异常处理"><span class="nav-number">5.</span> <span class="nav-text">五、异常处理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-客户端证书密码错误"><span class="nav-number">5.0.1.</span> <span class="nav-text">1.客户端证书密码错误</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-客户端和服务器的加密套协商失败"><span class="nav-number">5.0.2.</span> <span class="nav-text">2.客户端和服务器的加密套协商失败</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#附件"><span class="nav-number">6.</span> <span class="nav-text">附件</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">韧卓</span>
+
+  <div class="powered-by">  
+  </div>
+  <span>Hosted by <a href="https://pages.coding.me" style="font-weight: bold">Coding Pages</a></span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io" rel="external nofollow">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next" rel="external nofollow">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+
+</div>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'xfqRhDqjLncJa7MWAVd4ry0t-gzGzoHsz',
+        appKey: 'qAk9WFoSl8TEiPhEizlczESL',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("xfqRhDqjLncJa7MWAVd4ry0t-gzGzoHsz", "qAk9WFoSl8TEiPhEizlczESL");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
