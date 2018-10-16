@@ -123,3 +123,11 @@ create_time, "%Y-%m-%d %H"
 ```
 like CONCAT('%', #{port}, '%')
 ```
+
+## 插入数据后返回id
+
+`<insert id="insertSelective" parameterType="com.cmcc.Bean">`标签最后加入`useGeneratedKeys="true" keyProperty="id"`。新标签如下所示：
+
+```
+<insert id="insertSelective" parameterType="com.cmcc.Bean" useGeneratedKeys="true" keyProperty="id" >
+```

@@ -56,6 +56,8 @@ java -jar selenium-server-standalone-<version>.jar -role hub
   }
 }
 ```
+
+<!--more-->
 如果没有给出 url、host 和 port，配置会自动指向 localhost:whatever-port-Appium-started-on。
 
 如果你的 Appium Server 和 Selenium Grid 没有运行在同一台机器上，为确保 Selenium Grid 连接正常，请在你的 host & url 上使用外部域名或 IP 地址，而不是 localhost 和 127.0.0.1
@@ -82,3 +84,24 @@ appium -p 4724 -bp 4714 --nodeconfig "json文件路径"
 
 ## 问题
 Selenium Grid会发生阻塞，如果上一个测试任务因为异常无法继续执行会发生阻塞，后面的测试任务无法继续执行
+
+## Selenium Grid 架构
+{% qnimg selenium-grid架构图.png %}
+
+什么时 Hub呢？
+
+它是你加载所有测试的机器。
+
+一个Grid里只有一个Hub。
+
+hub是测试运行的地方，但是你看到的测试是在node上的浏览器上执行的。
+
+什么是Nodes？
+
+这台机器将执行您在hub上加载的测试
+
+他可以是一个或者多个nodes在一个grid里，Grid中有不同浏览器和操作系统。
+
+#### 做成多线程方式
+Selenium Grid只是提供多系统、多浏览器的执行环境，而不是说任务一个test case丢给它就能并行运行。并行的运行我这里就交给testng了
+
