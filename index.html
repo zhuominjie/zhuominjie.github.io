@@ -286,6 +286,164 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.dadroid.cn/posts/42fc8a9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="韧卓">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/duolaameng.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="大卓の哆啦A梦">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/posts/42fc8a9/" itemprop="url">Appium-环境部署</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-16T14:54:54+08:00">
+                2018-10-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/posts/42fc8a9/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/posts/42fc8a9/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/posts/42fc8a9/" class="leancloud_visitors" data-flag-title="Appium-环境部署">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="安装Java-jdk1-8"><a href="#安装Java-jdk1-8" class="headerlink" title="安装Java jdk1.8"></a>安装Java jdk1.8</h1><h4 id="搭建环境："><a href="#搭建环境：" class="headerlink" title="搭建环境："></a>搭建环境：</h4><p>Ubuntu 16.04 x64<br>JDK :jdk-8u171-linux-x64.tar.gz</p>
+<h4 id="下载linux对应的安装包"><a href="#下载linux对应的安装包" class="headerlink" title="下载linux对应的安装包"></a>下载linux对应的安装包</h4><p>下载地址：<a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html" target="_blank" rel="noopener">http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html</a></p>
+<h4 id="解压安装包jdk-8u171-linux-x64-tar-gz"><a href="#解压安装包jdk-8u171-linux-x64-tar-gz" class="headerlink" title="解压安装包jdk-8u171-linux-x64.tar.gz"></a>解压安装包jdk-8u171-linux-x64.tar.gz</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">tar -zxvf jdk-8u171-linux-x64.tar.gz</span><br></pre></td></tr></table></figure>
+<h4 id="转移目录到-usr-lib-目录下"><a href="#转移目录到-usr-lib-目录下" class="headerlink" title="转移目录到 /usr/lib 目录下"></a>转移目录到 /usr/lib 目录下</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">cd  /usr/lib</span><br><span class="line">sudo mkdir jdk</span><br><span class="line">sudo mv ~/jdk1.8.0_171/ usr/lib/jdk</span><br></pre></td></tr></table></figure>
+<h4 id="配置java环境变量"><a href="#配置java环境变量" class="headerlink" title="配置java环境变量"></a>配置java环境变量</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo vi /etc/bash.bashrc</span><br></pre></td></tr></table></figure>
+<p>在末尾加以下几行文字：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#set java env</span><br><span class="line">export JAVA_HOME=/usr/lib/jdk/jdk1.8.0_171</span><br><span class="line">export JRE_HOME=$&#123;JAVA_HOME&#125;/jre    </span><br><span class="line">export CLASSPATH=.:$&#123;JAVA_HOME&#125;/lib:$&#123;JRE_HOME&#125;/lib    </span><br><span class="line">export PATH=$&#123;JAVA_HOME&#125;/bin:$PATH</span><br></pre></td></tr></table></figure>
+<p>执行命令使修改立即生效</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">source /etc/profile</span><br></pre></td></tr></table></figure>
+<h4 id="测试安装是否成功"><a href="#测试安装是否成功" class="headerlink" title="测试安装是否成功"></a>测试安装是否成功</h4><p>在终端输入，出现版本号则表示安装成功</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">java -version</span><br></pre></td></tr></table></figure>
+<h1 id="安装-Android-SDK"><a href="#安装-Android-SDK" class="headerlink" title="安装 Android SDK"></a>安装 Android SDK</h1><h4 id="依赖安装"><a href="#依赖安装" class="headerlink" title="依赖安装"></a>依赖安装</h4><p>Android SDK中的adb程序是32位的，Ubuntu x64系统需要安装32位库文件，用于兼容32位的程序。如果不安装，adb会出错：java.io.IOException: error=2<br>输入下面命令，安装库文件（国内需先换源）</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo apt-get install -y libc6-i386 lib32stdc++6 lib32gcc1 lib32ncurses5 lib32z1</span><br></pre></td></tr></table></figure>
+<h4 id="下载-SDK-Tools"><a href="#下载-SDK-Tools" class="headerlink" title="下载 SDK Tools"></a>下载 SDK Tools</h4><p>地址：<a href="http://www.androiddevtools.cn/" target="_blank" rel="noopener">http://www.androiddevtools.cn/</a><br>在<code>AndroidDevTools</code>中下载<code>SDK Tools</code>，在<code>Downloads</code>文件夹下找到下载的文件，并将<code>android-linux-sdk</code>移动到<code>/opt/</code>目录下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo mv /Download/android-sdk-linux /opt/</span><br></pre></td></tr></table></figure>
+<h4 id="配置Android-SDK-环境变量"><a href="#配置Android-SDK-环境变量" class="headerlink" title="配置Android SDK 环境变量"></a>配置Android SDK 环境变量</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo vi /etc/bash.bashrc</span><br></pre></td></tr></table></figure>
+<p>在末尾增加如下内容：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">export ANDROID_SDK_HOME=/opt/android-sdk-linux</span><br><span class="line">export PATH=$PATH:$&#123;ANDROID_SDK_HOME&#125;/tools</span><br><span class="line">export PATH=$PATH:$&#123;ANDROID_SDK_HOME&#125;/platform-tools</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.dadroid.cn/posts/348c654f/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1804,174 +1962,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.dadroid.cn/posts/e7f3dec2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="韧卓">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/duolaameng.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="大卓の哆啦A梦">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/posts/e7f3dec2/" itemprop="url">微服务：Zuul转发后文件名乱码</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-12T12:50:34+08:00">
-                2018-06-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/微服务/" itemprop="url" rel="index">
-                    <span itemprop="name">微服务</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/posts/e7f3dec2/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/posts/e7f3dec2/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/posts/e7f3dec2/" class="leancloud_visitors" data-flag-title="微服务：Zuul转发后文件名乱码">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>最近在使用 SpringCloud 搭建微服务的过程中，发现上传文件经过 Zuul 网关转发的时候，因为上传文件名中文乱码，导致文件的写操作失败。但是不经过 Zuul 转发的时候，文件上传正常，因此猜测是 Zuul 对上传的请求的编码进行了处理。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">原文件名：file中文.txt</span><br><span class="line">上传后：file__.txt</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/posts/e7f3dec2/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2026,7 +2016,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">35</span>
+                  <span class="site-state-item-count">36</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
