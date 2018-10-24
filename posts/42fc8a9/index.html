@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="大卓の哆啦A梦">
 <meta property="og:description" content="安装Java jdk1.8搭建环境：Ubuntu 16.04 x64JDK :jdk-8u171-linux-x64.tar.gz 下载linux对应的安装包下载地址：http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html 解压安装包jdk-8u171-linux-x64.tar.gzt">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-10-16T07:42:38.000Z">
+<meta property="og:updated_time" content="2018-10-24T01:59:26.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Appium-环境部署">
 <meta name="twitter:description" content="安装Java jdk1.8搭建环境：Ubuntu 16.04 x64JDK :jdk-8u171-linux-x64.tar.gz 下载linux对应的安装包下载地址：http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html 解压安装包jdk-8u171-linux-x64.tar.gzt">
@@ -393,6 +393,9 @@
 <h4 id="配置Android-SDK-环境变量"><a href="#配置Android-SDK-环境变量" class="headerlink" title="配置Android SDK 环境变量"></a>配置Android SDK 环境变量</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo vi /etc/bash.bashrc</span><br></pre></td></tr></table></figure>
 <p>在末尾增加如下内容：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">export ANDROID_SDK_HOME=/opt/android-sdk-linux</span><br><span class="line">export PATH=$PATH:$&#123;ANDROID_SDK_HOME&#125;/tools</span><br><span class="line">export PATH=$PATH:$&#123;ANDROID_SDK_HOME&#125;/platform-tools</span><br></pre></td></tr></table></figure>
+<h1 id="踩坑"><a href="#踩坑" class="headerlink" title="踩坑"></a>踩坑</h1><ol>
+<li>Appium执行过程中，执行adb shell 命令，导致appium测试中断：<br>原因：linux使用yum和直接拷贝Android SDK的方式，在使用adb的时候会导致appium和系统adb分别使用两个不同文件的情况，导致端口占用。删掉一个可以解决。</li>
+</ol>
 
       
     </div>
@@ -426,6 +429,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/3a9e5616/" rel="prev" title="Spring-Application.properties用法">
+                Spring-Application.properties用法 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -509,7 +516,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-count">38</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -520,7 +527,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -531,7 +538,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">40</span>
+                  <span class="site-state-item-count">41</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -564,7 +571,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#安装Java-jdk1-8"><span class="nav-number">1.</span> <span class="nav-text">安装Java jdk1.8</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#搭建环境："><span class="nav-number">1.0.0.1.</span> <span class="nav-text">搭建环境：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#下载linux对应的安装包"><span class="nav-number">1.0.0.2.</span> <span class="nav-text">下载linux对应的安装包</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解压安装包jdk-8u171-linux-x64-tar-gz"><span class="nav-number">1.0.0.3.</span> <span class="nav-text">解压安装包jdk-8u171-linux-x64.tar.gz</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#转移目录到-usr-lib-目录下"><span class="nav-number">1.0.0.4.</span> <span class="nav-text">转移目录到 /usr/lib 目录下</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置java环境变量"><span class="nav-number">1.0.0.5.</span> <span class="nav-text">配置java环境变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#测试安装是否成功"><span class="nav-number">1.0.0.6.</span> <span class="nav-text">测试安装是否成功</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装-Android-SDK"><span class="nav-number">2.</span> <span class="nav-text">安装 Android SDK</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#依赖安装"><span class="nav-number">2.0.0.1.</span> <span class="nav-text">依赖安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#下载-SDK-Tools"><span class="nav-number">2.0.0.2.</span> <span class="nav-text">下载 SDK Tools</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置Android-SDK-环境变量"><span class="nav-number">2.0.0.3.</span> <span class="nav-text">配置Android SDK 环境变量</span></a></li></ol></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#安装Java-jdk1-8"><span class="nav-number">1.</span> <span class="nav-text">安装Java jdk1.8</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#搭建环境："><span class="nav-number">1.0.0.1.</span> <span class="nav-text">搭建环境：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#下载linux对应的安装包"><span class="nav-number">1.0.0.2.</span> <span class="nav-text">下载linux对应的安装包</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解压安装包jdk-8u171-linux-x64-tar-gz"><span class="nav-number">1.0.0.3.</span> <span class="nav-text">解压安装包jdk-8u171-linux-x64.tar.gz</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#转移目录到-usr-lib-目录下"><span class="nav-number">1.0.0.4.</span> <span class="nav-text">转移目录到 /usr/lib 目录下</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置java环境变量"><span class="nav-number">1.0.0.5.</span> <span class="nav-text">配置java环境变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#测试安装是否成功"><span class="nav-number">1.0.0.6.</span> <span class="nav-text">测试安装是否成功</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装-Android-SDK"><span class="nav-number">2.</span> <span class="nav-text">安装 Android SDK</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#依赖安装"><span class="nav-number">2.0.0.1.</span> <span class="nav-text">依赖安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#下载-SDK-Tools"><span class="nav-number">2.0.0.2.</span> <span class="nav-text">下载 SDK Tools</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置Android-SDK-环境变量"><span class="nav-number">2.0.0.3.</span> <span class="nav-text">配置Android SDK 环境变量</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#踩坑"><span class="nav-number">3.</span> <span class="nav-text">踩坑</span></a></li></ol></div>
             
 
           </div>
