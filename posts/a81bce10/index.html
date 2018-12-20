@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="大卓の哆啦A梦">
 <meta property="og:description" content="查询字段为null或者不为null在mysql中，查询某字段为空时，切记不可用= null，而是 is null，不为空则是is not null，示例如下： select * from table where column is null;select * from table where column is not null; group by 异常MySQL5.7 后将sql_mode的ON">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-20T02:15:34.000Z">
+<meta property="og:updated_time" content="2018-11-16T02:23:23.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据库：MySQL常用语句">
 <meta name="twitter:description" content="查询字段为null或者不为null在mysql中，查询某字段为空时，切记不可用= null，而是 is null，不为空则是is not null，示例如下： select * from table where column is null;select * from table where column is not null; group by 异常MySQL5.7 后将sql_mode的ON">
@@ -415,6 +415,46 @@
 <h2 id="忽略表名大小写"><a href="#忽略表名大小写" class="headerlink" title="忽略表名大小写"></a>忽略表名大小写</h2><p>在配置文件<code>my.cnf</code>在增加如下配置：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#默认是0，区分大小写；1忽略大小写</span><br><span class="line">lower_case_table_names=1</span><br></pre></td></tr></table></figure>
 <p>如果原有的数据库表中有大写的表名，在配置生效后，会出现该表查找不到的异常。在配置之前，将含有大写的表导出，在配置生效之后，重新导入，可以消除异常。</p>
+<h2 id="计算两个日期的时间差"><a href="#计算两个日期的时间差" class="headerlink" title="计算两个日期的时间差"></a>计算两个日期的时间差</h2><p><strong>函数：</strong><code>TIMESTAMPDIFF(interval,datetime_expr1,datetime_expr2)</code></p>
+<p><strong>说明:</strong><br>返回日期或日期时间表达式<code>datetime_expr1</code>和<code>datetime_expr2</code>之间的整数差。其结果的单位由<code>interval</code>参数给出。<code>interval</code>的法定值同<code>TIMESTAMPADD()</code>函数说明中所列出的相同。可选项如下：</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th style="text-align:center">参数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>秒</td>
+<td style="text-align:center">SECOND</td>
+</tr>
+<tr>
+<td>分钟</td>
+<td style="text-align:center">MINUTE</td>
+</tr>
+<tr>
+<td>小时</td>
+<td style="text-align:center">HOUR</td>
+</tr>
+<tr>
+<td>天</td>
+<td style="text-align:center">DAY</td>
+</tr>
+<tr>
+<td>月</td>
+<td style="text-align:center">MONTH</td>
+</tr>
+<tr>
+<td>年</td>
+<td style="text-align:center">YEAR</td>
+</tr>
+</tbody>
+</table>
+<h2 id="字符串拼接"><a href="#字符串拼接" class="headerlink" title="字符串拼接"></a>字符串拼接</h2><p>使用<code>CONCAT</code>这个关键字，如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">SELECT CONCAT(&apos;学号: &apos;,XNumber) FROM user</span><br></pre></td></tr></table></figure>
+<p>输出：<code>学号: 20</code></p>
+<h2 id="添加表字段"><a href="#添加表字段" class="headerlink" title="添加表字段"></a>添加表字段</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">alter table table1 add transactor varchar(10) not Null;</span><br><span class="line"></span><br><span class="line">alter table   table1 add id int unsigned not Null auto_increment primary key</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -541,7 +581,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-count">40</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -563,7 +603,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-count">45</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -596,7 +636,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#查询字段为null或者不为null"><span class="nav-number">1.</span> <span class="nav-text">查询字段为null或者不为null</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#group-by-异常"><span class="nav-number">2.</span> <span class="nav-text">group by 异常</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#忽略表名大小写"><span class="nav-number">3.</span> <span class="nav-text">忽略表名大小写</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#查询字段为null或者不为null"><span class="nav-number">1.</span> <span class="nav-text">查询字段为null或者不为null</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#group-by-异常"><span class="nav-number">2.</span> <span class="nav-text">group by 异常</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#忽略表名大小写"><span class="nav-number">3.</span> <span class="nav-text">忽略表名大小写</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#计算两个日期的时间差"><span class="nav-number">4.</span> <span class="nav-text">计算两个日期的时间差</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串拼接"><span class="nav-number">5.</span> <span class="nav-text">字符串拼接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加表字段"><span class="nav-number">6.</span> <span class="nav-text">添加表字段</span></a></li></ol></div>
             
 
           </div>

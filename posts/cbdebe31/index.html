@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="大卓の哆啦A梦">
 <meta property="og:description" content="SCP-文件传输从服务器下载文件scp username@servername:/remote_path/filename ~/local_destination 从服务器下载整个目录scp -r username@servername:/remote_path/remote_dir/ ~/local_destination 上传本地文件到服务器scp ~/local_path/local_fil">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-31T01:33:01.000Z">
+<meta property="og:updated_time" content="2018-11-20T08:54:40.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Liunx：常用命令">
 <meta name="twitter:description" content="SCP-文件传输从服务器下载文件scp username@servername:/remote_path/filename ~/local_destination 从服务器下载整个目录scp -r username@servername:/remote_path/remote_dir/ ~/local_destination 上传本地文件到服务器scp ~/local_path/local_fil">
@@ -420,8 +420,9 @@
 <p>其中，最后的<code>../sbin/nginx</code>就是启动进程的命令。那么如何才能查看到完整路径呢？</p>
 <p>linux为每一个启动的进程都建立了一个文件夹，目录位于<code>/proc/</code>，以上面的进程为例：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#输入命令</span><br><span class="line">cd /proc/12996</span><br><span class="line">ll</span><br><span class="line"></span><br><span class="line">#查看结果</span><br><span class="line">lrwxrwxrwx 1 root root 0 7月  30 20:04 cwd -&gt; /usr/local/nginx-1.15.2/conf</span><br><span class="line">lrwxrwxrwx 1 root root 0 7月  30 20:04 exe -&gt; /usr/local/nginx-1.15.2/sbin/nginx</span><br></pre></td></tr></table></figure>
-<p>由此可见，完整路径为：<code>/usr/local/nginx-1.15.2/sbin/nginx</code></p>
-
+<p>由此可见，<code>exe</code>表示完整路径为：<code>/usr/local/nginx-1.15.2/sbin/nginx</code>，<code>cwd</code>符号链接的是进程运行时的目录。</p>
+<h2 id="解压缩中文乱码"><a href="#解压缩中文乱码" class="headerlink" title="解压缩中文乱码"></a>解压缩中文乱码</h2><p>当上传zip文件到服务器时，可能在解压缩的时候出现中文乱码的情况，可以在 unzip 后面增加编码格式来避免这种情况，具体命令如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">unzip -O GBK file.zip</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -453,8 +454,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/posts/f507bee4/" rel="next" title="Quartz：Cron表达式详解">
-                <i class="fa fa-chevron-left"></i> Quartz：Cron表达式详解
+              <a href="/posts/5a838215/" rel="next" title="数据库：MyBatis常用语法">
+                <i class="fa fa-chevron-left"></i> 数据库：MyBatis常用语法
               </a>
             
           </div>
@@ -463,8 +464,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/posts/5a838215/" rel="prev" title="数据库：MyBatis常用语法">
-                数据库：MyBatis常用语法 <i class="fa fa-chevron-right"></i>
+              <a href="/posts/8e887edc/" rel="prev" title="微服务[Exception]：Zuul无法访问负载均衡服务">
+                微服务[Exception]：Zuul无法访问负载均衡服务 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -549,7 +550,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-count">40</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -571,7 +572,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-count">45</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -604,7 +605,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#SCP-文件传输"><span class="nav-number">1.</span> <span class="nav-text">SCP-文件传输</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#从服务器下载文件"><span class="nav-number">1.1.</span> <span class="nav-text">从服务器下载文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#从服务器下载整个目录"><span class="nav-number">1.2.</span> <span class="nav-text">从服务器下载整个目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#上传本地文件到服务器"><span class="nav-number">1.3.</span> <span class="nav-text">上传本地文件到服务器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#上传目录到服务器"><span class="nav-number">1.4.</span> <span class="nav-text">上传目录到服务器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看内存"><span class="nav-number">2.</span> <span class="nav-text">查看内存</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#free命令"><span class="nav-number">2.1.</span> <span class="nav-text">free命令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改密码"><span class="nav-number">3.</span> <span class="nav-text">修改密码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#软连接"><span class="nav-number">4.</span> <span class="nav-text">软连接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看进程的完整路径"><span class="nav-number">5.</span> <span class="nav-text">查看进程的完整路径</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#SCP-文件传输"><span class="nav-number">1.</span> <span class="nav-text">SCP-文件传输</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#从服务器下载文件"><span class="nav-number">1.1.</span> <span class="nav-text">从服务器下载文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#从服务器下载整个目录"><span class="nav-number">1.2.</span> <span class="nav-text">从服务器下载整个目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#上传本地文件到服务器"><span class="nav-number">1.3.</span> <span class="nav-text">上传本地文件到服务器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#上传目录到服务器"><span class="nav-number">1.4.</span> <span class="nav-text">上传目录到服务器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看内存"><span class="nav-number">2.</span> <span class="nav-text">查看内存</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#free命令"><span class="nav-number">2.1.</span> <span class="nav-text">free命令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改密码"><span class="nav-number">3.</span> <span class="nav-text">修改密码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#软连接"><span class="nav-number">4.</span> <span class="nav-text">软连接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看进程的完整路径"><span class="nav-number">5.</span> <span class="nav-text">查看进程的完整路径</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解压缩中文乱码"><span class="nav-number">6.</span> <span class="nav-text">解压缩中文乱码</span></a></li></ol></div>
             
 
           </div>
