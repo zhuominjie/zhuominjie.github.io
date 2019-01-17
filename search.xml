@@ -113,7 +113,7 @@
   <entry>
     <title><![CDATA[Nginx:安装和常用命令]]></title>
     <url>%2Fposts%2F8747ea0e%2F</url>
-    <content type="text"><![CDATA[下载安装包从官网下载nginx压缩包，官网地址：https://nginx.org/en/download.html。最好选择稳定版本。 安装假设下载的安装包位于/root/用户根目录下。 1、解压文件tar -zxvf nginx-1.15.2.tar.gz 2、自定义nginx安装位置 #创建文件夹cd /usr/localmkdir nginx-1.15.2#回到解压文件夹cd /root/nginx-1.15.2指定安装路径./configure --prefix=/usr/local/nginx-1.15.2编译安装makemake install 常用命令先进入到nginx的安装路径，可以看到目录结构如下： drwx------ 2 root root 6 7月 30 19:05 client_body_tempdrwxr-xr-x 2 root root 4096 7月 30 19:16 confdrwx------ 2 root root 6 7月 30 19:05 fastcgi_tempdrwxr-xr-x 5 root root 141 7月 30 19:15 htmldrwxr-xr-x 2 root root 58 7月 30 19:12 logsdrwx------ 2 root root 6 7月 30 19:05 proxy_tempdrwxr-xr-x 2 root root 19 7月 30 19:04 sbindrwx------ 2 root root 6 7月 30 19:05 scgi_tempdrwx------ 2 root root 6 7月 30 19:05 uwsgi_temp 其中，conf是配置文件，html是静态文件目录，logs是错误日志目录，sbin是执行文件目录 1、启动 ./sbin/nginx 2、停止 ./sbin/nginx -s stop 3、重载配置文件 ./sbin/nignx -s reload 4、指定配置文件启动 ./sbin/nginx -c /conf/nginx.conf 常见问题1. 缺少PCRE库./configure: error: the HTTP rewrite module requires the PCRE library. 使用yum安装 yum -y install pcre-devel]]></content>
+    <content type="text"><![CDATA[下载安装包从官网下载nginx压缩包，官网地址：https://nginx.org/en/download.html。最好选择稳定版本。 安装假设下载的安装包位于/root/用户根目录下。 1、解压文件tar -zxvf nginx-1.15.2.tar.gz 2、自定义nginx安装位置 #创建文件夹cd /usr/localmkdir nginx-1.15.2#回到解压文件夹cd /root/nginx-1.15.2指定安装路径./configure --prefix=/usr/local/nginx-1.15.2编译安装makemake install 常用命令先进入到nginx的安装路径，可以看到目录结构如下： drwx------ 2 root root 6 7月 30 19:05 client_body_tempdrwxr-xr-x 2 root root 4096 7月 30 19:16 confdrwx------ 2 root root 6 7月 30 19:05 fastcgi_tempdrwxr-xr-x 5 root root 141 7月 30 19:15 htmldrwxr-xr-x 2 root root 58 7月 30 19:12 logsdrwx------ 2 root root 6 7月 30 19:05 proxy_tempdrwxr-xr-x 2 root root 19 7月 30 19:04 sbindrwx------ 2 root root 6 7月 30 19:05 scgi_tempdrwx------ 2 root root 6 7月 30 19:05 uwsgi_temp 其中，conf是配置文件，html是静态文件目录，logs是错误日志目录，sbin是执行文件目录 1、启动 ./sbin/nginx 2、停止 ./sbin/nginx -s stop 3、重载配置文件 ./sbin/nignx -s reload 4、指定配置文件启动 ./sbin/nginx -c /conf/nginx.conf 常见问题1. 缺少C compiler库./configure: error: C compiler cc is not found 安装 yum -y install gcc gcc-c++ 2. 缺少PCRE库./configure: error: the HTTP rewrite module requires the PCRE library. 使用yum安装 yum -y install pcre-devel 3. 缺少OpenSSL库安装--with-http_ssl_module模块，缺少依赖 ./configure: error: SSL modules require the OpenSSL library. 安装 yum -y install openssl openssl-devel]]></content>
       <categories>
         <category>Nginx</category>
       </categories>
@@ -250,9 +250,9 @@
       </categories>
       <tags>
         <tag>zuul</tag>
+        <tag>eureka</tag>
         <tag>micro service</tag>
         <tag>spring cloud</tag>
-        <tag>eureka</tag>
       </tags>
   </entry>
   <entry>

@@ -416,9 +416,17 @@
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">./sbin/nignx -s reload</span><br></pre></td></tr></table></figure>
 <p>4、指定配置文件启动</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">./sbin/nginx -c /conf/nginx.conf</span><br></pre></td></tr></table></figure>
-<h2 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h2><h4 id="1-缺少PCRE库"><a href="#1-缺少PCRE库" class="headerlink" title="1. 缺少PCRE库"></a>1. 缺少<code>PCRE</code>库</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">./configure: error: the HTTP rewrite module requires the PCRE library.</span><br></pre></td></tr></table></figure>
+<h2 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h2><h4 id="1-缺少C-compiler库"><a href="#1-缺少C-compiler库" class="headerlink" title="1. 缺少C compiler库"></a>1. 缺少<code>C compiler</code>库</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">./configure: error: C compiler cc is not found</span><br></pre></td></tr></table></figure>
+<p>安装</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">yum -y install gcc gcc-c++</span><br></pre></td></tr></table></figure>
+<h4 id="2-缺少PCRE库"><a href="#2-缺少PCRE库" class="headerlink" title="2. 缺少PCRE库"></a>2. 缺少<code>PCRE</code>库</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">./configure: error: the HTTP rewrite module requires the PCRE library.</span><br></pre></td></tr></table></figure>
 <p>使用<code>yum</code>安装</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">yum -y install pcre-devel</span><br></pre></td></tr></table></figure>
+<h4 id="3-缺少OpenSSL库"><a href="#3-缺少OpenSSL库" class="headerlink" title="3. 缺少OpenSSL库"></a>3. 缺少<code>OpenSSL</code>库</h4><p>安装<code>--with-http_ssl_module</code>模块，缺少依赖</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">./configure: error: SSL modules require the OpenSSL library.</span><br></pre></td></tr></table></figure>
+<p>安装</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">yum -y install openssl openssl-devel</span><br></pre></td></tr></table></figure>
+
           
         
       
@@ -2139,7 +2147,7 @@
     <footer id="footer" class="footer">
       <div class="footer-inner">
         <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

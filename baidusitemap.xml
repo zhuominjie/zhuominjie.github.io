@@ -4,6 +4,26 @@
 
     
   <url>
+    <loc>http://www.dadroid.cn/posts/8747ea0e/</loc>
+    <lastmod>2019-01-17T08:49:30.000Z</lastmod>
+    <data>
+        <display>
+        <title>Nginx:安装和常用命令</title>
+        <pubTime>2018-07-30T11:23:59.000Z</pubTime>
+        
+        <tag>Nginx</tag>
+         
+         
+           
+             
+              <breadCrumb title="Nginx" url="http://www.dadroid.cn/categories/Nginx/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.dadroid.cn/posts/bcc0ef8/</loc>
     <lastmod>2018-12-20T01:43:55.000Z</lastmod>
     <data>
@@ -85,26 +105,6 @@
            
              
               <breadCrumb title="数据库" url="http://www.dadroid.cn/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.dadroid.cn/posts/8747ea0e/</loc>
-    <lastmod>2018-11-14T01:56:38.000Z</lastmod>
-    <data>
-        <display>
-        <title>Nginx:安装和常用命令</title>
-        <pubTime>2018-07-30T11:23:59.000Z</pubTime>
-        
-        <tag>Nginx</tag>
-         
-         
-           
-             
-              <breadCrumb title="Nginx" url="http://www.dadroid.cn/categories/Nginx/"/>
           
         </display>
     </data>
@@ -695,31 +695,7 @@
         
         <tag>zuul</tag>
          
-        <tag>micro service</tag>
-         
-        <tag>spring cloud</tag>
-         
         <tag>eureka</tag>
-         
-         
-           
-             
-              <breadCrumb title="Java" url="http://www.dadroid.cn/categories/Java/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.dadroid.cn/posts/b778229b/</loc>
-    <lastmod>2018-05-21T06:04:52.000Z</lastmod>
-    <data>
-        <display>
-        <title>微服务：Zuul代理转发</title>
-        <pubTime>2018-05-15T06:28:11.000Z</pubTime>
-        
-        <tag>zuul</tag>
          
         <tag>micro service</tag>
          
@@ -751,6 +727,30 @@
            
              
               <breadCrumb title="Hexo" url="http://www.dadroid.cn/categories/Hexo/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.dadroid.cn/posts/b778229b/</loc>
+    <lastmod>2018-05-21T06:04:52.000Z</lastmod>
+    <data>
+        <display>
+        <title>微服务：Zuul代理转发</title>
+        <pubTime>2018-05-15T06:28:11.000Z</pubTime>
+        
+        <tag>zuul</tag>
+         
+        <tag>micro service</tag>
+         
+        <tag>spring cloud</tag>
+         
+         
+           
+             
+              <breadCrumb title="Java" url="http://www.dadroid.cn/categories/Java/"/>
           
         </display>
     </data>
