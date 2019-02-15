@@ -416,6 +416,8 @@
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">./sbin/nignx -s reload</span><br></pre></td></tr></table></figure>
 <p>4、指定配置文件启动</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">./sbin/nginx -c /conf/nginx.conf</span><br></pre></td></tr></table></figure>
+<h2 id="配置策略"><a href="#配置策略" class="headerlink" title="配置策略"></a>配置策略</h2><h4 id="1-负载均衡同源策略"><a href="#1-负载均衡同源策略" class="headerlink" title="1. 负载均衡同源策略"></a>1. 负载均衡同源策略</h4><p>当同时使用负载均衡和CAS单点登录的时候，upstream的多个后端会分别于CAS Server建立会话，导致登录流程异常。该问题可以通过配置同源策略，根据访客ip固定被调用服务器。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">http &#123;</span><br><span class="line">	upstream gateway &#123;</span><br><span class="line">        ip_hash;</span><br><span class="line">        server 172.28.20.114:8080 ;</span><br><span class="line">        server 172.28.20.140:8080 ;</span><br><span class="line">        server 172.28.20.122:8080 ;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h2><h4 id="1-缺少C-compiler库"><a href="#1-缺少C-compiler库" class="headerlink" title="1. 缺少C compiler库"></a>1. 缺少<code>C compiler</code>库</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">./configure: error: C compiler cc is not found</span><br></pre></td></tr></table></figure>
 <p>安装</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">yum -y install gcc gcc-c++</span><br></pre></td></tr></table></figure>
@@ -424,8 +426,19 @@
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">yum -y install pcre-devel</span><br></pre></td></tr></table></figure>
 <h4 id="3-缺少OpenSSL库"><a href="#3-缺少OpenSSL库" class="headerlink" title="3. 缺少OpenSSL库"></a>3. 缺少<code>OpenSSL</code>库</h4><p>安装<code>--with-http_ssl_module</code>模块，缺少依赖</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">./configure: error: SSL modules require the OpenSSL library.</span><br></pre></td></tr></table></figure>
-<p>安装</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">yum -y install openssl openssl-devel</span><br></pre></td></tr></table></figure>
+<h5 id="Linux环境下安装"><a href="#Linux环境下安装" class="headerlink" title="Linux环境下安装"></a><code>Linux</code>环境下安装</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">yum -y install openssl openssl-devel</span><br></pre></td></tr></table></figure>
+<h5 id="Mac环境下"><a href="#Mac环境下" class="headerlink" title="Mac环境下"></a><code>Mac</code>环境下</h5><p>由于不能安装<code>openssl</code>，因此，需要到官网下载openssl 压缩包。</p>
+<p>地址： <a href="https://www.openssl.org/source/" target="_blank" rel="noopener">https://www.openssl.org/source/</a></p>
+<p>安装命令修改为：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">/configure --prefix=/usr/local/nginx --with-http_ssl_module --with-openssl=&lt;path&gt;</span><br></pre></td></tr></table></figure>
+<p><path></path> 是openssl文件解压位置。</p>
+<p>但是，在<code>make</code>编译过程中，可能存在如下问题：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ld: symbol(s) not found for architecture x86_64</span><br><span class="line">clang: error: linker command failed with exit code 1 (use -v to see invocation)</span><br></pre></td></tr></table></figure>
+<p>解决方法</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#在源码目录下</span><br><span class="line">vi objs/Makefile</span><br><span class="line"></span><br><span class="line">#找到类似下面这行</span><br><span class="line">&amp;&amp; ./config --prefix=/Users/wid/Downloads/nginx-1.8.0/../openssl-1.0.2d/.openssl no-shared</span><br></pre></td></tr></table></figure>
+<p>将<code>config</code>修改为<code>Configure darwin64-x86_64-cc</code>, <code>--prefix</code>之后的不用修改, 修改后的如:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&amp;&amp; ./Configure darwin64-x86_64-cc --prefix=/Users/wid/Downloads/nginx-1.8.0/../openssl-1.0.2d/.openssl no-shared</span><br></pre></td></tr></table></figure>
+<p>保存后，继续<code>make</code>即可</p>
 
           
         

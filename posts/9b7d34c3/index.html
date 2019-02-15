@@ -87,12 +87,12 @@
 <meta property="og:site_name" content="大卓の哆啦A梦">
 <meta property="og:description" content="从Java 5之后，在java.util.concurrent.locks包下提供了另外一种方式来实现同步访问，那就是Lock。 但是，既然都可以通过synchronized来实现同步访问了，那么为什么还需要提供Lock？这个问题将在下面进行阐述。本文先从synchronized的缺陷讲起，然后再讲述java.util.concurrent.locks包下常用的有哪些类和接口，最后讨论以下一些关于">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://p8v39fxp8.bkt.clouddn.com/static/images/201808011448-java-lock.jpg?imageView2/2/w/1536">
-<meta property="og:updated_time" content="2018-08-17T02:07:06.000Z">
+<meta property="og:image" content="http://ws4.sinaimg.cn/large/007blXSgly1g0734ovngqj30kj0l7q5i.jpg">
+<meta property="og:updated_time" content="2019-02-15T06:20:32.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java:并发编程lock">
 <meta name="twitter:description" content="从Java 5之后，在java.util.concurrent.locks包下提供了另外一种方式来实现同步访问，那就是Lock。 但是，既然都可以通过synchronized来实现同步访问了，那么为什么还需要提供Lock？这个问题将在下面进行阐述。本文先从synchronized的缺陷讲起，然后再讲述java.util.concurrent.locks包下常用的有哪些类和接口，最后讨论以下一些关于">
-<meta name="twitter:image" content="http://p8v39fxp8.bkt.clouddn.com/static/images/201808011448-java-lock.jpg?imageView2/2/w/1536">
+<meta name="twitter:image" content="http://ws4.sinaimg.cn/large/007blXSgly1g0734ovngqj30kj0l7q5i.jpg">
 
 
 
@@ -492,8 +492,7 @@
 <p>在Java中，synchronized就是非公平锁，它无法保证等待的线程获取锁的顺序。</p>
 <p>而对于ReentrantLock和ReentrantReadWriteLock，它默认情况下是非公平锁，但是可以设置为公平锁。</p>
 <p>看一下这2个类的源代码就清楚了：</p>
-<img src="http://p8v39fxp8.bkt.clouddn.com/static/images/201808011448-java-lock.jpg?imageView2/2/w/1536">
-<p>201808011448-java-lock</p>
+<p><img src="http://ws4.sinaimg.cn/large/007blXSgly1g0734ovngqj30kj0l7q5i.jpg" alt="image"><br>201808011448-java-lock</p>
 <p>在ReentrantLock中定义了2个静态内部类，一个是NotFairSync，一个是FairSync，分别用来实现非公平锁和公平锁。</p>
 <p>我们可以在创建ReentrantLock对象时，通过以下方式来设置锁的公平性：</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">ReentrantLock lock = <span class="keyword">new</span> ReentrantLock(<span class="keyword">true</span>);</span><br></pre></td></tr></table></figure>
