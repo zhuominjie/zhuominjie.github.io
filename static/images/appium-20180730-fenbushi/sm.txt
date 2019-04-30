@@ -1,0 +1,16 @@
+{
+    "code": "success",
+    "data": {
+        "width": 1000,
+        "height": 538,
+        "filename": "selenium-grid架构图.png",
+        "storename": "5cc7ba0f46e13.png",
+        "size": 58836,
+        "path": "/2019/04/30/5cc7ba0f46e13.png",
+        "hash": "OAvpBlCQtGI4goM",
+        "timestamp": 1556593167,
+        "ip": "112.17.79.154",
+        "url": "https://i.loli.net/2019/04/30/5cc7ba0f46e13.png",
+        "delete": "https://sm.ms/delete/OAvpBlCQtGI4goM"
+    }
+}

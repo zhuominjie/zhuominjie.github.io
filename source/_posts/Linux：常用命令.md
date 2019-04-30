@@ -96,4 +96,12 @@ lrwxrwxrwx 1 root root 0 7月  30 20:04 cwd -> /usr/local/nginx-1.15.2/conf
 lrwxrwxrwx 1 root root 0 7月  30 20:04 exe -> /usr/local/nginx-1.15.2/sbin/nginx
 ```
 
-由此可见，完整路径为：`/usr/local/nginx-1.15.2/sbin/nginx`
+由此可见，`exe`表示完整路径为：`/usr/local/nginx-1.15.2/sbin/nginx`，`cwd`符号链接的是进程运行时的目录。
+
+## 解压缩中文乱码
+
+当上传zip文件到服务器时，可能在解压缩的时候出现中文乱码的情况，可以在 unzip 后面增加编码格式来避免这种情况，具体命令如下：
+
+```
+unzip -O GBK file.zip
+```

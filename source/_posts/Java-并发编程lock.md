@@ -537,7 +537,7 @@ class MyClass {
 
 看一下这2个类的源代码就清楚了：
 
-{% qnimg 201808011448-java-lock.jpg %}
+![201808011448-java-lock.jpg](https://i.loli.net/2019/04/30/5cc7bba34264d.jpg)
 201808011448-java-lock
 
 在ReentrantLock中定义了2个静态内部类，一个是NotFairSync，一个是FairSync，分别用来实现非公平锁和公平锁。

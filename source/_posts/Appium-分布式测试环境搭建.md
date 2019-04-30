@@ -86,7 +86,7 @@ appium -p 4724 -bp 4714 --nodeconfig "json文件路径"
 Selenium Grid会发生阻塞，如果上一个测试任务因为异常无法继续执行会发生阻塞，后面的测试任务无法继续执行
 
 ## Selenium Grid 架构
-{% qnimg selenium-grid架构图.png %}
+![selenium-grid架构图.png](https://i.loli.net/2019/04/30/5cc7ba0f46e13.png)
 
 什么时 Hub呢？
 

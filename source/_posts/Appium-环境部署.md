@@ -83,3 +83,7 @@ export ANDROID_SDK_HOME=/opt/android-sdk-linux
 export PATH=$PATH:${ANDROID_SDK_HOME}/tools
 export PATH=$PATH:${ANDROID_SDK_HOME}/platform-tools
 ```
+
+# 踩坑
+1. Appium执行过程中，执行adb shell 命令，导致appium测试中断：
+原因：linux使用yum和直接拷贝Android SDK的方式，在使用adb的时候会导致appium和系统adb分别使用两个不同文件的情况，导致端口占用。删掉一个可以解决。

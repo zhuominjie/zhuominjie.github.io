@@ -1,0 +1,16 @@
+{
+    "code": "success",
+    "data": {
+        "width": 569,
+        "height": 436,
+        "filename": "Spring-arc.png",
+        "storename": "5cc7ba9832fe0.png",
+        "size": 190259,
+        "path": "/2019/04/30/5cc7ba9832fe0.png",
+        "hash": "o3Tx24Iw1DsSuEm",
+        "timestamp": 1556593304,
+        "ip": "112.17.79.154",
+        "url": "https://i.loli.net/2019/04/30/5cc7ba9832fe0.png",
+        "delete": "https://sm.ms/delete/o3Tx24Iw1DsSuEm"
+    }
+}

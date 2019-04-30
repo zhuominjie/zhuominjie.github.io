@@ -73,3 +73,96 @@ drwx------ 2 root root    6 7月  30 19:05 uwsgi_temp
 ```
 ./sbin/nginx -c /conf/nginx.conf
 ```
+
+## 配置策略
+
+#### 1. 负载均衡同源策略
+
+当同时使用负载均衡和CAS单点登录的时候，upstream的多个后端会分别于CAS Server建立会话，导致登录流程异常。该问题可以通过配置同源策略，根据访客ip固定被调用服务器。
+
+```
+http {
+	upstream gateway {
+        ip_hash;
+        server 172.28.20.114:8080 ;
+        server 172.28.20.140:8080 ;
+        server 172.28.20.122:8080 ;
+
+        }
+}
+
+```
+
+## 常见问题
+
+#### 1. 缺少`C compiler`库
+
+```
+./configure: error: C compiler cc is not found
+```
+
+安装
+
+```
+yum -y install gcc gcc-c++
+```
+
+#### 2. 缺少`PCRE`库
+
+```
+./configure: error: the HTTP rewrite module requires the PCRE library.
+```
+使用`yum`安装
+
+```
+yum -y install pcre-devel
+```
+
+#### 3. 缺少`OpenSSL`库
+
+安装`--with-http_ssl_module`模块，缺少依赖
+
+```
+./configure: error: SSL modules require the OpenSSL library.
+```
+##### `Linux`环境下安装
+
+```
+yum -y install openssl openssl-devel
+```
+
+##### `Mac`环境下
+由于不能安装`openssl`，因此，需要到官网下载openssl 压缩包。
+
+地址： https://www.openssl.org/source/
+
+安装命令修改为：
+
+```
+/configure --prefix=/usr/local/nginx --with-http_ssl_module --with-openssl=<path>
+```
+<path> 是openssl文件解压位置。
+
+但是，在`make`编译过程中，可能存在如下问题：
+
+```
+ld: symbol(s) not found for architecture x86_64
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+```
+
+解决方法
+
+```
+#在源码目录下
+vi objs/Makefile
+
+#找到类似下面这行
+&& ./config --prefix=/Users/wid/Downloads/nginx-1.8.0/../openssl-1.0.2d/.openssl no-shared
+```
+将`config`修改为`Configure darwin64-x86_64-cc`, `--prefix`之后的不用修改, 修改后的如:
+
+```
+&& ./Configure darwin64-x86_64-cc --prefix=/Users/wid/Downloads/nginx-1.8.0/../openssl-1.0.2d/.openssl no-shared
+```
+
+保存后，继续`make`即可

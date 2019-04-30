@@ -1,10 +1,10 @@
 ---
-title: 'JAVA:正则表达式用法'
+title: 'Java:正则表达式用法'
 tags:
-  - JAVA
+  - Java
   - regex
   - pattern
-categories: JAVA
+categories: Java
 abbrlink: 5ddc6624
 date: 2018-08-28 09:43:45
 keywords:

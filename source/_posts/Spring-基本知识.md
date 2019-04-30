@@ -32,7 +32,7 @@ Spring 的出现解决了 EJB 臃肿、低效、繁琐复杂、脱离现实的�
 ## Spring 的体系结构
 Spring 框架是一个分层架构，它包含一系列的功能要素，被分为大约20个模块。这些模块分为 Core Container、Data Access/Integration、Web、AOP、Aspects、Instrumentation 和 Test，如下图所示：
 
-{% qnimg Spring-arc.png %}
+![Spring-arc.png](https://i.loli.net/2019/04/30/5cc7ba9832fe0.png)
 
 核心容器（Core Container）包括 Core、Beans、Context、EL 模块。
 

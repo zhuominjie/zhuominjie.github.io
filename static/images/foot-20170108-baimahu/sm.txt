@@ -1,0 +1,16 @@
+{
+    "code": "success",
+    "data": {
+        "width": 2270,
+        "height": 1702,
+        "filename": "201701081204.jpg",
+        "storename": "5cc7b1b445b98.jpg",
+        "size": 299294,
+        "path": "/2019/04/30/5cc7b1b445b98.jpg",
+        "hash": "8ltCVJ4QAEKHnzM",
+        "timestamp": 1556591028,
+        "ip": "112.17.79.154",
+        "url": "https://i.loli.net/2019/04/30/5cc7b1b445b98.jpg",
+        "delete": "https://sm.ms/delete/8ltCVJ4QAEKHnzM"
+    }
+}

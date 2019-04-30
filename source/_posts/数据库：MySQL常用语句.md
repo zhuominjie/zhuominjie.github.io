@@ -63,3 +63,34 @@ lower_case_table_names=1
 ```
 如果原有的数据库表中有大写的表名，在配置生效后，会出现该表查找不到的异常。在配置之前，将含有大写的表导出，在配置生效之后，重新导入，可以消除异常。
 
+## 计算两个日期的时间差
+**函数：**`TIMESTAMPDIFF(interval,datetime_expr1,datetime_expr2)`
+
+**说明:** 
+返回日期或日期时间表达式`datetime_expr1`和`datetime_expr2`之间的整数差。其结果的单位由`interval`参数给出。`interval`的法定值同`TIMESTAMPADD()`函数说明中所列出的相同。可选项如下：
+
+|名称	| 参数 |
+| --------  | :-----:  |
+| 秒| SECOND |
+| 分钟 | MINUTE |
+|小时| HOUR |
+| 天 | DAY |
+|月| MONTH |
+|年| YEAR |
+
+## 字符串拼接
+使用`CONCAT`这个关键字，如下：
+
+```
+SELECT CONCAT('学号: ',XNumber) FROM user
+```
+输出：`学号: 20`
+
+## 添加表字段
+
+```
+alter table table1 add transactor varchar(10) not Null;
+
+alter table   table1 add id int unsigned not Null auto_increment primary key
+```
+

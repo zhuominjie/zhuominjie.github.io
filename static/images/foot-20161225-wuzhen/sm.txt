@@ -1,0 +1,33 @@
+{
+    "code": "success",
+    "data": {
+        "width": 3264,
+        "height": 2448,
+        "filename": "201612251316.jpg",
+        "storename": "5cc7aee221957.jpg",
+        "size": 412974,
+        "path": "/2019/04/30/5cc7aee221957.jpg",
+        "hash": "JUdBmGyYi2RFgKW",
+        "timestamp": 1556590306,
+        "ip": "112.17.79.154",
+        "url": "https://i.loli.net/2019/04/30/5cc7aee221957.jpg",
+        "delete": "https://sm.ms/delete/JUdBmGyYi2RFgKW"
+    }
+}
+
+{
+    "code": "success",
+    "data": {
+        "width": 3264,
+        "height": 2448,
+        "filename": "201612251455.jpg",
+        "storename": "5cc7aeef665ec.jpg",
+        "size": 750714,
+        "path": "/2019/04/30/5cc7aeef665ec.jpg",
+        "hash": "Pa4r8VvwSTo2zHu",
+        "timestamp": 1556590319,
+        "ip": "112.17.79.154",
+        "url": "https://i.loli.net/2019/04/30/5cc7aeef665ec.jpg",
+        "delete": "https://sm.ms/delete/Pa4r8VvwSTo2zHu"
+    }
+}

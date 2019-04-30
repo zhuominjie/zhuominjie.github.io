@@ -1,0 +1,16 @@
+{
+    "code": "success",
+    "data": {
+        "width": 739,
+        "height": 763,
+        "filename": "201808011448-java-lock.jpg",
+        "storename": "5cc7bba34264d.jpg",
+        "size": 105195,
+        "path": "/2019/04/30/5cc7bba34264d.jpg",
+        "hash": "6W5FkSKaREQl3Jx",
+        "timestamp": 1556593571,
+        "ip": "112.17.79.154",
+        "url": "https://i.loli.net/2019/04/30/5cc7bba34264d.jpg",
+        "delete": "https://sm.ms/delete/6W5FkSKaREQl3Jx"
+    }
+}
