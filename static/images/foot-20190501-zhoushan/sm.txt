@@ -1,0 +1,67 @@
+{
+    "code": "success",
+    "data": {
+        "width": 4000,
+        "height": 3000,
+        "filename": "zhoushan-sea1-compressed.jpg",
+        "storename": "5cce71b4d4418.jpg",
+        "size": 1333331,
+        "path": "/2019/05/05/5cce71b4d4418.jpg",
+        "hash": "srm6wH48PTc7SLx",
+        "timestamp": 1557033396,
+        "ip": "112.17.79.154",
+        "url": "https://i.loli.net/2019/05/05/5cce71b4d4418.jpg",
+        "delete": "https://sm.ms/delete/srm6wH48PTc7SLx"
+    }
+}
+
+{
+    "code": "success",
+    "data": {
+        "width": 4000,
+        "height": 3000,
+        "filename": "zhoushan-sea2-compressed.jpg",
+        "storename": "5cce71d6f0683.jpg",
+        "size": 1696859,
+        "path": "/2019/05/05/5cce71d6f0683.jpg",
+        "hash": "5OWxMpY1AqVc2gk",
+        "timestamp": 1557033430,
+        "ip": "112.17.79.154",
+        "url": "https://i.loli.net/2019/05/05/5cce71d6f0683.jpg",
+        "delete": "https://sm.ms/delete/5OWxMpY1AqVc2gk"
+    }
+}
+
+{
+    "code": "success",
+    "data": {
+        "width": 3728,
+        "height": 2499,
+        "filename": "zhoushan-sha2-compressed.jpg",
+        "storename": "5cce71e79a2d3.jpg",
+        "size": 1592409,
+        "path": "/2019/05/05/5cce71e79a2d3.jpg",
+        "hash": "NgnuKTvaBo8Ut3F",
+        "timestamp": 1557033447,
+        "ip": "112.17.79.154",
+        "url": "https://i.loli.net/2019/05/05/5cce71e79a2d3.jpg",
+        "delete": "https://sm.ms/delete/NgnuKTvaBo8Ut3F"
+    }
+}
+
+{
+    "code": "success",
+    "data": {
+        "width": 3907,
+        "height": 2930,
+        "filename": "zhoushan-shenjiamen.jpeg",
+        "storename": "5cce9b7b89678.jpeg",
+        "size": 2917856,
+        "path": "/2019/05/05/5cce9b7b89678.jpeg",
+        "hash": "ClgptHExTcIUm56",
+        "timestamp": 1557044091,
+        "ip": "112.17.79.154",
+        "url": "https://i.loli.net/2019/05/05/5cce9b7b89678.jpeg",
+        "delete": "https://sm.ms/delete/ClgptHExTcIUm56"
+    }
+}
