@@ -4,8 +4,30 @@
 
     
   <url>
+    <loc>http://www.dadroid.cn/posts/87ad1d25/</loc>
+    <lastmod>2019-05-06T09:33:38.000Z</lastmod>
+    <data>
+        <display>
+        <title>Nginx-WebSocket代理转发</title>
+        <pubTime>2019-05-06T01:05:13.000Z</pubTime>
+        
+        <tag>Nginx</tag>
+         
+        <tag>WebSocket</tag>
+         
+         
+           
+             
+              <breadCrumb title="Nginx" url="http://www.dadroid.cn/categories/Nginx/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.dadroid.cn/posts/6235ebf3/</loc>
-    <lastmod>2019-05-05T09:20:26.000Z</lastmod>
+    <lastmod>2019-05-05T09:24:45.000Z</lastmod>
     <data>
         <display>
         <title>足迹：舟山朱家尖</title>
@@ -621,9 +643,9 @@
         
         <tag>Java</tag>
          
-        <tag>Quartz</tag>
-         
         <tag>Spring</tag>
+         
+        <tag>Quartz</tag>
          
         <tag>持久化</tag>
          
@@ -735,11 +757,11 @@
         
         <tag>zuul</tag>
          
+        <tag>eureka</tag>
+         
         <tag>micro service</tag>
          
         <tag>spring cloud</tag>
-         
-        <tag>eureka</tag>
          
          
            
@@ -785,9 +807,9 @@
         
         <tag>Java</tag>
          
-        <tag>Quartz</tag>
-         
         <tag>Spring</tag>
+         
+        <tag>Quartz</tag>
          
         <tag>持久化</tag>
          
